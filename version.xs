@@ -35,8 +35,9 @@ PPCODE:
     SV *rv;
     if (items == 3 )
     {
+	STRLEN n_a;
 	vs = sv_newmortal();
-	sv_setpvf(vs,"v%s",SvPV_nolen(ST(2)));
+	sv_setpvf(vs,"v%s",SvPV(ST(2),n_a));
     }
 
     rv = new_version(vs);
@@ -136,7 +137,8 @@ PPCODE:
     }
     else
     {
-	version = savepv(SvPV_nolen(ver));
+	STRLEN n_a;
+	version = savepv(SvPV(ver,n_a));
     }
     (void)scan_version(version,vs,TRUE);
     Safefree(version);

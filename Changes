@@ -1,4 +1,35 @@
 ------------------------------------------------------------------------
+r221 | jpeacock | 2004-01-29 21:46:15 -0500 (Thu, 29 Jan 2004) | 18 lines
+
+*    lib/version.pm
+     Update the $VERSION prior to release
+
+*    MANIFEST
+     Remove Changes as it is now autocreated
+
+*    Makefile.PL
+     Autocreate Changes as part of 'dist' target
+
+*    util.c
+     Correct handling of v-strings in new_version()
+
+*    version.xs, util.c
+     Change use of SvPV_nolen() with SvPV() so that 5.005_03 works again
+
+*    t/01base.t
+     Add tests for v-string creation (skipped on Perl < 5.8.0)
+
+------------------------------------------------------------------------
+r220 | jpeacock | 2004-01-29 20:35:12 -0500 (Thu, 29 Jan 2004) | 2 lines
+
+*    Create a branch from which to eventually release 0.35
+
+------------------------------------------------------------------------
+r219 | jpeacock | 2004-01-29 20:31:22 -0500 (Thu, 29 Jan 2004) | 2 lines
+
+*    Belately create tag for version 0.34
+
+------------------------------------------------------------------------
 r213 | jpeacock | 2003-12-29 10:35:34 -0500 (Mon, 29 Dec 2003) | 13 lines
 
 *    typemap

@@ -135,7 +135,20 @@ SV *
 Perl_new_version(pTHX_ SV *ver)
 {
     SV *rv = newSV(0);
+#ifdef SvVOK
+    if ( SvVOK(ver) ) { /* already a v-string */
+	char *version;
+	MAGIC* mg = mg_find(ver,PERL_MAGIC_vstring);
+	version = savepvn( (const char*)mg->mg_ptr,mg->mg_len );
+	sv_setpv(rv,version);
+	Safefree(version);
+    }
+    else {
+#endif
     sv_setsv(rv,ver); /* make a duplicate */
+#ifdef SvVOK
+    }
+#endif
     upg_version(rv);
     return rv;
 }
@@ -173,7 +186,8 @@ Perl_upg_version(pTHX_ SV *ver)
 #endif
     else /* must be a string or something like a string */
     {
-	version = savepv(SvPV_nolen(ver));
+	STRLEN n_a;
+	version = savepv(SvPV(ver,n_a));
     }
     (void)scan_version(version, ver, qv);
     Safefree(version);
@@ -304,12 +318,25 @@ Perl_vcmp(pTHX_ SV *lsv, SV *rsv)
 	i++;
     }
 
-    if ( l != r && retval == 0 ) /* possible match except for trailing 0 */
+    if ( l != r && retval == 0 ) /* possible match except for trailing 0's */
     {
-	if ( !( l < r && r-l == 1 && SvIV(*av_fetch((AV *)rsv,r,0)) == 0 ) &&
-	     !( l-r == 1 && SvIV(*av_fetch((AV *)lsv,l,0)) == 0 ) )
+	if ( l < r )
 	{
-	    retval = l < r ? -1 : +1; /* not a match after all */
+	    while ( i <= r && retval == 0 )
+	    {
+		if ( SvIV(*av_fetch((AV *)rsv,i,0)) != 0 )
+		    retval = -1; /* not a match after all */
+		i++;
+	    }
+	}
+	else
+	{
+	    while ( i <= l && retval == 0 )
+	    {
+		if ( SvIV(*av_fetch((AV *)lsv,i,0)) != 0 )
+		    retval = +1; /* not a match after all */
+		i++;
+	    }
 	}
     }
     return retval;

@@ -4,7 +4,7 @@
 
 #########################
 
-use Test::More tests => 156;
+use Test::More tests => 164;
 
 diag "Tests with base class" unless $ENV{PERL_CORE};
 
@@ -213,7 +213,7 @@ sub BaseTests {
 	ok ( $version eq "1.2.0", 'qv(1.2) eq "1.2.0"' );
 
 	# test the CVS revision mode
-	diag "testing CVS Revision";
+	diag "testing CVS Revision" unless $ENV{PERL_CORE};
 	$version = new version qw$Revision: 1.2$;
 	ok ( $version eq "1.2.0", 'qw$Revision: 1.2$ eq 1.2.0' );
 	
@@ -244,4 +244,17 @@ sub BaseTests {
 	eval "use Test::More $version";
 	unlike($@, qr/Test::More version $version required/,
 		'Replacement eval works with incremented digit');
+	
+SKIP: 	{
+	    skip 'Cannot test v-strings with Perl < 5.8.0', 4 
+		    if $] < 5.008; 
+	    diag "Tests with v-strings" unless $ENV{PERL_CORE};
+	    $version = $CLASS->new(1.2.3);
+	    ok("$version" eq "1.2.3", '"$version" eq "1.2.3"');
+	    $version = $CLASS->new(1.0.0);
+	    $new_version = $CLASS->new(1);
+	    ok($version == $new_version, '$version == $new_version');
+	    ok($version eq $new_version, '$version eq $new_version');
+	    ok("$version" eq "$new_version", '"$version" eq "$new_version"');
+	}
 }
