@@ -1,4 +1,35 @@
 ------------------------------------------------------------------------
+r213 | jpeacock | 2003-12-29 10:35:34 -0500 (Mon, 29 Dec 2003) | 13 lines
+
+*    typemap
+     Stop automatically dereferencing input variable
+*    lib/version.pm
+     Update $VERSION for a change
+*    README
+     Include warning on memory leaks
+*    util.c
+     (new_version): use upg_version exclusively
+     (upg_version): move code from new_version here
+*    version.xs
+     Stop dereferencing input variables
+     Stop assuming that the PV has a value
+
+------------------------------------------------------------------------
+r212 | jpeacock | 2003-12-28 23:39:08 -0500 (Sun, 28 Dec 2003) | 12 lines
+
+*    t/01base.t
+     Replace postfix increment with prefix increment to prevent erroneous
+     "Attempt to free..." errors
+     Add test of CVS $Revision: $ style versions
+
+*    util.c
+     Rewrite new_version to free temporary string variable
+
+*    version.xs
+     Rewrite version->new() to eliminate temp string for CVS $Revision: $
+     Rewrite version->qv() to use scan_version instead of new_version
+
+------------------------------------------------------------------------
 r209 | jpeacock | 2003-12-21 13:00:05 -0500 (Sun, 21 Dec 2003) | 4 lines
 
 M    version.xs

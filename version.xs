@@ -35,9 +35,8 @@ PPCODE:
     SV *rv;
     if (items == 3 )
     {
-	char *version = savepvn(SvPVX(ST(2)),SvCUR(ST(2)));
-	vs = newSVpvf("v%s",version);
-	Safefree(version);
+	vs = sv_newmortal();
+	sv_setpvf(vs,"v%s",SvPV_nolen(ST(2)));
     }
 
     rv = new_version(vs);
@@ -77,15 +76,14 @@ PPCODE:
     {
 	robj = sv_2mortal(new_version(robj));
     }
-    rvs = SvRV(robj);
 
     if ( swap )
     {
-        rs = newSViv(vcmp(rvs,lobj));
+        rs = newSViv(vcmp(robj,lobj));
     }
     else
     {
-        rs = newSViv(vcmp(lobj,rvs));
+        rs = newSViv(vcmp(lobj,robj));
     }
 
     PUSHs(sv_2mortal(rs));
@@ -114,8 +112,9 @@ is_alpha(lobj)
     version		lobj	
 PPCODE:
 {
-    I32 len = av_len((AV *)lobj);
-    I32 digit = SvIVX(*av_fetch((AV *)lobj, len, 0));
+    AV * av = (AV *)SvRV(lobj);
+    I32 len = av_len(av);
+    I32 digit = SvIVX(*av_fetch(av, len, 0));
     if ( digit < 0 )
 	XSRETURN_YES;
     else
@@ -127,7 +126,7 @@ qv(ver)
     SV *ver
 PPCODE:
 {
-    SV *vs;
+    SV *vs = sv_newmortal();
     char *version;
     if ( SvNOK(ver) ) /* may get too much accuracy */
     {
@@ -137,12 +136,12 @@ PPCODE:
     }
     else
     {
-	version = savepvn(SvPVX(ver),SvCUR(ver));
+	version = savepv(SvPV_nolen(ver));
     }
-    vs = sv_2mortal(newSVpvf("v%s",version));
+    (void)scan_version(version,vs,TRUE);
     Safefree(version);
 
-    PUSHs(sv_2mortal(new_version(vs)));
+    PUSHs(vs);
 }
 
 void

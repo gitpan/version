@@ -135,27 +135,8 @@ SV *
 Perl_new_version(pTHX_ SV *ver)
 {
     SV *rv = newSV(0);
-    char *version;
-    bool qv = 0;
-
-    if ( SvNOK(ver) ) /* may get too much accuracy */ 
-    {
-	char tbuf[64];
-	sprintf(tbuf,"%.9"NVgf, SvNVX(ver));
-	version = savepv(tbuf);
-    }
-#ifdef SvVOK
-    else if ( SvVOK(ver) ) { /* already a v-string */
-	MAGIC* mg = mg_find(ver,PERL_MAGIC_vstring);
-	version = savepvn( (const char*)mg->mg_ptr,mg->mg_len );
-	qv = 1;
-    }
-#endif
-    else /* must be a string or something like a string */
-    {
-	version = (char *)SvPV(ver,PL_na);
-    }
-    version = scan_version(version, rv, qv);
+    sv_setsv(rv,ver); /* make a duplicate */
+    upg_version(rv);
     return rv;
 }
 
@@ -174,16 +155,28 @@ Returns a pointer to the upgraded SV.
 SV *
 Perl_upg_version(pTHX_ SV *ver)
 {
+    char *version;
     bool qv = 0;
-    char *version = savepvn(SvPVX(ver),SvCUR(ver));
+
+    if ( SvNOK(ver) ) /* may get too much accuracy */ 
+    {
+	char tbuf[64];
+	sprintf(tbuf,"%.9"NVgf, SvNVX(ver));
+	version = savepv(tbuf);
+    }
 #ifdef SvVOK
-    if ( SvVOK(ver) ) { /* already a v-string */
+    else if ( SvVOK(ver) ) { /* already a v-string */
 	MAGIC* mg = mg_find(ver,PERL_MAGIC_vstring);
 	version = savepvn( (const char*)mg->mg_ptr,mg->mg_len );
 	qv = 1;
     }
 #endif
-    version = scan_version(version,ver,qv);
+    else /* must be a string or something like a string */
+    {
+	version = savepv(SvPV_nolen(ver));
+    }
+    (void)scan_version(version, ver, qv);
+    Safefree(version);
     return ver;
 }
 
