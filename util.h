@@ -1,23 +1,10 @@
 #include "EXTERN.h"
 #include "perl.h"
 #include "XSUB.h"
-#ifndef aTHX_
-#	define aTHX_
-#endif
-#ifndef pTHX_
-#	define pTHX_
-#endif
-#ifndef WARN_OVERFLOW
-#	define WARN_OVERFLOW "WARNING:"
-#endif
-#ifndef warner
-#	define warner warn
-#endif
-#ifndef ckWARN_d
-#	define ckWARN_d(w)	1
-#endif
-#ifndef NVgf
-#	define	NVgf	"g"
+#include "ppport.h"
+
+#ifndef PERL_ABS
+#define PERL_ABS(x) ((x) < 0 ? -(x) : (x))
 #endif
 
 char * Perl_scan_version(pTHX_ char *s, SV *rv);

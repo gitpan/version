@@ -32,12 +32,18 @@ new(class,...)
 PPCODE:
 {
     SV *vs = ST(1);
+    SV *rv;
     if (items == 3 )
     {
 	char *version = savepvn(SvPVX(ST(2)),SvCUR(ST(2)));
 	vs = newSVpvf("v%s",version);
     }
-    PUSHs(new_version(vs));
+
+    rv = new_version(vs);
+    if ( strcmp(class,"version") != 0 ) /* inherited new() */
+	sv_bless(rv, gv_stashpv(class,TRUE));
+
+    PUSHs(rv);
 }
 
 void
@@ -81,7 +87,7 @@ PPCODE:
         rs = newSViv(vcmp(lobj,rvs));
     }
 
-    PUSHs(rs);
+    PUSHs(sv_2mortal(rs));
 }
 
 void
@@ -91,7 +97,7 @@ PPCODE:
 {
     SV	*rs;
     rs = newSViv( vcmp(lobj,new_version(newSVpvn("0",1))) );
-    PUSHs(rs);
+    PUSHs(sv_2mortal(rs));
 }
 
 void
@@ -166,7 +172,7 @@ PPCODE:
 	    upg_version(sv);
 
 	if ( !sv_derived_from(req, "version"))
-	    req = new_version(req); /* req is R/O so we gave to use new */
+	    req = new_version(req); /* req is R/O so we have to use new */
 
 	if ( vcmp( req, sv ) > 0 )
 	    Perl_croak(aTHX_ "%s version %_ required--this is only version %_",
