@@ -4,7 +4,7 @@
 #include "util.h"
 
 /* --------------------------------------------------
- * $Revision: 2.0 $
+ * $Revision: 2.3 $
  * --------------------------------------------------*/
 
 typedef     SV *version;
@@ -94,7 +94,7 @@ noop(lobj,...)
     version		lobj
 CODE:
 {
-    croak("operation not supported with version object");
+    Perl_croak(aTHX_ "operation not supported with version object");
 }
 
 void
@@ -136,14 +136,12 @@ PPCODE:
 
 	if (undef) {
 	     if (pkg)
-		  Perl_croak(aTHX_
-			     "%s does not define $%s::VERSION--version check failed",
+		  Perl_croak(aTHX_ "%s does not define $%s::VERSION--version check failed",
 			     HvNAME(pkg), HvNAME(pkg));
 	     else {
 		  char *str = SvPVx(ST(0), len);
 
-		  Perl_croak(aTHX_
-			     "%s defines neither package nor VERSION--version check failed", str);
+		  Perl_croak(aTHX_ "%s defines neither package nor VERSION--version check failed", str);
 	     }
 	}
 	if ( !sv_derived_from(sv, "version"))

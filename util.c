@@ -34,13 +34,13 @@ Perl_scan_version(pTHX_ char *s, SV *rv)
 	if ( *pos == '.' )
 	{
 	    if ( saw_under )
-		croak(aTHX_ "Invalid version format (underscores before decimal)");
+		Perl_croak(aTHX_ "Invalid version format (underscores before decimal)");
 	    saw_period++ ;
 	}
 	else if ( *pos == '_' )
 	{
 	    if ( saw_under )
-		croak(aTHX_ "Invalid version format (multiple underscores)");
+		Perl_croak(aTHX_ "Invalid version format (multiple underscores)");
 	    saw_under = 1;
 	}
 	pos++;
@@ -74,7 +74,7 @@ Perl_scan_version(pTHX_ char *s, SV *rv)
 		    rev += (*end - '0') * mult;
 		    mult *= 10;
 		    if ( abs(orev) > abs(rev) )
-			croak(aTHX_ "Integer overflow in version"); 
+			Perl_croak(aTHX_ "Integer overflow in version"); 
 		}
 	    }
 
@@ -89,7 +89,7 @@ Perl_scan_version(pTHX_ char *s, SV *rv)
 		break;
 	    }
 	    while ( isDIGIT(*pos) ) {
-		if ( saw_period == 1 && pos-s == 3 )
+		if ( !saw_under && saw_period == 1 && pos-s == 3 )
 		    break;
 		pos++;
 	    }
@@ -115,14 +115,23 @@ SV *
 Perl_new_version(pTHX_ SV *ver)
 {
     SV *rv = NEWSV(92,5);
-    char *version = (char *)SvPV(ver,PL_na);
-
+    char *version;
+    if ( SvNOK(ver) ) /* may get too much accuracy */ 
+    {
+	char tbuf[64];
+	sprintf(tbuf,"%.9g", SvNVX(ver));
+	version = savepv(tbuf);
+    }
 #ifdef SvVOK
-    if ( SvVOK(ver) ) { /* already a v-string */
+    else if ( SvVOK(ver) ) { /* already a v-string */
 	MAGIC* mg = mg_find(ver,PERL_MAGIC_vstring);
 	version = savepvn( (const char*)mg->mg_ptr,mg->mg_len );
     }
 #endif
+    else
+    {
+	version = (char *)SvPV(ver,PL_na);
+    }
     version = scan_version(version,rv);
     return rv;
 }
