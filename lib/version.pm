@@ -1,4 +1,4 @@
-#!/usr/bin/perl -w
+#!perl -w
 package version;
 
 use 5.005_03;
@@ -9,7 +9,7 @@ use vars qw(@ISA $VERSION $CLASS);
 
 @ISA = qw(DynaLoader);
 
-$VERSION = (qw$Revision: 2.7 $)[1]/10;
+$VERSION = 0.28; # stop using CVS and switch to subversion
 
 $CLASS = 'version';
 
