@@ -19,12 +19,15 @@ is a beta version).
 
 =cut
 */
+
 char *
 Perl_scan_version(pTHX_ char *s, SV *rv)
 {
+    const char *start = s;
     char *pos = s;
     I32 saw_period = 0;
     bool saw_under = 0;
+    bool was_string = ( SvTYPE(rv) == SVt_PV );
     SV* sv = newSVrv(rv, "version"); /* create an SV and upgrade the RV */
     (void)sv_upgrade(sv, SVt_PVAV); /* needs to be an AV type */
 
@@ -49,7 +52,7 @@ Perl_scan_version(pTHX_ char *s, SV *rv)
 
     if (*pos == 'v') pos++;  /* get past 'v' */
     while (isDIGIT(*pos))
-    pos++;
+	pos++;
     if (!isALPHA(*pos)) {
 	I32 rev;
 
@@ -58,27 +61,40 @@ Perl_scan_version(pTHX_ char *s, SV *rv)
 	for (;;) {
 	    rev = 0;
 	    {
-		/* this is atoi() that delimits on underscores */
-		char *end = pos;
-		I32 mult = 1;
-		if ( s < pos && *(s-1) == '_' ) {
-		    if ( *s == '0' && *(s+1) != '0')
-			mult = 10;	/* perl-style */
-		    else
-			mult = -1;	/* beta version */
-		}
-		while (--end >= s) {
-
-		    I32 orev;
-		    orev = rev;
-		    rev += (*end - '0') * mult;
-		    mult *= 10;
-		    if ( abs(orev) > abs(rev) )
-			Perl_croak(aTHX_ "Integer overflow in version"); 
-		}
-	    }
-
-	    /* Append revision */
+  		/* this is atoi() that delimits on underscores */
+  		char *end = pos;
+  		I32 mult = 1;
+ 		I32 orev;
+  		if ( s < pos && s > start && *(s-1) == '_' ) {
+ 			mult *= -1;	/* beta version */
+  		}
+		/* the following if() will only be true after the decimal
+		 * point of a version originally created with a bare
+		 * floating point number, i.e. not quoted in any way
+		 */
+ 		if ( s > start+1 && saw_period == 1 && !saw_under && !was_string) {
+ 		    mult = 100;
+ 		    while ( s < end ) {
+ 			orev = rev;
+ 			rev += (*s - '0') * mult;
+ 			mult /= 10;
+ 			if ( abs(orev) > abs(rev) )
+ 			    Perl_croak(aTHX_ "Integer overflow in version");
+ 			s++;
+ 		    }
+  		}
+ 		else {
+ 		    while (--end >= s) {
+ 			orev = rev;
+ 			rev += (*end - '0') * mult;
+ 			mult *= 10;
+ 			if ( abs(orev) > abs(rev) )
+ 			    Perl_croak(aTHX_ "Integer overflow in version");
+ 		    }
+ 		} 
+  	    }
+  
+  	    /* Append revision */
 	    av_push((AV *)sv, newSViv(rev));
 	    if ( (*pos == '.' || *pos == '_') && isDIGIT(pos[1]))
 		s = ++pos;
@@ -114,12 +130,12 @@ want to upgrade the SV.
 SV *
 Perl_new_version(pTHX_ SV *ver)
 {
-    SV *rv = NEWSV(92,5);
+    SV *rv = newSV(0);
     char *version;
     if ( SvNOK(ver) ) /* may get too much accuracy */ 
     {
 	char tbuf[64];
-	sprintf(tbuf,"%.9g", SvNVX(ver));
+	sprintf(tbuf,"%.9"NVgf, SvNVX(ver));
 	version = savepv(tbuf);
     }
 #ifdef SvVOK
@@ -128,9 +144,22 @@ Perl_new_version(pTHX_ SV *ver)
 	version = savepvn( (const char*)mg->mg_ptr,mg->mg_len );
     }
 #endif
-    else
+    else /* must be a string or something like a string */
     {
+	int decimal = 0;
+	char *tmpstr;
 	version = (char *)SvPV(ver,PL_na);
+	for (   tmpstr  = strchr(version,'.');
+		tmpstr != NULL;
+		tmpstr  = strchr(tmpstr,'.') )
+	{
+	    decimal++; 
+	    tmpstr++;
+	}
+	if ( decimal == 1 && !strchr(version,'_') )
+	{
+	    (void)sv_upgrade(rv,SVt_PV);
+	}
     }
     version = scan_version(version,rv);
     return rv;
@@ -281,7 +310,13 @@ Perl_vcmp(pTHX_ SV *lsv, SV *rsv)
 	i++;
     }
 
-    if ( l != r && retval == 0 )
-	retval = l < r ? -1 : +1;
+    if ( l != r && retval == 0 ) /* possible match except for trailing 0 */
+    {
+	if ( !( l < r && r-l == 1 && SvIV(*av_fetch((AV *)rsv,r,0)) == 0 ) &&
+	     !( l-r == 1 && SvIV(*av_fetch((AV *)lsv,l,0)) == 0 ) )
+	{
+	    retval = l < r ? -1 : +1; /* not a match after all */
+	}
+    }
     return retval;
 }
