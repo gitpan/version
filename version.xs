@@ -127,23 +127,33 @@ qv(ver)
     SV *ver
 PPCODE:
 {
-    SV *vs = sv_newmortal();
-    char *version;
-    if ( SvNOK(ver) ) /* may get too much accuracy */
-    {
-	char tbuf[64];
-	sprintf(tbuf,"%.9"NVgf, SvNVX(ver));
-	version = savepv(tbuf);
+#ifdef SvVOK
+    if ( !SvVOK(ver) ) { /* not already a v-string */
+#endif
+	SV *vs = sv_newmortal();
+	char *version;
+	if ( SvNOK(ver) ) /* may get too much accuracy */
+	{
+	    char tbuf[64];
+	    sprintf(tbuf,"%.9"NVgf, SvNVX(ver));
+	    version = savepv(tbuf);
+	}
+	else
+	{
+	    STRLEN n_a;
+	    version = savepv(SvPV(ver,n_a));
+	}
+	(void)scan_version(version,vs,TRUE);
+	Safefree(version);
+
+	PUSHs(vs);
+#ifdef SvVOK
     }
     else
     {
-	STRLEN n_a;
-	version = savepv(SvPV(ver,n_a));
+	PUSHs(sv_2mortal(new_version(ver)));
     }
-    (void)scan_version(version,vs,TRUE);
-    Safefree(version);
-
-    PUSHs(vs);
+#endif
 }
 
 void

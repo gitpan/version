@@ -1,4 +1,30 @@
 ------------------------------------------------------------------------
+r226 | jpeacock | 2004-02-01 20:30:01 -0500 (Sun, 01 Feb 2004) | 13 lines
+
+*    README
+     Include a short blurb on the qv() operator
+
+*    lib/version.pm
+     Reformat the description of the qv() operator
+     Change the $VERSION for a release
+
+*    version.xs
+     Support using qv() with v-strings in Perl 5.8.1+
+
+*    t/01base.t
+     Tests for qv() and v-strings
+
+------------------------------------------------------------------------
+r225 | jpeacock | 2004-02-01 20:29:11 -0500 (Sun, 01 Feb 2004) | 2 lines
+
+Copy the files prior to updating to new version
+
+------------------------------------------------------------------------
+r222 | jpeacock | 2004-01-29 22:35:40 -0500 (Thu, 29 Jan 2004) | 2 lines
+
+Tag for 0.35.0 release
+
+------------------------------------------------------------------------
 r221 | jpeacock | 2004-01-29 21:46:15 -0500 (Thu, 29 Jan 2004) | 18 lines
 
 *    lib/version.pm

@@ -4,7 +4,7 @@
 
 #########################
 
-use Test::More tests => 164;
+use Test::More tests => 166;
 
 diag "Tests with base class" unless $ENV{PERL_CORE};
 
@@ -246,15 +246,17 @@ sub BaseTests {
 		'Replacement eval works with incremented digit');
 	
 SKIP: 	{
-	    skip 'Cannot test v-strings with Perl < 5.8.0', 4 
-		    if $] < 5.008; 
+	    skip 'Cannot test v-strings with Perl < 5.8.1', 5
+		    if $] < 5.008_001; 
 	    diag "Tests with v-strings" unless $ENV{PERL_CORE};
 	    $version = $CLASS->new(1.2.3);
-	    ok("$version" eq "1.2.3", '"$version" eq "1.2.3"');
+	    ok("$version" eq "1.2.3", '"$version" eq 1.2.3');
 	    $version = $CLASS->new(1.0.0);
 	    $new_version = $CLASS->new(1);
 	    ok($version == $new_version, '$version == $new_version');
 	    ok($version eq $new_version, '$version eq $new_version');
 	    ok("$version" eq "$new_version", '"$version" eq "$new_version"');
+	    $version = qv(1.2.3);
+	    ok("$version" eq "1.2.3", 'v-string initialized qv()');
 	}
 }

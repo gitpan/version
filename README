@@ -1,4 +1,4 @@
-version 0.34
+version 0.36
 ====================
 
 Provides the same version objects as included in Perl v5.9.0 (and hopefully in
@@ -7,11 +7,15 @@ of Perl >= v5.9.0, this module will not do anything, since the code already
 exists in the Perl core.
 
 Now includes a subclass, version::AlphaBeta, which demonstrates using
-alphanumeric version strings, instead of strict numeric versions.
+alphanumeric version strings, instead of strict numeric versions.  Also a
+new qv() operator which can be used to force a version to be interpreted
+not as a floating-point value (especially useful with older versions of
+Perl).
 
 IMPORTANT NOTE: the replacement UNIVERSAL::VERSION method supplied by this
 module currently leaks memory, so don't call it in a loop in your code
-until this has been corrected.
+until this has been corrected (this is a very uncommon mode of operation,
+so it is not as serious a problem as it could be otherwise).
 
 Please read the POD documentation for usage/details.
 

@@ -12,7 +12,7 @@ use vars qw(@ISA $VERSION $CLASS @EXPORT);
 
 @EXPORT = qw(qv);
 
-$VERSION = 0.35; # stop using CVS and switch to subversion
+$VERSION = 0.36; # stop using CVS and switch to subversion
 
 $CLASS = 'version';
 
@@ -214,6 +214,12 @@ In other words, the version will be automatically parsed out of the
 string, and it will be quoted to preserve the meaning CVS normally
 carries for versions.
 
+=back
+
+=over 4
+
+=item * qv()
+
 An alternate way to create a new version object is through the exported
 qv() sub.  This is not strictly like other q? operators (like qq, qw),
 in that the only delimiters supported are parentheses (or spaces).  It is
@@ -226,12 +232,12 @@ point interpretation.  For example:
 As you can see, either a bare number or a quoted string can be used, and
 either will yield the same version number.
 
+=back
+
 For the subsequent examples, the following two objects will be used:
 
   $ver  = new version "1.2.3"; # see "Quoting" below
   $alpha = new version "1.2_3"; # see "Alpha versions" below
-
-=back
 
 =over 4
 
@@ -413,7 +419,7 @@ comparisons.
 
 =head1 EXPORT
 
-None by default.
+qv - quoted version initialization operator
 
 =head1 AUTHOR
 
