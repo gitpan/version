@@ -1,4 +1,4 @@
-version 0.38
+version 0.39
 ====================
 
 Provides the same version objects as included in Perl v5.9.0 (and hopefully in
@@ -6,9 +6,14 @@ the 5.10.0 release).  In fact, if you attempt to use this module with a version
 of Perl >= v5.9.0, this module will not do anything, since the code already
 exists in the Perl core.
 
+This release changes the behavior of alpha versions with only 1 decimal
+place, to make them behave more like their floating-point counterparts.
+This may lead to some confusion over the stringified representation of
+alpha versions.  See the POD for more details.
+
 IMPORTANT NOTE: version-0.37 introduced a segfault when trying to use the
-UNIVERSAL::VERSION routine on modules without a $VERSION scalar.  This has
-been fixed.
+UNIVERSAL::VERSION routine on modules without a $VERSION scalar.  This was
+fixed in version-0.38.
 
 IMPORTANT NOTE2: This version changes the default stringification for some
 version objects.  Be sure and read the updated POD for details.  This also
