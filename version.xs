@@ -157,6 +157,14 @@ PPCODE:
 }
 
 void
+normal(ver)
+    SV *ver
+PPCODE:
+{
+    PUSHs(sv_2mortal(vnormal(ver)));
+}
+
+void
 VERSION(sv,...)
     SV *sv
 PPCODE:
@@ -215,11 +223,12 @@ PPCODE:
 	}
 
 	if ( vcmp( req, sv ) > 0 )
-	    Perl_croak(aTHX_ "%s version %_ required--this is only version %_",
-		       HvNAME(pkg), req, sv);
+	    Perl_croak(aTHX_ "%s version %"SVf" (%"SVf") required--"
+		    "this is only version %"SVf" (%"SVf")", HvNAME(pkg),
+		    vnumify(req),vnormal(req),vnumify(sv),vnormal(sv));
     }
 
-    PUSHs(sv);
+    PUSHs(vnumify(sv));
 
     XSRETURN(1);
 }

@@ -1,4 +1,4 @@
-version 0.36
+version 0.37
 ====================
 
 Provides the same version objects as included in Perl v5.9.0 (and hopefully in
@@ -12,7 +12,11 @@ new qv() operator which can be used to force a version to be interpreted
 not as a floating-point value (especially useful with older versions of
 Perl).
 
-IMPORTANT NOTE: the replacement UNIVERSAL::VERSION method supplied by this
+IMPORTANT NOTE: This version changes the default stringification for some
+version objects.  Be sure and read the updated POD for details.  This also
+affect the return value of the replacement UNIVERSAL::VERSION method.
+
+IMPORTANT NOTE2: the replacement UNIVERSAL::VERSION method supplied by this
 module currently leaks memory, so don't call it in a loop in your code
 until this has been corrected (this is a very uncommon mode of operation,
 so it is not as serious a problem as it could be otherwise).
@@ -36,5 +40,5 @@ COPYRIGHT AND LICENCE
 
 This module can be distributed under the same terms as Perl.
 
-Copyright (C) 2002 John Peacock
+Copyright (C) 2004 John Peacock
 

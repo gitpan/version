@@ -115,6 +115,11 @@ Perl_scan_version(pTHX_ char *s, SV *rv, bool qv)
 	    }
 	}
     }
+    if ( qv ) { /* quoted versions always become full version objects */
+	I32 len = av_len((AV *)sv);
+	for ( len = 2 - len; len != 0; len-- )
+	    av_push((AV *)sv, newSViv(0));
+    }
     return s;
 }
 
@@ -236,12 +241,12 @@ Perl_vnumify(pTHX_ SV *vs)
 }
 
 /*
-=for apidoc vstringify
+=for apidoc vnormal
 
 Accepts a version object and returns the normalized string
 representation.  Call like:
 
-    sv = vstringify(rv);
+    sv = vnormal(rv);
 
 NOTE: you can pass either the object directly or the SV
 contained within the RV.
@@ -250,7 +255,7 @@ contained within the RV.
 */
 
 SV *
-Perl_vstringify(pTHX_ SV *vs)
+Perl_vnormal(pTHX_ SV *vs)
 {
     I32 i, len, digit;
     SV *sv = newSV(0);
@@ -280,6 +285,31 @@ Perl_vstringify(pTHX_ SV *vs)
 
     return sv;
 } 
+
+/*
+=for apidoc vstringify
+
+In order to maintain maximum compatibility with earlier versions
+of Perl, this function will return either the floating point
+notation or the multiple dotted notation, depending on whether
+the original version contained 1 or more dots, respectively
+
+=cut
+*/
+
+SV *
+Perl_vstringify(pTHX_ SV *vs)
+{
+    I32 i, len, digit;
+    if ( SvROK(vs) )
+	vs = SvRV(vs);
+    len = av_len((AV *)vs);
+    
+    if ( len < 2 )
+	return vnumify(vs);
+    else
+	return vnormal(vs);
+}
 
 /*
 =for apidoc vcmp

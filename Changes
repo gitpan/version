@@ -1,4 +1,45 @@
 ------------------------------------------------------------------------
+r232 | jpeacock | 2004-04-03 14:30:01 -0500 (Sat, 03 Apr 2004) | 5 lines
+
+*    lib/version.pm
+     Change all uses of "new version" to "version->new()"
+     Check all examples against current code/behavior
+     Add doc warnings for edge cases
+
+------------------------------------------------------------------------
+r231 | jpeacock | 2004-03-27 22:45:18 -0500 (Sat, 27 Mar 2004) | 25 lines
+
+*    util.c
+     quoted versions, e.g qv() and v-string, always get at least 3 terms 
+     change vstringify() to vnormal()
+     new vstringify() to display either vnumify() or vnormal() form
+
+*    util.h
+     Add #define for SVf (SV format) only needed for Perl 5.005_03
+
+*    version.xs
+     new XS class function normal()
+     UNIVERSAL::VERSION warning displays both numify() and normal() forms,
+     also returns exclusively numify() form
+
+*    lib/version.pm
+     Extensive POD rewrite to explain normal form and how stringify works
+
+*    t/01base.t
+     Altered tests to correspond to new stringify behavior
+
+*    README
+     Add warning about new stringify behavior
+
+*    ppport.h
+     Copied from recent bleadperl build
+
+------------------------------------------------------------------------
+r230 | jpeacock | 2004-03-23 21:07:08 -0500 (Tue, 23 Mar 2004) | 2 lines
+
+Create a new tag before changing anything
+
+------------------------------------------------------------------------
 r226 | jpeacock | 2004-02-01 20:30:01 -0500 (Sun, 01 Feb 2004) | 13 lines
 
 *    README
