@@ -25,7 +25,7 @@ is ( "$version" , "1.230" , '1.23 eq "1.230"' );
 diag "tests with quoted numbers" unless $ENV{PERL_CORE};
 $version = new version "5.005_03";
 is ( "$version" , "5.5_3" , '"5.005_03" eq "5.5_3"' );
-$version = new version "1.23";
+$version = new version "v1.23";
 is ( "$version" , "1.23" , '"1.23" eq "1.23"' );
 
 # Test stringify operator
@@ -159,7 +159,7 @@ ok ( $new_version < $version, '$new_version < $version' );
 ok ( $version != $new_version, '$version != $new_version' );
 
 diag "test implicit [in]equality" unless $ENV{PERL_CORE};
-$version = new version "1.2";
+$version = new version "v1.2";
 $new_version = new version "1.2.0";
 ok ( $version == $new_version, '$version == $new_version' );
 $new_version = new version "1.2_0";
