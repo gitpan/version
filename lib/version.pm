@@ -12,7 +12,7 @@ use vars qw(@ISA $VERSION $CLASS @EXPORT);
 
 @EXPORT = qw(qv);
 
-$VERSION = 0.37; # stop using CVS and switch to subversion
+$VERSION = 0.38; # stop using CVS and switch to subversion
 
 $CLASS = 'version';
 
@@ -215,6 +215,14 @@ were used:
 In other words, the version will be automatically parsed out of the
 string, and it will be quoted to preserve the meaning CVS normally
 carries for versions.
+
+New in 0.38, a new version object can be created as a copy of an existing
+version object:
+
+  $v1 = version->new(12.3);
+  $v2 = version->new($v1);
+
+and $v1 and $v2 will be identical.
 
 =back
 

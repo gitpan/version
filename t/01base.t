@@ -4,7 +4,7 @@
 
 #########################
 
-use Test::More tests => 164;
+use Test::More tests => 168;
 
 diag "Tests with base class" unless $ENV{PERL_CORE};
 
@@ -211,6 +211,12 @@ sub BaseTests {
 	ok ( $version eq "1.2.0", 'qv("1.2") eq "1.2.0"' );
 	$version = qv(1.2);
 	ok ( $version eq "1.2.0", 'qv(1.2) eq "1.2.0"' );
+
+	# test creation from existing version object
+	diag "create new from existing version" unless $ENV{PERL_CORE};
+	ok (eval {$new_version = version->new($version)},
+		"new from existing object");
+	ok ($new_version == $version, "duped object identical");
 
 	# test the CVS revision mode
 	diag "testing CVS Revision" unless $ENV{PERL_CORE};

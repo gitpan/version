@@ -228,7 +228,10 @@ PPCODE:
 		    vnumify(req),vnormal(req),vnumify(sv),vnormal(sv));
     }
 
-    PUSHs(vnumify(sv));
+    if ( sv_derived_from(sv, "version") )
+	PUSHs(vnumify(sv));
+    else
+	PUSHs(sv);
 
     XSRETURN(1);
 }
