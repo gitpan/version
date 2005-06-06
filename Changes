@@ -1,3 +1,21 @@
+2005-06-06 05:30:47 John Peacock <jpeacock@cpan.org>
+	
+	Final changes to release 0.43 to CPAN
+	
+	*   README, lib/version.pm
+	    Bump $VERSION number
+	
+	*   t/01base.t
+	    Test that single term version expands to triplet for $v->normal
+	    Eliminate "Exporter" from derived class
+	
+	*   util/util.c
+	    Various const'ifying to match Perl's own changes
+	    Handle short and really short array outputs in vnormal()
+	
+	*   util/util.h
+	    const'ify Perl_scan_version()
+
 2005-05-23 07:17:02 John Peacock <jpeacock@cpan.org>
 	
 	Complete rewrite of parser to handle CPAN-style (two significant decimal) 
