@@ -1,3 +1,11 @@
+2005-07-23 22:29:06 John Peacock <jpeacock@cpan.org>
+	
+	Complete rename of files to prevent GCC 4.0 bug
+
+2005-07-23 22:22:54 John Peacock <jpeacock@cpan.org>
+	
+	Preliminary commit for rename of util.[ch]
+
 2005-06-06 05:30:47 John Peacock <jpeacock@cpan.org>
 	
 	Final changes to release 0.43 to CPAN
