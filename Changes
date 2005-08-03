@@ -1,3 +1,11 @@
+2005-08-03 09:12:29 John Peacock <jpeacock@cpan.org>
+	
+	Don't strip trailing zeros unneccesarily
+
+2005-08-02 19:12:24 John Peacock <jpeacock@cpan.org>
+	
+	Spelling fixes from "Piotr Fusik" <pfusik@op.pl>
+
 2005-07-23 22:29:06 John Peacock <jpeacock@cpan.org>
 	
 	Complete rename of files to prevent GCC 4.0 bug
