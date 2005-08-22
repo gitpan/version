@@ -1,3 +1,10 @@
+2005-08-22 02:28:37 John Peacock <jpeacock@cpan.org>
+	
+	Leading whitespace or lack of leading zero caused the the object to be
+	initialized incorrectly (reported by Andreas Koenig).
+	
+	Added POD for subclassing.  Removed cruft from README file.
+
 2005-08-03 09:12:29 John Peacock <jpeacock@cpan.org>
 	
 	Don't strip trailing zeros unneccesarily
