@@ -1,3 +1,15 @@
+2005-08-23 13:19:45 John Peacock <jpeacock@cpan.org>
+	
+	Badly written subclasses could SEGV (reported by Andreas Koenig).  Now all
+	version objects are validated before use.
+	
+	Added vverify() function to validate version objects and added it before
+	each use of a version object.  Added tests for poorly written subclass that
+	tickle the above function.
+	
+	Apply const'ifying from bleadperl and reformat calls to sv_[cat|set]pvf to
+	be consistent.
+
 2005-08-22 02:28:37 John Peacock <jpeacock@cpan.org>
 	
 	Leading whitespace or lack of leading zero caused the the object to be

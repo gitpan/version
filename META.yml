@@ -1,6 +1,6 @@
 ---
 name: version
-version: 0.46
+version: 0.47
 author:
   - John Peacock E<lt>jpeacock@cpan.orgE<gt>
 abstract: Perl extension for Version Objects
@@ -10,5 +10,5 @@ requires:
 provides:
   version:
     file: lib/version.pm
-    version: 0.46
+    version: 0.47
 generated_by: Module::Build version 0.2701
