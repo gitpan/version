@@ -1,14 +1,16 @@
 ---
 name: version
-version: 0.47
-author:
-  - John Peacock E<lt>jpeacock@cpan.orgE<gt>
-abstract: Perl extension for Version Objects
+version: 0.48
+author: ~
+abstract: ~
 license: perl
 requires:
   perl: '> 5.005, !=5.9.1, !=5.9.2'
 provides:
   version:
     file: lib/version.pm
-    version: 0.47
+    version: 0.48
+  version::vxs:
+    file: lib/version/vxs.pm
+    version: 0.48
 generated_by: Module::Build version 0.2701

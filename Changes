@@ -1,3 +1,26 @@
+2005-09-14 13:58:57 John Peacock <jpeacock@cpan.org>
+	
+	Significant archectectural change (object hash has to contain
+	reference to array not the array itself); see
+	
+	    <https://rt.cpan.org/Ticket/Display.html?id=14439>
+	
+	for details.  Initial changes to support pure Perl variant
+	(not included yet), see
+	
+	    <https://rt.cpan.org/Ticket/Display.html?id=14417>
+	
+	for more details.  All POD moved to seperate file.  Tests
+	abstracted out for reuse by different classes.
+	
+2005-09-07 07:01:16 John Peacock <jpeacock@cpan.org>
+	
+	"version" element of hash must be a reference, see:
+	   <https://rt.cpan.org/Ticket/Display.html?id=14439>
+	for details.
+	
+	Also, function name changes backported from bleadperl version.
+
 2005-08-23 13:19:45 John Peacock <jpeacock@cpan.org>
 	
 	Badly written subclasses could SEGV (reported by Andreas Koenig).  Now all
