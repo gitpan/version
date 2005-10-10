@@ -1,3 +1,35 @@
+2005-10-10 12:29:52 John Peacock <jpeacock@cpan.org>
+	
+	* version/README
+	    Remember to update this for new release
+
+2005-10-08 21:00:13 John Peacock <jpeacock@cpan.org>
+	
+	Fix Build.PL so Win32 will compile properly
+
+2005-10-06 15:30:06 John Peacock <jpeacock@cpan.org>
+	
+	* version/Build.PL
+	    Explicit call to dist_name to help Windows DTRT.  Resolves ticket:
+	    <https://rt.cpan.org/Ticket/Display.html?id=14743>
+	
+	* lib/version/vxs.pm
+	  lib/version.pm
+	  lib/version.pod
+	  t/01base.t
+	  t/02derived.t
+	  t/coretests.pm
+	  vutil/vutil.c
+	    Change implementation to return version objects instead of version::vxs
+	    object.  Document that qv() isn't inherited and give work around.
+	    Update tests to no longer test version::vxs class directory (since it
+	    doesn't work).  Resolves ticket:
+	    <https://rt.cpan.org/Ticket/Display.html?id=14958>
+
+2005-09-26 13:31:34 John Peacock <jpeacock@cpan.org>
+	
+	Start POD rewrite.
+
 2005-09-14 13:58:57 John Peacock <jpeacock@cpan.org>
 	
 	Significant archectectural change (object hash has to contain
