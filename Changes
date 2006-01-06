@@ -1,3 +1,26 @@
+2006-01-06  John Peacock <jpeacock@cpan.org>
+
+	New version to deal with malformed input data that came up
+	in bleadperl:
+
+	  sprintf of version objects
+	  <https://rt.perl.org/rt3/Ticket/Display.html?id=37897>
+
+	* README
+	  lib/version/vxs.pm
+	  lib/version.pm
+	    Bump version.
+
+	* vutil/vutil.c
+	    Die if input value has underscore but no decimal.
+
+	* t/01base.t
+	  t/02derived.t
+	    Use no_plan so I don't need to increment tests any more.
+
+	* t/coretests.pm
+	    Check for malformed input.
+
 2006-01-05  John Peacock <jpeacock@cpan.org>
 
 	Ready for new release to CPAN with minor changes.
