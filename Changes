@@ -1,3 +1,23 @@
+2006-01-05  John Peacock <jpeacock@cpan.org>
+
+	Ready for new release to CPAN with minor changes.
+
+	* README
+	    Describe minor changes
+
+	* lib/version/vxs.pm
+	  lib/version.pm
+	    Bump $VERSION.
+
+	* vutil/vutil.c
+	    Eliminate code I'm never going to use.
+
+2005-12-03  John Peacock <jpeacock@cpan.org>
+
+	* lib/version.pod
+	    PAUSE does so support version objects.  Elaborate on support
+	    for Module::Build and lack thereof for ExtUtils::MakeMaker.
+
 2005-12-02  John Peacock <jpeacock@cpan.org>
 
 	* version/vxs.pm

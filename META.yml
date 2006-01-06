@@ -1,6 +1,6 @@
 ---
 name: version
-version: 0.50
+version: 0.51
 author: ~
 abstract: ~
 license: perl
@@ -10,8 +10,8 @@ requires:
 provides:
   version:
     file: lib/version.pm
-    version: 0.50
+    version: 0.51
   version::vxs:
     file: lib/version/vxs.pm
-    version: 0.50
+    version: 0.51
 generated_by: Module::Build version 0.2611
