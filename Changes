@@ -1,126 +1,68 @@
-2006-01-10  John Peacock <jpeacock@cpan.org>
+2006-02-12  John Peacock <jpeacock@cpan.org>
 
-	Release 0.53 to CPAN.
+	Ready for CPAN release as beta module.
 
-	* vutil/vutil.c
-	    warn() when initialization string contains trailing characters
-	    (rather than silently ignoring them).  Suggested by David Wheeler.
-
-	* t/coretests.pm
-	    Test the above change.
-
-	* README
-	    Document the above.
-
-	* lib/version.pm
-	  lib/version/vxs.pm
-	    Bump $VERSION.
-
-2006-01-06  John Peacock <jpeacock@cpan.org>
-
-	New version to deal with malformed input data that came up
-	in bleadperl:
-
-	  sprintf of version objects
-	  <https://rt.perl.org/rt3/Ticket/Display.html?id=37897>
-
-	* README
-	  lib/version/vxs.pm
+	* vutil/vxs.pm
+	  vperl/vpp.pm
 	  lib/version.pm
-	    Bump version.
-
-	* vutil/vutil.c
-	    Die if input value has underscore but no decimal.
-
-	* t/01base.t
-	  t/02derived.t
-	    Use no_plan so I don't need to increment tests any more.
-
-	* t/coretests.pm
-	    Check for malformed input.
-
-2006-01-05  John Peacock <jpeacock@cpan.org>
-
-	Ready for new release to CPAN with minor changes.
+	    Backrev to a beta release.
 
 	* README
-	    Describe minor changes
-
-	* lib/version/vxs.pm
-	  lib/version.pm
-	    Bump $VERSION.
-
-	* vutil/vutil.c
-	    Eliminate code I'm never going to use.
-
-2005-12-03  John Peacock <jpeacock@cpan.org>
-
-	* lib/version.pod
-	    PAUSE does so support version objects.  Elaborate on support
-	    for Module::Build and lack thereof for ExtUtils::MakeMaker.
-
-2005-12-02  John Peacock <jpeacock@cpan.org>
-
-	* version/vxs.pm
-	    Forgot to bump this.  When am I going to have inherited props?
-
-2005-12-02  John Peacock <jpeacock@cpan.org>
+	  lib/version.pod
+	    Document changes in interface of $obj->new().
 
 	* Build.PL
-	    Explicit minimum version of Module::Build.  Fixes
-	    <https://rt.cpan.org/Ticket/Display.html?id=16249>
+	    Make Scalar::Util requirement optional based both on Perl
+	    version and on whether vpp.pm is being installed.
 
-	* README
-	    Whoo-hoo!  Remember to update this the first time.
+2006-02-12  John Peacock <jpeacock@cpan.org>
+
+	Working pure Perl version objects (but relies on Scalar::Util).  Change
+	behavior of XS model too (see below).  All tests pass.
+
+	* vutil/vxs.xs
+	    $v2 = $v1->new() shouldn't clone original value.
+
+	* t/coretests.pm
+	    Make sure obj->new() doesn't clone value.
+
+	* vperl/vpp.pm
+	    Implement CVS-style (evil) initialization.
+	    Add _verify() sub to make sure derived classes don't break things.
+	    Add test for vstring (uses Scalar::Util) and DTRT.
+
+2006-02-12  John Peacock <jpeacock@cpan.org>
+
+	Nearly working pure Perl version objects.  A couple of tests still fail.
 
 	* lib/version.pm
-	    Make sure that there is no possible way that Perl will
-	    try to include the non-existant pure Perl vpp.pm
+	    Bump version.
+	    Re-enable vpp.pm support
 
-	* lib/version.pod
-	    Complete rewrite that is hopefully easier to understand.
+	* vperl/vpp.pm
+	    Bump version.
+	    Completely rewrite new() to exactly mirror what the XS code does.
+	    Support swapped comparisons.
+	    Correct $v->normal() code for short decimal versions.
 
-2005-11-01  John Peacock <jpeacock@cpan.org>
+	* vutil/vxs.pm
+	    Bump version.
 
-	* vutil/vutil.c
-	    Use trinary operator to choose power of 10, rather than pow(),
-	    which caused some problem with AIX 5.1.  Resolves:
+2006-02-09  John Peacock <jpeacock@cpan.org>
 
-	      <https://rt.cpan.org/NoAuth/Bug.html?id=15254>
+	Complete merge with version/trunk (all tests pass).
 
-	* t/02derived.t
-	    Suppress unnecessary warning when overriding qv() sub.
+2006-02-09  John Peacock <jpeacock@cpan.org>
 
-2005-10-10  John Peacock <jpeacock@cpan.org>
+	Merge from version/trunk
 
-	* version/README
-	    Remember to update this for 0.49 release.
+2005-09-26  John Peacock <jpeacock@cpan.org>
 
-2005-10-08  John Peacock <jpeacock@cpan.org>
+	Check in work so far on combined XS and PP version
 
-	Fix Build.PL so Win32 will compile properly
+2005-09-26  John Peacock <jpeacock@cpan.org>
 
-2005-10-06  John Peacock <jpeacock@cpan.org>
-
-	* version/Build.PL
-	    Explicit call to dist_name to help Windows DTRT.  Resolves
-	    ticket:
-
-	      <https://rt.cpan.org/Ticket/Display.html?id=14743>
-
-	* lib/version/vxs.pm
-	  lib/version.pm
-	  lib/version.pod
-	  t/01base.t
-	  t/02derived.t
-	  t/coretests.pm
-	  vutil/vutil.c
-	    Change implementation to return version objects instead of
-	    version::vxs object.  Document that qv() isn't inherited and
-	    give work around.  Update tests to no longer test version::vxs
-	    class directly (since it doesn't work).  Resolves ticket:
-
-	      <https://rt.cpan.org/Ticket/Display.html?id=14958>
+	Branch to develop the combined XS and PP version
 
 2005-09-26  John Peacock <jpeacock@cpan.org>
 

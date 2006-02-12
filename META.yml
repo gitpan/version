@@ -1,17 +1,22 @@
 ---
 name: version
-version: 0.53
-author: ~
-abstract: ~
+version: 0.53_03
+author:
+  - John Peacock E<lt>jpeacock@cpan.orgE<gt>
+abstract: Perl extension for Version Objects
 license: perl
+resources:
+  license: http://dev.perl.org/licenses/
 requires:
-  Module::Build: 0.2611
   perl: '> 5.005, !=5.9.1, !=5.9.2'
 provides:
   version:
     file: lib/version.pm
-    version: 0.53
+    version: 0.53_03
   version::vxs:
-    file: lib/version/vxs.pm
-    version: 0.53
-generated_by: Module::Build version 0.2611
+    file: vutil/vxs.pm
+    version: 0.53_03
+generated_by: Module::Build version 0.2707
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.2.html
+  version: 1.2

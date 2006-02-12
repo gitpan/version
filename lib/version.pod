@@ -110,7 +110,7 @@ if required:
 
   $v  = version->new(1.002);     # 1.002, but compares like 1.2.0
   $v  = version->new(1.002003);  # 1.002003
-  $v2 = version->new( "1.2.3");  # v1.2.3
+  $v2 = version->new("1.2.3");   # v1.2.3
 
 In specific, version numbers initialized as L<Numeric Versions> will
 stringify in Numeric form.  Version numbers initialized as L<Extended Versions>
@@ -161,7 +161,7 @@ a single decimal point, e.g.:
                                    # Prints
   $v = version->new( "v1.200");    # v1.200.0
   $v = version->new("v1.20.0");    # v1.20.0
-  $v = qv("v1.2.3);                # v1.2.3
+  $v = qv("v1.2.3");               # v1.2.3
   $v = qv("1.2.3");                # v1.2.3
   $v = qv("1.20");                 # v1.20.0
 
@@ -236,9 +236,15 @@ object, either as a class method:
 or as an object method:
 
   $v1 = version->new(12.3);
+  $v2 = $v1->new(12.3);
+
+and in each case, $v1 and $v2 will be identical.  NOTE: if you create
+a new object using an existing object like this:
+
   $v2 = $v1->new();
 
-and in each case, $v1 and $v2 will be identical.
+the new object B<will not> be a clone of the existing object.  In the
+example case, $v2 will be an empty object of the same type as $v1.
 
 =back
 
