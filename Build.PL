@@ -17,6 +17,7 @@ my %build_arguments = (
     requires        => {
 	perl => '> 5.005, !=5.9.1, !=5.9.2',
     },
+    dynamic_config  => 1,
 );
 
 if ( $perl_only or not $t->have_c_compiler() ) {
@@ -41,6 +42,8 @@ else {
     $build_arguments{xs_files} = {
 	'./vutil/vxs.xs' => 'lib/version/vxs.xs'
     };
+    $build_arguments{add_to_cleanup} = 
+    	['lib/version/vxs.*'];
 }
 
 my $class = Module::Build->subclass
