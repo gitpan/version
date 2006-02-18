@@ -1,23 +1,17 @@
 ---
 name: version
-version: 0.54
-author:
-  - 'John Peacock E<lt>jpeacock@cpan.orgE<gt>'
-abstract: Perl extension for Version Objects
+version: 0.55
+author: ~
+abstract: ~
 license: perl
-resources:
-  license: http://dev.perl.org/licenses/
 requires:
   perl: '> 5.005, !=5.9.1, !=5.9.2'
 dynamic_config: 1
 provides:
   version:
     file: lib/version.pm
-    version: 0.54
+    version: 0.55
   version::vxs:
     file: vutil/vxs.pm
-    version: 0.5303
-generated_by: Module::Build version 0.2707
-meta-spec:
-  url: http://module-build.sourceforge.net/META-spec-v1.2.html
-  version: 1.2
+    version: 0.55
+generated_by: Module::Build version 0.2611

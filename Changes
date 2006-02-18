@@ -1,3 +1,7 @@
+2006-02-17  John Peacock <jpeacock@cpan.org>
+
+	Emergency release to fix up M::B 0.2611 problem
+
 2006-02-16  John Peacock <jpeacock@cpan.org>
 
 	Neglected to clean up after XS code (since we are playing games).
