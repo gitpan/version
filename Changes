@@ -1,3 +1,7 @@
+2006-02-19  John Peacock <jpeacock@cpan.org>
+
+	Another workaround for incomplete testing
+
 2006-02-17  John Peacock <jpeacock@cpan.org>
 
 	Emergency release to fix up M::B 0.2611 problem
