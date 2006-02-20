@@ -1,5 +1,19 @@
 2006-02-20  John Peacock <jpeacock@cpan.org>
 
+	Next beta release to CPAN.
+
+	* Build.PL
+	    Subclass Module::Build and override have_c_compiler() with one that
+	    fails without die'ing.
+
+	* README
+	  lib/version.pm
+	  vperl/vpp.pm
+	  vutil/vxs.pm
+	    $VERSION++.
+
+2006-02-20  John Peacock <jpeacock@cpan.org>
+
 	Beta release to CPAN.
 
 	* README
