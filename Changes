@@ -1,3 +1,23 @@
+2006-02-20  John Peacock <jpeacock@cpan.org>
+
+	Beta release to CPAN.
+
+	* README
+	  lib/version.pm
+	    Bump $VERSION for new release.
+
+	* vperl/vpp.pm
+	    Fully implemented UNIVERSAL::VERSION in the pure Perl module.
+	    Set explicit $VERSION so that correct module gets loaded during
+	    testing.
+
+	* vutil/vxs.pm
+	    Set explicit $VERSION so that correct module gets loaded during
+	    testing.
+
+	* t/coretests.pm
+	    Additional tests (based on bleadperl t/op/use.t).
+
 2006-02-19  John Peacock <jpeacock@cpan.org>
 
 	Another workaround for incomplete testing
