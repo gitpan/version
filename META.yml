@@ -1,17 +1,17 @@
 ---
 name: version
-version: 0.56_03
+version: 0.57
 author: ~
 abstract: ~
 license: perl
 requires:
-  perl: '> 5.005, !=5.9.1, !=5.9.2'
+  perl: '> 5.005, < 5.009'
 dynamic_config: 1
 provides:
   version:
     file: lib/version.pm
-    version: 0.56_03
+    version: 0.57
   version::vxs:
     file: vutil/vxs.pm
-    version: 0.56_03
+    version: 0.57
 generated_by: Module::Build version 0.2611

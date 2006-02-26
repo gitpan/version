@@ -1,3 +1,7 @@
+2006-02-26  John Peacock <jpeacock@cpan.org>
+
+	Release 0.57 to CPAN.  Only bumps $VERSION and slightly improve Build.PL.
+
 2006-02-20  John Peacock <jpeacock@cpan.org>
 
 	Next beta release to CPAN.
