@@ -1,8 +1,22 @@
-2006-02-26  John Peacock <jpeacock@cpan.org>
+john_peacock  r230):
+
+	Restore compatibility with Perl 5.6.x (though not with 5.005_x yet).
+
+john_peacock  r228):
+
+	* lib/version.pod
+	    Minor POD fixup (revealed by pod2html).
+
+	* t/coretests.pm
+	  t/01base.t
+	  t/02derived.t
+	    Suppress status messages except when --verbose is used.
+
+jpeacock  r226):
 
 	Release 0.57 to CPAN.  Only bumps $VERSION and slightly improve Build.PL.
 
-2006-02-20  John Peacock <jpeacock@cpan.org>
+jpeacock  r224):
 
 	Next beta release to CPAN.
 
@@ -16,7 +30,7 @@
 	  vutil/vxs.pm
 	    $VERSION++.
 
-2006-02-20  John Peacock <jpeacock@cpan.org>
+jpeacock  r222):
 
 	Beta release to CPAN.
 
@@ -36,31 +50,31 @@
 	* t/coretests.pm
 	    Additional tests (based on bleadperl t/op/use.t).
 
-2006-02-19  John Peacock <jpeacock@cpan.org>
+jpeacock  r220):
 
 	Another workaround for incomplete testing
 
-2006-02-17  John Peacock <jpeacock@cpan.org>
+jpeacock  r218):
 
 	Emergency release to fix up M::B 0.2611 problem
 
-2006-02-16  John Peacock <jpeacock@cpan.org>
+jpeacock  r216):
 
 	Neglected to clean up after XS code (since we are playing games).
 
-2006-02-16  John Peacock <jpeacock@cpan.org>
+jpeacock  r215):
 
 	No, really, the final changes before releasing to CPAN. :(
 
-2006-02-16  John Peacock <jpeacock@cpan.org>
+jpeacock  r214):
 
 	Final updates for 0.54 release to CPAN.
 
-2006-02-14  John Peacock <jpeacock@cpan.org>
+jpeacock  r213):
 
 	Merge from version-combined branch.  Equivalent to RELEASE_0_53_03.
 
-2006-02-09  John Peacock <jpeacock@cpan.org>
+jpeacock  r206):
 
 	Commit changes prior to push to implement pure Perl alternative.
 
@@ -73,7 +87,7 @@
 	* vutil/vutil.c
 	    Sync with bleadperl.  Only warn if 'use warnings' is set.
 
-2006-01-10  John Peacock <jpeacock@cpan.org>
+jpeacock  r204):
 
 	Release 0.53 to CPAN.
 
@@ -91,7 +105,7 @@
 	  lib/version/vxs.pm
 	    Bump $VERSION.
 
-2006-01-06  John Peacock <jpeacock@cpan.org>
+jpeacock  r202):
 
 	New version to deal with malformed input data that came up
 	in bleadperl:
@@ -114,7 +128,7 @@
 	* t/coretests.pm
 	    Check for malformed input.
 
-2006-01-05  John Peacock <jpeacock@cpan.org>
+jpeacock  r200):
 
 	Ready for new release to CPAN with minor changes.
 
@@ -128,18 +142,18 @@
 	* vutil/vutil.c
 	    Eliminate code I'm never going to use.
 
-2005-12-03  John Peacock <jpeacock@cpan.org>
+jpeacock  r193):
 
 	* lib/version.pod
 	    PAUSE does so support version objects.  Elaborate on support
 	    for Module::Build and lack thereof for ExtUtils::MakeMaker.
 
-2005-12-02  John Peacock <jpeacock@cpan.org>
+jpeacock  r185):
 
 	* version/vxs.pm
 	    Forgot to bump this.  When am I going to have inherited props?
 
-2005-12-02  John Peacock <jpeacock@cpan.org>
+jpeacock  r184):
 
 	* Build.PL
 	    Explicit minimum version of Module::Build.  Fixes
@@ -155,7 +169,7 @@
 	* lib/version.pod
 	    Complete rewrite that is hopefully easier to understand.
 
-2005-11-01  John Peacock <jpeacock@cpan.org>
+jpeacock  r183):
 
 	* vutil/vutil.c
 	    Use trinary operator to choose power of 10, rather than pow(),
@@ -166,16 +180,16 @@
 	* t/02derived.t
 	    Suppress unnecessary warning when overriding qv() sub.
 
-2005-10-10  John Peacock <jpeacock@cpan.org>
+jpeacock  r182):
 
 	* version/README
 	    Remember to update this for 0.49 release.
 
-2005-10-08  John Peacock <jpeacock@cpan.org>
+jpeacock  r181):
 
 	Fix Build.PL so Win32 will compile properly
 
-2005-10-06  John Peacock <jpeacock@cpan.org>
+jpeacock  r180):
 
 	* version/Build.PL
 	    Explicit call to dist_name to help Windows DTRT.  Resolves
@@ -197,11 +211,11 @@
 
 	      <https://rt.cpan.org/Ticket/Display.html?id=14958>
 
-2005-09-26  John Peacock <jpeacock@cpan.org>
+jpeacock  r177):
 
 	Start POD rewrite.
 
-2005-09-14  John Peacock <jpeacock@cpan.org>
+jpeacock  r176):
 
 	Significant archectectural change (object hash has to contain
 	reference to array not the array itself); see
@@ -216,7 +230,7 @@
 	for more details.  All POD moved to seperate file.  Tests
 	abstracted out for reuse by different classes.
 
-2005-09-07  John Peacock <jpeacock@cpan.org>
+jpeacock  r165):
 
 	"version" element of hash must be a reference, see:
 	   <https://rt.cpan.org/Ticket/Display.html?id=14439>
@@ -224,7 +238,7 @@
 
 	Also, function name changes backported from bleadperl version.
 
-2005-08-23  John Peacock <jpeacock@cpan.org>
+jpeacock  r164):
 
 	Badly written subclasses could SEGV (reported by Andreas Koenig).
 	Now all version objects are validated before use.
@@ -236,30 +250,30 @@
 	Apply const'ifying from bleadperl and reformat calls to
 	sv_[cat|set]pvf to be consistent with bleadperl source.
 
-2005-08-22  John Peacock <jpeacock@cpan.org>
+jpeacock  r163):
 
 	Leading whitespace or lack of leading zero caused the the object
 	to be initialized incorrectly (reported by Andreas Koenig).
 
 	Added POD for subclassing.  Removed cruft from README file.
 
-2005-08-03  John Peacock <jpeacock@cpan.org>
+jpeacock  r162):
 
 	Don't strip trailing zeros unneccesarily
 
-2005-08-02  John Peacock <jpeacock@cpan.org>
+jpeacock  r161):
 
 	Spelling fixes from "Piotr Fusik" <pfusik@op.pl>
 
-2005-07-23  John Peacock <jpeacock@cpan.org>
+jpeacock  r160):
 
 	Complete rename of files to prevent GCC 4.0 bug
 
-2005-07-23  John Peacock <jpeacock@cpan.org>
+jpeacock  r159):
 
 	Preliminary commit for rename of util.[ch]
 
-2005-06-06  John Peacock <jpeacock@cpan.org>
+jpeacock  r158):
 
 	Final changes to release 0.43 to CPAN
 
@@ -277,7 +291,7 @@
 	*   util/util.h
 	    const'ify Perl_scan_version().
 
-2005-05-23  John Peacock <jpeacock@cpan.org>
+jpeacock  r157):
 
 	Complete rewrite of parser to handle CPAN-style (two significant
 	decimal) versions, as well as finish documenting the changes.
@@ -294,7 +308,7 @@
 	    Add additional tests for CPAN-style alphas as well as
 	    object->new().
 
-2005-05-20  John Peacock <jpeacock@cpan.org>
+jpeacock  r156):
 
 	*   lib/version.pm
 	    Revised POD to correspond to new behavior with regards to both
@@ -305,7 +319,7 @@
 	    Copy existing object if called as object method with no
 	    parameter.
 
-2005-05-17  John Peacock <jpeacock@cpan.org>
+jpeacock  r155):
 
 	Working towards a release to CPAN.
 
@@ -320,7 +334,7 @@
 	*   util/util.c
 	    Finish up handling for vcmp to deal with alpha versions.
 
-2005-05-17  John Peacock <jpeacock@cpan.org>
+jpeacock  r154):
 
 	Almost completely working; only the comparison tests with
 	non-objects is still failing.
@@ -334,7 +348,7 @@
 	    Forgot to make sure to display all subversion from short
 	    numeric versions.
 
-2005-05-15  John Peacock <jpeacock@cpan.org>
+jpeacock  r153):
 
 	Completed (?) to move to Module::Build
 
@@ -352,7 +366,7 @@
 	    Add additional files that were originally left out of file
 	    Alphabetize this listing (for compulsiveness)
 
-2005-05-15  John Peacock <jpeacock@cpan.org>
+jpeacock  r152):
 
 	Intermediate commit to facilitate move to Module::Build as well as
 	work on new hash-based object (all tests do not suceed)
@@ -372,7 +386,7 @@
 	*   t/01base.t
 	    Changed to prevent core dump (temporarily)
 
-2005-05-08  John Peacock <jpeacock@cpan.org>
+jpeacock  r151):
 
 	Implement alpha versions using secret array zero slot to
 	differentiate between two place alphas (1.02_03) and three place
@@ -386,7 +400,7 @@
 	   (Perl_vnumify): use the new zero'th array element to distinguish
 	   between 2 and 3 significant decimal places for printing.
 
-2005-04-21  John Peacock <jpeacock@cpan.org>
+jpeacock  r150):
 
 	*  util.c
 	   Handle two digit alpha versions
@@ -395,7 +409,7 @@
 	*  t/01base.t
 	   Altered tests to match new expectations
 
-2005-02-06  John Peacock <jpeacock@cpan.org>
+jpeacock  r148):
 
 	*   Makefile.PL
 	    Windows doesn't understand the braces for shell expansion
@@ -415,7 +429,7 @@
 	*   version.xs
 	    new() returns void since it actual returns on the stack
 
-2004-07-12  John Peacock <jpeacock@cpan.org>
+jpeacock  r146):
 
 	*    util.c
 	     Fix infinite loop for CVS-style versions of more than 3
@@ -431,7 +445,7 @@
 	*    README
 	     Remember to update this before releasing (for a change).
 
-2004-07-11  John Peacock <jpeacock@cpan.org>
+jpeacock  r144):
 
 	*    lib/version.pm
 	     Increment $VERSION number; have to quote to get the tgz file
@@ -443,11 +457,11 @@
 	     Thanks to Marcus Holland-Moritz <mhx-perl@gmx.net> for finding
 	     this.
 
-2004-04-14  John Peacock <jpeacock@cpan.org>
+jpeacock  r136):
 
 	Merge changes from version-0.39 back to trunk
 
-2004-01-06  John Peacock <jpeacock@cpan.org>
+jpeacock  r121):
 
 	*    t/02AlphaBeta.t
 	*    t/01base.t
@@ -469,19 +483,19 @@
 	     for internal representation; trigger CPAN-style only for
 	     second term.
 
-2004-01-03  John Peacock <jpeacock@cpan.org>
+jpeacock  r120):
 
 	Ignore MakeMaker-generated files in svn status
 
-2004-01-03  John Peacock <jpeacock@cpan.org>
+jpeacock  r119):
 
 	Ignore MakeMaker-generated files in svn status
 
-2004-01-03  John Peacock <jpeacock@cpan.org>
+jpeacock  r118):
 
 	Ignore MakeMaker-generated files in svn status
 
-2004-01-01  John Peacock <jpeacock@cpan.org>
+jpeacock  r117):
 
 	*    lib/version.pm
 	     (POD): Initial documentation of CPAN-Style versions.
@@ -491,7 +505,7 @@
 	     decimal places) differently from Perl-style (three or more
 	     decimal places).
 
-2003-12-29  John Peacock <jpeacock@cpan.org>
+jpeacock  r116):
 
 	*    typemap
 	     Stop automatically dereferencing input variable
@@ -506,7 +520,7 @@
 	     Stop dereferencing input variables
 	     Stop assuming that the PV has a value
 
-2003-12-28  John Peacock <jpeacock@cpan.org>
+jpeacock  r115):
 
 	*    t/01base.t
 	     Replace postfix increment with prefix increment to prevent erroneous
@@ -520,32 +534,32 @@
 	     Rewrite version->new() to eliminate temp string for CVS $Revision: $
 	     Rewrite version->qv() to use scan_version instead of new_version
 
-2003-12-21  John Peacock <jpeacock@cpan.org>
+jpeacock  r112):
 
 	M    version.xs
 	     Go through code to ensure that there are no leaking scalars
 	     Sadly, there are still leaks from version::VERSION of unknown origins
 
-2003-12-20  John Peacock <jpeacock@cpan.org>
+jpeacock  r111):
 
 	M    t/02AlphaBeta.t
 	M    lib/version/AlphaBeta.pm
 	     Implement an alternate object representation
 	     Overload stringify() with custom function
 
-2003-10-25  John Peacock <jpeacock@cpan.org>
+jpeacock  r110):
 
 	M    t/02AlphaBeta.t
 	     Add empty derived class and modify tests to run
 	M    t/01base.t
 	     Work around bug with postfix increment under all Perl < bleadperl
 
-2003-09-10  John Peacock <jpeacock@cpan.org>
+jpeacock  r109):
 
 	Fix for Ticket #3764 - need to strip final term before chop()
 	Implement qv() function and document/test
 
-2003-09-10  John Peacock <jpeacock@cpan.org>
+jpeacock  r107):
 
 	Remove the changes file from the repository.
 	Generate it before release:
@@ -554,30 +568,30 @@
 
 	and eventually by 'release.pl --changes'
 
-2003-09-10  John Peacock <jpeacock@cpan.org>
+jpeacock  r106):
 
 	Finish backporting bleadperl changes
 	Special case test for 5.005_03
 	Patch ppport.h to support IVSIZE for 5.005_03
 
-2003-09-10  John Peacock <jpeacock@cpan.org>
+jpeacock  r105):
 
 	No, really delete the lines from MANIFEST
 	Last bit of clean up in the POD
 
-2003-09-10  John Peacock <jpeacock@cpan.org>
+jpeacock  r104):
 
 	Delete version::Empty module and include in t/01base.t instead
 	Correct MANIFEST (delete missing files and add ppport.h)
 	Make version::stringify() return at least three subversions
 
-2003-09-09  John Peacock <jpeacock@cpan.org>
+jpeacock  r103):
 
 	Integrate changes from bleadperl
 	Combine emptyclass.t test into 01base.t
 	Use ppport.h instead of homebrewed #define's
 
-2003-09-07  John Peacock <jpeacock@cpan.org>
+jpeacock  r102):
 
 	Extend version::new() to handle derived classes
 	Abstract t/01base.t into external file
@@ -585,35 +599,35 @@
 
 	FIX: "attempt to free unreferenced scalar" during testing
 
-2003-07-09  John Peacock <jpeacock@cpan.org>
+jpeacock  r92):
 
 	Merge changes made accidently on branch back to head
 
-2003-06-13  John Peacock <jpeacock@cpan.org>
+jpeacock  r82):
 
 	Forgot to commit this before releasing.
 
-2003-06-13  John Peacock <jpeacock@cpan.org>
+jpeacock  r78):
 
 	Correct the example code (again) to correct for CVS update problems
 
-2003-06-13  John Peacock <jpeacock@cpan.org>
+jpeacock  r77):
 
 	Reformatted POD's from <Matthew.Persico@Lazard.com>
 
-2003-06-13  John Peacock <jpeacock@cpan.org>
+jpeacock  r76):
 
 	Change reference from "beta" to "alpha" to follow PAUSE convention
 	Add new function ->is_alpha() to test for alpha versions
 	Add docs for all logical operations on version objects
 	Fix example to have matching versions (old CVS issue)
 
-2003-06-13  John Peacock <jpeacock@cpan.org>
+jpeacock  r75):
 
 	Implement version::AlphaBeta module
 	Copy repository history from CVS into subversion
 
-2003-06-13  John Peacock <jpeacock@cpan.org>
+jpeacock  r74):
 
 	To prepare to load /home/jpeacock/tmp/version-0.28 into version/trunk,
 	perform 2 renames.
@@ -621,170 +635,170 @@
 	* version/trunk/t/1.t: Renamed from version/trunk/t/version.t.
 	* version/trunk/lib/version.pm: Renamed from version/trunk/version.pm.
 
-2003-01-05  John Peacock <jpeacock@cpan.org>
+jpeacock  r49):
 
 	Extract most recent log messages for main file
 
-2003-01-05  John Peacock <jpeacock@cpan.org>
+jpeacock  r48):
 
 	Rewrite POD to call a v-string a v-string
 	Reformat POD to look nicer
 
-2003-01-05  John Peacock <jpeacock@cpan.org>
+jpeacock  r47):
 
 	Make vnumify return an actual NV (instead of an SV which looks like one)
 
-2003-01-05  John Peacock <jpeacock@cpan.org>
+jpeacock  r46):
 
 	Make warnings even more dire
 
-2003-01-05  John Peacock <jpeacock@cpan.org>
+jpeacock  r45):
 
 	change comment message to more accurately reflect the test
 
-2002-12-27  John Peacock <jpeacock@cpan.org>
+jpeacock  r44):
 
 	Rewrite to support new model of "Numeric Versions" and "String Versions"
 
-2002-12-17  John Peacock <jpeacock@cpan.org>
+jpeacock  r43):
 
 	New version to cope with GSAR's vision of bare number versions
 
-2002-12-05  John Peacock <jpeacock@cpan.org>
+jpeacock  r42):
 
 	Make -w clean tests
 
-2002-12-05  John Peacock <jpeacock@cpan.org>
+jpeacock  r41):
 
 	Bring into sync with perl-current
 
-2002-11-18  John Peacock <jpeacock@cpan.org>
+jpeacock  r40):
 
 	Bring current with repository version
 
-2002-11-18  John Peacock <jpeacock@cpan.org>
+jpeacock  r39):
 
 	Fix compile errors under threaded Perl's
 	Supress {Unquoted string version} warnings
 
-2002-11-18  John Peacock <jpeacock@cpan.org>
+jpeacock  r38):
 
 	Fix compile errors under threaded Perls
 
-2002-11-18  John Peacock <jpeacock@cpan.org>
+jpeacock  r37):
 
 	Fix compile errors under threaded Perl's
 	Supress {Unquoted string "version"} warnings
 
-2002-10-14  John Peacock <jpeacock@cpan.org>
+jpeacock  r36):
 
 	Fix typos
 	Fix handling of null versions
 
-2002-10-10  John Peacock <jpeacock@cpan.org>
+jpeacock  r35):
 
 	use Perl_croak from C code
 
-2002-10-08  John Peacock <jpeacock@cpan.org>
+jpeacock  r34):
 
 	Recover gracefully to null versions (rather than core)
 
-2002-10-08  John Peacock <jpeacock@cpan.org>
+jpeacock  r33):
 
 	Recover gracefully to null versions (rather than core)
 
-2002-10-04  John Peacock <jpeacock@cpan.org>
+jpeacock  r32):
 
 	Document extended decimal version parsing
 
-2002-10-04  John Peacock <jpeacock@cpan.org>
+jpeacock  r31):
 
 	Force all files to next major revision (so the version works)
 
-2002-10-04  John Peacock <jpeacock@cpan.org>
+jpeacock  r30):
 
 	Add tests for 1.002003 => 1.2.3
 
-2002-10-04  John Peacock <jpeacock@cpan.org>
+jpeacock  r29):
 
 	Add support for 1.002003 => 1.2.3
 
-2002-10-04  John Peacock <jpeacock@cpan.org>
+jpeacock  r28):
 
 	Remove dependency on Exporter.pm
 
-2002-09-29  John Peacock <jpeacock@cpan.org>
+jpeacock  r27):
 
 	Update with version from perl-current
 
-2002-09-29  John Peacock <jpeacock@cpan.org>
+jpeacock  r26):
 
 	Change vstringify and vnumify
 	Reword main POD slightly
 
-2002-09-28  John Peacock <jpeacock@cpan.org>
+jpeacock  r25):
 
 	Final changes to release to CPAN
 	Merged code into perl-current
 
-2002-09-28  John Peacock <jpeacock@cpan.org>
+jpeacock  r24):
 
 	Ready to release to CPAN
 
-2002-09-28  John Peacock <jpeacock@cpan.org>
+jpeacock  r23):
 
 	POD changes
 
-2002-09-28  John Peacock <jpeacock@cpan.org>
+jpeacock  r22):
 
 	Cannot use SvPV_nolen in 5.005_03
 
-2002-09-22  John Peacock <jpeacock@cpan.org>
+jpeacock  r21):
 
 	Document the UNIVERSAL::VERSION replacement
 
-2002-09-22  John Peacock <jpeacock@cpan.org>
+jpeacock  r20):
 
 	Successfully create and test my own UNIVERSAL::VERSION replacement
 
-2002-09-16  John Peacock <jpeacock@cpan.org>
+jpeacock  r19):
 
 	Improve the testing of beta versions
 
-2002-09-16  John Peacock <jpeacock@cpan.org>
+jpeacock  r18):
 
 	More POD changes
 
-2002-09-16  John Peacock <jpeacock@cpan.org>
+jpeacock  r17):
 
 	Add additional testing
 	Add POD
 
-2002-09-16  John Peacock <jpeacock@cpan.org>
+jpeacock  r16):
 
 	Finally works in 5.005_03, 5.6.1, and 5.8.0
 
-2002-09-15  John Peacock <jpeacock@cpan.org>
+jpeacock  r15):
 
 	Doesn't work any more?
 
-2002-09-14  John Peacock <jpeacock@cpan.org>
+jpeacock  r14):
 
 	working AV objects in 5.6.x only
 
-2002-09-14  John Peacock <jpeacock@cpan.org>
+jpeacock  r13):
 
 	*** empty log message ***
 
-2002-09-13  John Peacock <jpeacock@cpan.org>
+jpeacock  r12):
 
 	Finished for the night
 
-2002-09-13  John Peacock <jpeacock@cpan.org>
+jpeacock  r11):
 
 	almost working AV style version objects
 
-2002-09-13  John Peacock <jpeacock@cpan.org>
+jpeacock  r10):
 
 	Initial revision
 
