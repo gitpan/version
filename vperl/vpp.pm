@@ -5,7 +5,7 @@ use strict;
 use Exporter ();
 use Scalar::Util;
 use vars qw ($VERSION @ISA @EXPORT @EXPORT_OK %EXPORT_TAGS @REGEXS);
-$VERSION     = 0.58;
+$VERSION     = 0.59;
 @ISA         = qw (Exporter);
 #Give a hoot don't pollute, do not export more than needed by default
 @EXPORT      = qw (qv);
@@ -387,34 +387,35 @@ sub _verify {
     }
 }
 
-package UNIVERSAL;
-no warnings qw(redefine);
+# Thanks to Yitzchak Scott-Thoennes for this mode of operation
+{
+    local $^W;
+    *UNIVERSAL::VERSION = sub {
+	my ($obj, $req) = @_;
+	my $class = ref($obj) || $obj;
+	no strict 'refs';
+	eval "require $class" unless %{"$class\::"}; # already existing
+	die "$class defines neither package nor VERSION--version check failed"
+	    if $@ or not %{"$class\::"};
+	
+	my $version = eval "\$$class\::VERSION";
+	die "$class does not define \$$class\::VERSION--version check failed"
+	    unless defined $version;
 
-sub VERSION {
-    my ($obj, $req) = @_;
-    my $class = ref($obj) || $obj;
-    no strict 'refs';
-    eval "require $class" unless %{"$class\::"}; # already existing
-    die "$class defines neither package nor VERSION--version check failed"
-        if $@ or not %{"$class\::"};
-    
-    my $version = eval "\$$class\::VERSION";
-    die "$class does not define \$$class\::VERSION--version check failed"
-        unless defined $version;
+	$version = version::vpp->new($version);
 
-    $version = version::vpp->new($version);
+	if ( defined $req ) {
+	    $req = version::vpp->new($req);
 
-    if ( defined $req ) {
-	$req = version::vpp->new($req);
+	    die sprintf ("%s version %s (%s) required--".
+		     "this is only version %s (%s)", $class, 
+		     $req->numify, $req->normal,
+		     $version->numify, $version->normal)
+		if ( $req > $version ); 
+	}
 
-	die sprintf ("%s version %s (%s) required--".
-                 "this is only version %s (%s)", $class, 
-		 $req->numify, $req->normal,
-		 $version->numify, $version->normal)
-	    if ( $req > $version ); 
-    }
-
-    return $version->numify;
+	return $version->numify;
+    };
 }
 
 1; #this line is important and will help the module return a true value

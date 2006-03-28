@@ -1,11 +1,5 @@
 #!/usr/bin/perl
 
-BEGIN {
-    if ( $] < 5.006 ) {
-	die "version-0.58 is not currently compatible with Perl 5.005_x";
-    }
-}
-
 use Module::Build;
 my $perl_only;
 

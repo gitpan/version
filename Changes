@@ -1,3 +1,14 @@
+john_peacock  r233):
+
+	Complete compatibility with Perl 5.005_0x as well as 5.6.2.
+	Remove the compatibility warnings.pm (since it was a bad idea).
+	Release to CPAN.
+
+john_peacock  r231):
+
+	Fix the pure Perl release for 5.005_0x (thanks to Nick Ing-Simmons).
+	Ready for release to CPAN.
+
 john_peacock  r230):
 
 	Restore compatibility with Perl 5.6.x (though not with 5.005_x yet).
