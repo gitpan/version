@@ -206,9 +206,9 @@ sub BaseTests {
     # test the qv() sub
     diag "testing qv" if $Verbose;
     $version = qv("1.2");
-    ok ( $version eq "1.2.0", 'qv("1.2") eq "1.2.0"' );
+    cmp_ok ( $version, "eq", "v1.2.0", 'qv("1.2") eq "1.2.0"' );
     $version = qv(1.2);
-    ok ( $version eq "1.2.0", 'qv(1.2) eq "1.2.0"' );
+    cmp_ok ( $version, "eq", "v1.2.0", 'qv(1.2) eq "1.2.0"' );
     isa_ok( qv('5.008'), $CLASS );
 
     # test creation from existing version object
@@ -290,6 +290,16 @@ sub BaseTests {
 	unlink 'yyy.pm';
     }
 
+    { # dummy up some variously broken modules for testing
+	open F, ">zzz.pm" or die "Cannot open zzz.pm: $!\n";
+	print F "package zzz;\n\@VERSION = ();\n1;\n";
+	close F;
+	eval "use lib '.'; use zzz 3;";
+	like ($@, qr/^zzz does not define \$zzz::VERSION/,
+	    'Replacement handles modules without VERSION'); 
+	unlink 'zzz.pm';
+    }
+
 SKIP: 	{
 	skip 'Cannot test v-strings with Perl < 5.8.1', 4
 		if $] < 5.008_001; 
@@ -324,6 +334,38 @@ SKIP: 	{
     $version = $CLASS->new(" 1.7");
     ok($version->numify eq "1.700", "leading space ignored");
 
+    # dummy up a legal module for testing RT#19017
+    open F, ">www.pm" or die "Cannot open www.pm: $!\n";
+    print F <<"EOF";
+package www;
+use version; \$VERSION = qv('0.0.4');
+1;
+EOF
+    close F;
+    {
+	eval "use lib '.'; use www 0.000008;";
+	like ($@, qr/^www version 0.000008 \(v0.0.8\) required/,
+	    "Make sure very small versions don't freak"); 
+    }
+SKIP: {
+	skip 'Cannot "use" extended versions with Perl < 5.6.2', 1
+		if $] < 5.006_002; 
+        
+	eval "use lib '.'; use www 0.0.8;";
+	like ($@, qr/^www version 0.000008 \(v0.0.8\) required/,
+	    "Make sure very small versions don't freak"); 
+    }
+    {
+	eval "use lib '.'; use www 1;";
+	like ($@, qr/^www version 1.000 \(v1.0.0\) required/,
+	    "Comparing vs. version with no decimal"); 
+    }
+    {
+	eval "use lib '.'; use www 1.;";
+	like ($@, qr/^www version 1.000 \(v1.0.0\) required/,
+	    "Comparing "); 
+    }
+    unlink 'www.pm';
 }
 
 package known::module;

@@ -1,3 +1,24 @@
+john_peacock  r239):
+
+	Prep beta release to CPAN.
+
+	Improve POD on using modules that use version.pm.
+	New tests.
+	Require pure Perl module for 5.005_03 (for now).
+
+john_peacock  r238):
+
+	Tweak ppport.h #define's to support 5.0005_04
+
+john_peacock  r237):
+
+	Rewrite to remove dependency on Exporter.
+	Fix RT#19017 - problems related to very small version numbers.
+
+john_peacock  r236):
+
+	Not sure if this works on 5.005_03 after all
+
 john_peacock  r233):
 
 	Complete compatibility with Perl 5.005_0x as well as 5.6.2.
