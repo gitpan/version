@@ -1,4 +1,9 @@
-john_peacock  r239):
+jpeacock  r6295):
+
+	Fix reported failures with UNIVERSAL::VERSION as fallback method in vpp.pm.
+	Augment new() to try and spot non-magic v-strings for v5.6.2 - v5.8.1.
+
+john_peacock  r6272):
 
 	Prep beta release to CPAN.
 
@@ -6,35 +11,35 @@ john_peacock  r239):
 	New tests.
 	Require pure Perl module for 5.005_03 (for now).
 
-john_peacock  r238):
+john_peacock  r6271):
 
 	Tweak ppport.h #define's to support 5.0005_04
 
-john_peacock  r237):
+john_peacock  r6270):
 
 	Rewrite to remove dependency on Exporter.
 	Fix RT#19017 - problems related to very small version numbers.
 
-john_peacock  r236):
+john_peacock  r6269):
 
 	Not sure if this works on 5.005_03 after all
 
-john_peacock  r233):
+john_peacock  r6266):
 
 	Complete compatibility with Perl 5.005_0x as well as 5.6.2.
 	Remove the compatibility warnings.pm (since it was a bad idea).
 	Release to CPAN.
 
-john_peacock  r231):
+john_peacock  r6264):
 
 	Fix the pure Perl release for 5.005_0x (thanks to Nick Ing-Simmons).
 	Ready for release to CPAN.
 
-john_peacock  r230):
+john_peacock  r6263):
 
 	Restore compatibility with Perl 5.6.x (though not with 5.005_x yet).
 
-john_peacock  r228):
+john_peacock  r6261):
 
 	* lib/version.pod
 	    Minor POD fixup (revealed by pod2html).
@@ -44,11 +49,11 @@ john_peacock  r228):
 	  t/02derived.t
 	    Suppress status messages except when --verbose is used.
 
-jpeacock  r226):
+jpeacock  r6259):
 
 	Release 0.57 to CPAN.  Only bumps $VERSION and slightly improve Build.PL.
 
-jpeacock  r224):
+jpeacock  r6257):
 
 	Next beta release to CPAN.
 
@@ -62,7 +67,7 @@ jpeacock  r224):
 	  vutil/vxs.pm
 	    $VERSION++.
 
-jpeacock  r222):
+jpeacock  r6255):
 
 	Beta release to CPAN.
 
@@ -82,31 +87,31 @@ jpeacock  r222):
 	* t/coretests.pm
 	    Additional tests (based on bleadperl t/op/use.t).
 
-jpeacock  r220):
+jpeacock  r6253):
 
 	Another workaround for incomplete testing
 
-jpeacock  r218):
+jpeacock  r6251):
 
 	Emergency release to fix up M::B 0.2611 problem
 
-jpeacock  r216):
+jpeacock  r6249):
 
 	Neglected to clean up after XS code (since we are playing games).
 
-jpeacock  r215):
+jpeacock  r6248):
 
 	No, really, the final changes before releasing to CPAN. :(
 
-jpeacock  r214):
+jpeacock  r6247):
 
 	Final updates for 0.54 release to CPAN.
 
-jpeacock  r213):
+jpeacock  r6246):
 
 	Merge from version-combined branch.  Equivalent to RELEASE_0_53_03.
 
-jpeacock  r206):
+jpeacock  r6239):
 
 	Commit changes prior to push to implement pure Perl alternative.
 
@@ -119,7 +124,7 @@ jpeacock  r206):
 	* vutil/vutil.c
 	    Sync with bleadperl.  Only warn if 'use warnings' is set.
 
-jpeacock  r204):
+jpeacock  r6237):
 
 	Release 0.53 to CPAN.
 
@@ -137,7 +142,7 @@ jpeacock  r204):
 	  lib/version/vxs.pm
 	    Bump $VERSION.
 
-jpeacock  r202):
+jpeacock  r6235):
 
 	New version to deal with malformed input data that came up
 	in bleadperl:
@@ -160,7 +165,7 @@ jpeacock  r202):
 	* t/coretests.pm
 	    Check for malformed input.
 
-jpeacock  r200):
+jpeacock  r6233):
 
 	Ready for new release to CPAN with minor changes.
 
@@ -174,18 +179,18 @@ jpeacock  r200):
 	* vutil/vutil.c
 	    Eliminate code I'm never going to use.
 
-jpeacock  r193):
+jpeacock  r6226):
 
 	* lib/version.pod
 	    PAUSE does so support version objects.  Elaborate on support
 	    for Module::Build and lack thereof for ExtUtils::MakeMaker.
 
-jpeacock  r185):
+jpeacock  r6218):
 
 	* version/vxs.pm
 	    Forgot to bump this.  When am I going to have inherited props?
 
-jpeacock  r184):
+jpeacock  r6217):
 
 	* Build.PL
 	    Explicit minimum version of Module::Build.  Fixes
@@ -201,7 +206,7 @@ jpeacock  r184):
 	* lib/version.pod
 	    Complete rewrite that is hopefully easier to understand.
 
-jpeacock  r183):
+jpeacock  r6216):
 
 	* vutil/vutil.c
 	    Use trinary operator to choose power of 10, rather than pow(),
@@ -212,16 +217,16 @@ jpeacock  r183):
 	* t/02derived.t
 	    Suppress unnecessary warning when overriding qv() sub.
 
-jpeacock  r182):
+jpeacock  r6215):
 
 	* version/README
 	    Remember to update this for 0.49 release.
 
-jpeacock  r181):
+jpeacock  r6214):
 
 	Fix Build.PL so Win32 will compile properly
 
-jpeacock  r180):
+jpeacock  r6213):
 
 	* version/Build.PL
 	    Explicit call to dist_name to help Windows DTRT.  Resolves
@@ -243,11 +248,11 @@ jpeacock  r180):
 
 	      <https://rt.cpan.org/Ticket/Display.html?id=14958>
 
-jpeacock  r177):
+jpeacock  r6210):
 
 	Start POD rewrite.
 
-jpeacock  r176):
+jpeacock  r6209):
 
 	Significant archectectural change (object hash has to contain
 	reference to array not the array itself); see
@@ -262,7 +267,7 @@ jpeacock  r176):
 	for more details.  All POD moved to seperate file.  Tests
 	abstracted out for reuse by different classes.
 
-jpeacock  r165):
+jpeacock  r6198):
 
 	"version" element of hash must be a reference, see:
 	   <https://rt.cpan.org/Ticket/Display.html?id=14439>
@@ -270,7 +275,7 @@ jpeacock  r165):
 
 	Also, function name changes backported from bleadperl version.
 
-jpeacock  r164):
+jpeacock  r6197):
 
 	Badly written subclasses could SEGV (reported by Andreas Koenig).
 	Now all version objects are validated before use.
@@ -282,30 +287,30 @@ jpeacock  r164):
 	Apply const'ifying from bleadperl and reformat calls to
 	sv_[cat|set]pvf to be consistent with bleadperl source.
 
-jpeacock  r163):
+jpeacock  r6196):
 
 	Leading whitespace or lack of leading zero caused the the object
 	to be initialized incorrectly (reported by Andreas Koenig).
 
 	Added POD for subclassing.  Removed cruft from README file.
 
-jpeacock  r162):
+jpeacock  r6195):
 
 	Don't strip trailing zeros unneccesarily
 
-jpeacock  r161):
+jpeacock  r6194):
 
 	Spelling fixes from "Piotr Fusik" <pfusik@op.pl>
 
-jpeacock  r160):
+jpeacock  r6193):
 
 	Complete rename of files to prevent GCC 4.0 bug
 
-jpeacock  r159):
+jpeacock  r6192):
 
 	Preliminary commit for rename of util.[ch]
 
-jpeacock  r158):
+jpeacock  r6191):
 
 	Final changes to release 0.43 to CPAN
 
@@ -323,7 +328,7 @@ jpeacock  r158):
 	*   util/util.h
 	    const'ify Perl_scan_version().
 
-jpeacock  r157):
+jpeacock  r6190):
 
 	Complete rewrite of parser to handle CPAN-style (two significant
 	decimal) versions, as well as finish documenting the changes.
@@ -340,7 +345,7 @@ jpeacock  r157):
 	    Add additional tests for CPAN-style alphas as well as
 	    object->new().
 
-jpeacock  r156):
+jpeacock  r6189):
 
 	*   lib/version.pm
 	    Revised POD to correspond to new behavior with regards to both
@@ -351,7 +356,7 @@ jpeacock  r156):
 	    Copy existing object if called as object method with no
 	    parameter.
 
-jpeacock  r155):
+jpeacock  r6188):
 
 	Working towards a release to CPAN.
 
@@ -366,7 +371,7 @@ jpeacock  r155):
 	*   util/util.c
 	    Finish up handling for vcmp to deal with alpha versions.
 
-jpeacock  r154):
+jpeacock  r6187):
 
 	Almost completely working; only the comparison tests with
 	non-objects is still failing.
@@ -380,7 +385,7 @@ jpeacock  r154):
 	    Forgot to make sure to display all subversion from short
 	    numeric versions.
 
-jpeacock  r153):
+jpeacock  r6186):
 
 	Completed (?) to move to Module::Build
 
@@ -398,7 +403,7 @@ jpeacock  r153):
 	    Add additional files that were originally left out of file
 	    Alphabetize this listing (for compulsiveness)
 
-jpeacock  r152):
+jpeacock  r6185):
 
 	Intermediate commit to facilitate move to Module::Build as well as
 	work on new hash-based object (all tests do not suceed)
@@ -418,7 +423,7 @@ jpeacock  r152):
 	*   t/01base.t
 	    Changed to prevent core dump (temporarily)
 
-jpeacock  r151):
+jpeacock  r6184):
 
 	Implement alpha versions using secret array zero slot to
 	differentiate between two place alphas (1.02_03) and three place
@@ -432,7 +437,7 @@ jpeacock  r151):
 	   (Perl_vnumify): use the new zero'th array element to distinguish
 	   between 2 and 3 significant decimal places for printing.
 
-jpeacock  r150):
+jpeacock  r6183):
 
 	*  util.c
 	   Handle two digit alpha versions
@@ -441,7 +446,7 @@ jpeacock  r150):
 	*  t/01base.t
 	   Altered tests to match new expectations
 
-jpeacock  r148):
+jpeacock  r6181):
 
 	*   Makefile.PL
 	    Windows doesn't understand the braces for shell expansion
@@ -461,7 +466,7 @@ jpeacock  r148):
 	*   version.xs
 	    new() returns void since it actual returns on the stack
 
-jpeacock  r146):
+jpeacock  r6179):
 
 	*    util.c
 	     Fix infinite loop for CVS-style versions of more than 3
@@ -477,7 +482,7 @@ jpeacock  r146):
 	*    README
 	     Remember to update this before releasing (for a change).
 
-jpeacock  r144):
+jpeacock  r6177):
 
 	*    lib/version.pm
 	     Increment $VERSION number; have to quote to get the tgz file
@@ -489,11 +494,11 @@ jpeacock  r144):
 	     Thanks to Marcus Holland-Moritz <mhx-perl@gmx.net> for finding
 	     this.
 
-jpeacock  r136):
+jpeacock  r6169):
 
 	Merge changes from version-0.39 back to trunk
 
-jpeacock  r121):
+jpeacock  r6154):
 
 	*    t/02AlphaBeta.t
 	*    t/01base.t
@@ -515,19 +520,19 @@ jpeacock  r121):
 	     for internal representation; trigger CPAN-style only for
 	     second term.
 
-jpeacock  r120):
+jpeacock  r6153):
 
 	Ignore MakeMaker-generated files in svn status
 
-jpeacock  r119):
+jpeacock  r6152):
 
 	Ignore MakeMaker-generated files in svn status
 
-jpeacock  r118):
+jpeacock  r6151):
 
 	Ignore MakeMaker-generated files in svn status
 
-jpeacock  r117):
+jpeacock  r6150):
 
 	*    lib/version.pm
 	     (POD): Initial documentation of CPAN-Style versions.
@@ -537,7 +542,7 @@ jpeacock  r117):
 	     decimal places) differently from Perl-style (three or more
 	     decimal places).
 
-jpeacock  r116):
+jpeacock  r6149):
 
 	*    typemap
 	     Stop automatically dereferencing input variable
@@ -552,7 +557,7 @@ jpeacock  r116):
 	     Stop dereferencing input variables
 	     Stop assuming that the PV has a value
 
-jpeacock  r115):
+jpeacock  r6148):
 
 	*    t/01base.t
 	     Replace postfix increment with prefix increment to prevent erroneous
@@ -566,32 +571,32 @@ jpeacock  r115):
 	     Rewrite version->new() to eliminate temp string for CVS $Revision: $
 	     Rewrite version->qv() to use scan_version instead of new_version
 
-jpeacock  r112):
+jpeacock  r6145):
 
 	M    version.xs
 	     Go through code to ensure that there are no leaking scalars
 	     Sadly, there are still leaks from version::VERSION of unknown origins
 
-jpeacock  r111):
+jpeacock  r6144):
 
 	M    t/02AlphaBeta.t
 	M    lib/version/AlphaBeta.pm
 	     Implement an alternate object representation
 	     Overload stringify() with custom function
 
-jpeacock  r110):
+jpeacock  r6143):
 
 	M    t/02AlphaBeta.t
 	     Add empty derived class and modify tests to run
 	M    t/01base.t
 	     Work around bug with postfix increment under all Perl < bleadperl
 
-jpeacock  r109):
+jpeacock  r6142):
 
 	Fix for Ticket #3764 - need to strip final term before chop()
 	Implement qv() function and document/test
 
-jpeacock  r107):
+jpeacock  r6140):
 
 	Remove the changes file from the repository.
 	Generate it before release:
@@ -600,30 +605,30 @@ jpeacock  r107):
 
 	and eventually by 'release.pl --changes'
 
-jpeacock  r106):
+jpeacock  r6139):
 
 	Finish backporting bleadperl changes
 	Special case test for 5.005_03
 	Patch ppport.h to support IVSIZE for 5.005_03
 
-jpeacock  r105):
+jpeacock  r6138):
 
 	No, really delete the lines from MANIFEST
 	Last bit of clean up in the POD
 
-jpeacock  r104):
+jpeacock  r6137):
 
 	Delete version::Empty module and include in t/01base.t instead
 	Correct MANIFEST (delete missing files and add ppport.h)
 	Make version::stringify() return at least three subversions
 
-jpeacock  r103):
+jpeacock  r6136):
 
 	Integrate changes from bleadperl
 	Combine emptyclass.t test into 01base.t
 	Use ppport.h instead of homebrewed #define's
 
-jpeacock  r102):
+jpeacock  r6135):
 
 	Extend version::new() to handle derived classes
 	Abstract t/01base.t into external file
@@ -631,35 +636,35 @@ jpeacock  r102):
 
 	FIX: "attempt to free unreferenced scalar" during testing
 
-jpeacock  r92):
+jpeacock  r6125):
 
 	Merge changes made accidently on branch back to head
 
-jpeacock  r82):
+jpeacock  r6115):
 
 	Forgot to commit this before releasing.
 
-jpeacock  r78):
+jpeacock  r6111):
 
 	Correct the example code (again) to correct for CVS update problems
 
-jpeacock  r77):
+jpeacock  r6110):
 
 	Reformatted POD's from <Matthew.Persico@Lazard.com>
 
-jpeacock  r76):
+jpeacock  r6109):
 
 	Change reference from "beta" to "alpha" to follow PAUSE convention
 	Add new function ->is_alpha() to test for alpha versions
 	Add docs for all logical operations on version objects
 	Fix example to have matching versions (old CVS issue)
 
-jpeacock  r75):
+jpeacock  r6108):
 
 	Implement version::AlphaBeta module
 	Copy repository history from CVS into subversion
 
-jpeacock  r74):
+jpeacock  r6107):
 
 	To prepare to load /home/jpeacock/tmp/version-0.28 into version/trunk,
 	perform 2 renames.
@@ -667,170 +672,170 @@ jpeacock  r74):
 	* version/trunk/t/1.t: Renamed from version/trunk/t/version.t.
 	* version/trunk/lib/version.pm: Renamed from version/trunk/version.pm.
 
-jpeacock  r49):
+jpeacock  r6082):
 
 	Extract most recent log messages for main file
 
-jpeacock  r48):
+jpeacock  r6081):
 
 	Rewrite POD to call a v-string a v-string
 	Reformat POD to look nicer
 
-jpeacock  r47):
+jpeacock  r6080):
 
 	Make vnumify return an actual NV (instead of an SV which looks like one)
 
-jpeacock  r46):
+jpeacock  r6079):
 
 	Make warnings even more dire
 
-jpeacock  r45):
+jpeacock  r6078):
 
 	change comment message to more accurately reflect the test
 
-jpeacock  r44):
+jpeacock  r6077):
 
 	Rewrite to support new model of "Numeric Versions" and "String Versions"
 
-jpeacock  r43):
+jpeacock  r6076):
 
 	New version to cope with GSAR's vision of bare number versions
 
-jpeacock  r42):
+jpeacock  r6075):
 
 	Make -w clean tests
 
-jpeacock  r41):
+jpeacock  r6074):
 
 	Bring into sync with perl-current
 
-jpeacock  r40):
+jpeacock  r6073):
 
 	Bring current with repository version
 
-jpeacock  r39):
+jpeacock  r6072):
 
 	Fix compile errors under threaded Perl's
 	Supress {Unquoted string version} warnings
 
-jpeacock  r38):
+jpeacock  r6071):
 
 	Fix compile errors under threaded Perls
 
-jpeacock  r37):
+jpeacock  r6070):
 
 	Fix compile errors under threaded Perl's
 	Supress {Unquoted string "version"} warnings
 
-jpeacock  r36):
+jpeacock  r6069):
 
 	Fix typos
 	Fix handling of null versions
 
-jpeacock  r35):
+jpeacock  r6068):
 
 	use Perl_croak from C code
 
-jpeacock  r34):
+jpeacock  r6067):
 
 	Recover gracefully to null versions (rather than core)
 
-jpeacock  r33):
+jpeacock  r6066):
 
 	Recover gracefully to null versions (rather than core)
 
-jpeacock  r32):
+jpeacock  r6065):
 
 	Document extended decimal version parsing
 
-jpeacock  r31):
+jpeacock  r6064):
 
 	Force all files to next major revision (so the version works)
 
-jpeacock  r30):
+jpeacock  r6063):
 
 	Add tests for 1.002003 => 1.2.3
 
-jpeacock  r29):
+jpeacock  r6062):
 
 	Add support for 1.002003 => 1.2.3
 
-jpeacock  r28):
+jpeacock  r6061):
 
 	Remove dependency on Exporter.pm
 
-jpeacock  r27):
+jpeacock  r6060):
 
 	Update with version from perl-current
 
-jpeacock  r26):
+jpeacock  r6059):
 
 	Change vstringify and vnumify
 	Reword main POD slightly
 
-jpeacock  r25):
+jpeacock  r6058):
 
 	Final changes to release to CPAN
 	Merged code into perl-current
 
-jpeacock  r24):
+jpeacock  r6057):
 
 	Ready to release to CPAN
 
-jpeacock  r23):
+jpeacock  r6056):
 
 	POD changes
 
-jpeacock  r22):
+jpeacock  r6055):
 
 	Cannot use SvPV_nolen in 5.005_03
 
-jpeacock  r21):
+jpeacock  r6054):
 
 	Document the UNIVERSAL::VERSION replacement
 
-jpeacock  r20):
+jpeacock  r6053):
 
 	Successfully create and test my own UNIVERSAL::VERSION replacement
 
-jpeacock  r19):
+jpeacock  r6052):
 
 	Improve the testing of beta versions
 
-jpeacock  r18):
+jpeacock  r6051):
 
 	More POD changes
 
-jpeacock  r17):
+jpeacock  r6050):
 
 	Add additional testing
 	Add POD
 
-jpeacock  r16):
+jpeacock  r6049):
 
 	Finally works in 5.005_03, 5.6.1, and 5.8.0
 
-jpeacock  r15):
+jpeacock  r6048):
 
 	Doesn't work any more?
 
-jpeacock  r14):
+jpeacock  r6047):
 
 	working AV objects in 5.6.x only
 
-jpeacock  r13):
+jpeacock  r6046):
 
 	*** empty log message ***
 
-jpeacock  r12):
+jpeacock  r6045):
 
 	Finished for the night
 
-jpeacock  r11):
+jpeacock  r6044):
 
 	almost working AV style version objects
 
-jpeacock  r10):
+jpeacock  r6043):
 
 	Initial revision
 
