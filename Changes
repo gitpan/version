@@ -1,3 +1,9 @@
+jpeacock  r6302):
+
+	Now works with 'require version' and not just 'use version' (with tests).
+	Pure Perl UNIVERSAL::VERSION now operates correctly when used as a fallback
+	inherited class method, e.g. class->VERSION or $obj->VERSION.
+
 jpeacock  r6295):
 
 	Fix reported failures with UNIVERSAL::VERSION as fallback method in vpp.pm.
