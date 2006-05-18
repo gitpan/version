@@ -1,3 +1,13 @@
+jpeacock  r6311):
+
+	Prep for another beta to CPAN
+
+jpeacock  r6310):
+
+	Integrate upstream bleadperl changes.
+	Add compatibility code to vutil.h until ppport.h catches up.
+	Fix (and test for) the case where class->VERSION is called
+
 jpeacock  r6302):
 
 	Now works with 'require version' and not just 'use version' (with tests).
