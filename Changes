@@ -1,3 +1,10 @@
+jpeacock  r6317):
+
+	Replace ppport.h with much improved version.
+	Strip out my pathetic compatibility code (see above).
+	Add dependency to ppport.h to each file with appropriate #define's.
+	Release to CPAN as 0.60.
+
 jpeacock  r6311):
 
 	Prep for another beta to CPAN
