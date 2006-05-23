@@ -1,3 +1,13 @@
+jpeacock  r6333):
+
+	Use even newer ppport.h, per Marcus Holland-Moritz.
+	Bump $VERSION for release to CPAN as 0.61.
+
+jpeacock  r6332):
+
+	In my haste to jettison Exporter, I neglected to consider that someone
+	might try and load version.pm twice.  Fixed (and tested).
+
 jpeacock  r6317):
 
 	Replace ppport.h with much improved version.
