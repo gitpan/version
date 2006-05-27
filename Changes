@@ -1,3 +1,14 @@
+jpeacock  r6370):
+
+	Release to CPAN as 0.63 (no really!).
+
+jpeacock  r6369):
+
+	Prevent XS from issuing warnings when initializing with undef or no
+	parameter at all.
+
+	Release to CPAN as 0.63.
+
 jpeacock  r6367):
 
 	Fix RT 19517 - need to handle 'undef' as a string.
