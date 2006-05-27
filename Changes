@@ -1,3 +1,10 @@
+jpeacock  r6367):
+
+	Fix RT 19517 - need to handle 'undef' as a string.
+	Release to CPAN as 0.62.
+
+	TODO - leaking undef warnings from the XS code
+
 jpeacock  r6333):
 
 	Use even newer ppport.h, per Marcus Holland-Moritz.
