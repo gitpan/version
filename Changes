@@ -1,3 +1,22 @@
+jpeacock  r6491):
+
+	Bump version in preparation for release to CPAN as 0.64.
+
+jpeacock  r6430):
+
+	As it turns out, the import() method *can* be inherited and DTRT.
+	POD adjusted to reflect the current reality.
+
+jpeacock  r6429):
+
+	Based on a suggestion by David Wheeler, test for already exported qv() in a
+	more inheritance friendly fashion.
+
+	Create a way to call the base import() from a subclass and have it DTRT and
+	provide documentation for doing so.
+
+	Ready to release to CPAN as 0.63_01.
+
 jpeacock  r6370):
 
 	Release to CPAN as 0.63 (no really!).
