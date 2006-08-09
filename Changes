@@ -1,3 +1,24 @@
+2006-08-08  John Peacock <jpeacock@cpan.org>
+
+	Revert accidental whitespace change
+
+2006-08-08  John Peacock <jpeacock@cpan.org>
+
+	One more regex to prevent patch files being added to MANIFEST
+
+2006-08-08  John Peacock <jpeacock@cpan.org>
+
+	Dependency on changelog not in correct order with dist
+
+2006-08-08  John Peacock <jpeacock@cpan.org>
+
+	Yet another way to structure Makefile.PL so that it autogenerates Changes.
+
+2006-08-08  John Peacock <jpeacock@cpan.org>
+
+	Once again, fix very small version handling in pure Perl release (globally
+	this time).
+
 2006-07-30  John Peacock <jpeacock@cpan.org>
 
 	Property change (don't need these to be executable).
