@@ -1,3 +1,19 @@
+2006-10-08  John Peacock <jpeacock@cpan.org>
+
+	I was wrong.  Apparently all releases of Perl require you to force the PV
+	to be regenerated after changing the locale.
+
+2006-10-08  John Peacock <jpeacock@cpan.org>
+
+	Lots of changes.  Problems noted in bleadperl because of locales which use
+	commas for the decimal point.  Both XS and Perl code updated to handle
+	this, which was tricky for the latter because locale handling was so bad
+	prior to 5.8.0.  Harmless warning during testing caused by bad interaction
+	between POSIX and Test::More's AUTOLOAD (no idea how to fix it).
+
+	Also bumped up required versions in tests and updated Makefile.PL to
+	correctly install the POD file.
+
 2006-08-16  John Peacock <jpeacock@cpan.org>
 
 	Use default subclass name in Build.PL, since M::B nukes the version::
