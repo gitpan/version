@@ -1,3 +1,7 @@
+2006-10-29  John Peacock <jpeacock@cpan.org>
+
+	Release 0.68 to CPAN with locale tests.
+
 2006-10-08  John Peacock <jpeacock@cpan.org>
 
 	I was wrong.  Apparently all releases of Perl require you to force the PV
