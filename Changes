@@ -1,3 +1,29 @@
+2007-01-10  John Peacock <jpeacock@cpan.org>
+
+	Rewrite Makefile.PL again before releasing 0.69 to CPAN.
+
+2007-01-09  John Peacock <jpeacock@cpan.org>
+
+	Before releasing to CPAN, make sure to remove stale Makefile.* remnants
+	from previous runs (in case someone tries to rebuild with the pure Perl
+	release after building the XS release).
+
+2007-01-08  John Peacock <jpeacock@cpan.org>
+
+	Release 0.69 to CPAN
+
+2007-01-08  John Peacock <jpeacock@cpan.org>
+
+	Try to make the Makefile.PL more forgiving about evil compilers (RT#24283).
+	Eliminate Scalar::Util from pure Perl version (for Jos <kane@xs4all.nl>).
+	Latest ppport.h (newer is better, right?).
+	Resolve RT#24239 and 24244, related to PERL_DONT_CREATE_GVSV.
+
+2006-11-23  John Peacock <jpeacock@cpan.org>
+
+	Replace checks with Test::More with a custom module (so the tests won't
+	break when Test::More gets updated).
+
 2006-10-29  John Peacock <jpeacock@cpan.org>
 
 	Release 0.68 to CPAN with locale tests.
