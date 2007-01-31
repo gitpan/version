@@ -59,6 +59,7 @@ sub BaseTests {
 	"Version string contains invalid data; ignoring");
 
     # from here on out capture the warning and test independently
+    {
     my $warning;
     local $SIG{__WARN__} = sub { $warning = $_[0] };
     $version = $CLASS->new("99 and 44/100 pure");
@@ -242,6 +243,10 @@ SKIP: {
 
     # test reformed UNIVERSAL::VERSION
     diag "Replacement UNIVERSAL::VERSION tests" if $Verbose;
+
+    my $error_regex = $] < 5.006
+	? 'version \d required'
+	: 'does not define \$...::VERSION';
     
     {
 	open F, ">aaa.pm" or die "Cannot open aaa.pm: $!\n";
@@ -256,6 +261,16 @@ SKIP: {
 	# test as class method
 	$new_version = "aaa"->VERSION;
 	cmp_ok($new_version,'eq',$version, "Called as class method");
+
+	eval "print Completely::Unknown::Module->VERSION";
+	if ( $] < 5.008 ) {
+	    unlike($@, qr/$error_regex/,
+		"Don't freak if the module doesn't even exist");
+	}
+	else {
+	    unlike($@, qr/defines neither package nor VERSION/,
+		"Don't freak if the module doesn't even exist");
+	}
 
 	# this should fail even with old UNIVERSAL::VERSION
 	$version += 0.01; $version = sprintf("%.3f",$version);
@@ -281,21 +296,20 @@ SKIP: {
 	open F, ">xxx.pm" or die "Cannot open xxx.pm: $!\n";
 	print F "1;\n";
 	close F;
-	my $error_regex;
-	if ( $] < 5.008 ) {
-	    $error_regex = 'xxx does not define \$xxx::VERSION';
-	}
-	else {
-	    $error_regex = 'xxx defines neither package nor VERSION';
-	}
 
 	eval "use lib '.'; use xxx 3;";
-	like ($@, qr/$error_regex/,
-	    'Replacement handles modules without package or VERSION'); 
-	eval "use lib '.'; use xxx; $version = xxx->VERSION";
+	if ( $] < 5.008 ) {
+	    like($@, qr/$error_regex/,
+		'Replacement handles modules without package or VERSION'); 
+	}
+	else {
+	    like($@, qr/defines neither package nor VERSION/,
+		'Replacement handles modules without package or VERSION'); 
+	}
+	eval "use lib '.'; use xxx; \$version = xxx->VERSION";
 	unlike ($@, qr/$error_regex/,
 	    'Replacement handles modules without package or VERSION'); 
-	ok (defined($version), "Called as class method");
+	ok (!defined($version), "Called as class method");
 	unlink 'xxx.pm';
     }
     
@@ -304,10 +318,10 @@ SKIP: {
 	print F "package yyy;\n#look ma no VERSION\n1;\n";
 	close F;
 	eval "use lib '.'; use yyy 3;";
-	like ($@, qr/^yyy does not define \$yyy::VERSION/,
+	like ($@, qr/$error_regex/,
 	    'Replacement handles modules without VERSION'); 
 	eval "use lib '.'; use yyy; print yyy->VERSION";
-	unlike ($@, qr/^yyy does not define \$yyy::VERSION/,
+	unlike ($@, qr/$error_regex/,
 	    'Replacement handles modules without VERSION'); 
 	unlink 'yyy.pm';
     }
@@ -317,17 +331,17 @@ SKIP: {
 	print F "package zzz;\n\@VERSION = ();\n1;\n";
 	close F;
 	eval "use lib '.'; use zzz 3;";
-	like ($@, qr/^zzz does not define \$zzz::VERSION/,
+	like ($@, qr/$error_regex/,
 	    'Replacement handles modules without VERSION'); 
 	eval "use lib '.'; use zzz; print zzz->VERSION";
-	unlike ($@, qr/^zzz does not define \$zzz::VERSION/,
+	unlike ($@, qr/$error_regex/,
 	    'Replacement handles modules without VERSION'); 
 	unlink 'zzz.pm';
     }
 
 SKIP: 	{
-	skip 'Cannot test bare v-strings with Perl < 5.6.0', 4
-		if $] < 5.006_000; 
+	skip 'Cannot test bare v-strings with Perl < 5.8.0', 4
+		if $] < 5.008_000; 
 	diag "Tests with v-strings" if $Verbose;
 	$version = $CLASS->new(1.2.3);
 	ok("$version" eq "v1.2.3", '"$version" eq 1.2.3');
@@ -381,6 +395,7 @@ SKIP: 	{
     $version = $CLASS->new(0.000001);
     unlike($warning, qr/^Version string '1e-06' contains invalid data/,
     	"Very small version objects");
+    }
 
 SKIP: {
 	# dummy up a legal module for testing RT#19017
@@ -435,6 +450,8 @@ EOF
 
 SKIP: {
 	# test locale handling
+	my $warning;
+	local $SIG{__WARN__} = sub { $warning = $_[0] };
 	my $ver = 1.23;  # has to be floating point number
 	my $loc;
 	while (<DATA>) {

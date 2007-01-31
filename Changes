@@ -1,3 +1,28 @@
+2007-01-30  John Peacock <jpeacock@cpan.org>
+
+	Bump $VERSION's and update README for another dev release [0.69_02]
+
+2007-01-30  John Peacock <jpeacock@cpan.org>
+
+	XS UNIVERSAL::VERSION code now emits error messages just like the release of
+	Perl it is compiled against.
+
+2007-01-30  John Peacock <jpeacock@cpan.org>
+
+	Need to limit the effects of the WARN handler.
+	Stop testing v-strings in Perl 5.6.x until XS code is up to snuff.
+
+2007-01-30  John Peacock <jpeacock@cpan.org>
+
+	Complete rewrite of tests to confirm that version::vpp mirrors the
+	different Perl releases' error messages.
+
+2007-01-30  John Peacock <jpeacock@cpan.org>
+
+	Carefully replicate [almost] all error messages exactly as different Perl
+	releases would otherwise report.  Resolves RT#24675 (once the tests are
+	adjusted).
+
 2007-01-27  John Peacock <jpeacock@cpan.org>
 
 	Improve documentation of v-strings as version initializers.
