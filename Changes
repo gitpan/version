@@ -1,3 +1,7 @@
+2007-02-05  John Peacock <jpeacock@cpan.org>
+
+	Suppress installation (but test anyways) in bleadperl or better.
+
 2007-01-30  John Peacock <jpeacock@cpan.org>
 
 	Bump $VERSION's and update README for another dev release [0.69_02]
