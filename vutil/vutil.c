@@ -80,6 +80,9 @@ Perl_scan_version(pTHX_ const char *s, SV *rv, bool qv)
     if ( alpha && !saw_period )
 	Perl_croak(aTHX_ "Invalid version format (alpha without decimal)");
 
+    if ( alpha && saw_period && width == 0 )
+	Perl_croak(aTHX_ "Invalid version format (misplaced _ in number)");
+
     if ( saw_period > 1 )
 	qv = 1; /* force quoted version processing */
 
@@ -135,7 +138,7 @@ Perl_scan_version(pTHX_ const char *s, SV *rv, bool qv)
 
   	    /* Append revision */
 	    av_push(av, newSViv(rev));
-	    if ( *pos == '.' ) /*&& isDIGIT(pos[1]) )*/
+	    if ( *pos == '.' )
 		s = ++pos;
 	    else if ( *pos == '_' && isDIGIT(pos[1]) )
 		s = ++pos;
@@ -289,7 +292,7 @@ Perl_upg_version(pTHX_ SV *ver)
 #ifdef USE_LOCALE_NUMERIC
 	char *loc = setlocale(LC_NUMERIC, "C");
 #endif
-  	STRLEN len = my_snprintf(tbuf, sizeof(tbuf), "%.9"NVff, SvNVX(ver));
+	STRLEN len = my_snprintf(tbuf, sizeof(tbuf), "%.9"NVff, SvNVX(ver));
 #ifdef USE_LOCALE_NUMERIC
 	setlocale(LC_NUMERIC, loc);
 #endif
@@ -311,8 +314,8 @@ Perl_upg_version(pTHX_ SV *ver)
     if ( *s != '\0' ) 
 	if(ckWARN(WARN_MISC))
 	    Perl_warner(aTHX_ packWARN(WARN_MISC), 
-	    "Version string '%s' contains invalid data; "
-	    "ignoring: '%s'", version, s);
+		"Version string '%s' contains invalid data; "
+		"ignoring: '%s'", version, s);
     Safefree(version);
     return ver;
 }
