@@ -1,3 +1,7 @@
+2007-02-12  John Peacock <jpeacock@cpan.org>
+
+	Final 0.70 release to CPAN.
+
 2007-02-08  John Peacock <jpeacock@cpan.org>
 
 	Error out on malformed input 1._1 (Andy Armstrong <andy@hexten.net>).
