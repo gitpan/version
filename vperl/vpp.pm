@@ -3,7 +3,7 @@ use strict;
 
 use locale;
 use vars qw ($VERSION @ISA @REGEXS);
-$VERSION = 0.71;
+$VERSION = 0.72;
 
 push @REGEXS, qr/
 	^v?	# optional leading 'v'
@@ -33,6 +33,7 @@ sub new
 	    # RT #19517 - special case for undef comparison
 	    # or someone forgot to pass a value
 	    push @{$self->{version}}, 0;
+	    $self->{original} = "0";
 	    return ($self);
 	}
 
@@ -221,6 +222,9 @@ sub new
 	         "ignoring: '".substr($value,$pos)."'";
 	}
 
+	# cache the original value for use when stringification
+	$self->{original} = substr($value,0,$pos);
+
 	return ($self);
 }
 
@@ -301,6 +305,12 @@ sub normal
     return $string;
 }
 
+sub original {
+    my $self = shift;
+    $self->{original} = shift if @_;
+    return $self->{original};
+}
+
 sub stringify
 {
     my ($self) = @_;
@@ -312,7 +322,7 @@ sub stringify
 	return $self->normal;
     }
     else {
-	return $self->numify;
+	return $self->original;
     }
 }
 
@@ -405,7 +415,9 @@ sub qv {
 
     $value = _un_vstring($value);
     $value = 'v'.$value unless $value =~ /^v/;
-    return version->new($value); # always use base class
+    my $version = version->new($value); # always use base class
+    $version->original($_[0]);
+    return $version;
 }
 
 sub is_qv {
@@ -444,7 +456,6 @@ sub _un_vstring {
 {
     local $^W;
     *UNIVERSAL::VERSION = sub {
-	$DB::single = 1;
 	my ($obj, $req) = @_;
 	my $class = ref($obj) || $obj;
 

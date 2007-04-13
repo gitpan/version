@@ -1,3 +1,28 @@
+2007-04-12  John Peacock <jpeacock@cpan.org>
+
+	Output the original string form for numeric versions for XS code now.
+	Ready to release to CPAN.
+
+2007-04-12  John Peacock <jpeacock@cpan.org>
+
+	It will be less surprising to overload string comparisons (now that the
+	default stringification is identical to the initializer) than it would be
+	to not overload them.
+
+2007-04-11  John Peacock <jpeacock@cpan.org>
+
+	Better way to handle the undef initialization case.
+
+2007-04-11  John Peacock <jpeacock@cpan.org>
+
+	Disallow string comparisons with version objects.  Tests adjusted to use
+	numeric comparisons only.
+
+2007-04-11  John Peacock <jpeacock@cpan.org>
+
+	Cache the original string used to initialize the version object and return
+	that when stringifying.  Only works with pure Perl class for the moment.
+
 2007-03-18  John Peacock <jpeacock@cpan.org>
 
 	Add more text to README on v-string support.
