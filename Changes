@@ -1,3 +1,8 @@
+2007-04-14  John Peacock <jpeacock@cpan.org>
+
+	Return original string value for all stringification cases except for
+	qv(1.2) which returns 'v1.2' for roundtrip purposes.
+
 2007-04-12  John Peacock <jpeacock@cpan.org>
 
 	Output the original string form for numeric versions for XS code now.
