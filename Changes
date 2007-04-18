@@ -1,3 +1,18 @@
+2007-04-17  John Peacock <jpeacock@cpan.org>
+
+	One last place that needed a leading 'v' (for non-magic v-strings).
+
+2007-04-17  John Peacock <jpeacock@cpan.org>
+
+	v-string created version objects always stringify with a leading 'v' for
+	consistency's sake, since we have no way of knowing whether one was present
+	for 5.6.0 <= Perl < 5.8.1 (non-magic v-strings).
+
+2007-04-17  John Peacock <jpeacock@cpan.org>
+
+	When copying an existing version object, forgot to copy the original string
+	representation.
+
 2007-04-14  John Peacock <jpeacock@cpan.org>
 
 	Return original string value for all stringification cases except for

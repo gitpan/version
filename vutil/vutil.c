@@ -249,6 +249,12 @@ Perl_new_version(pTHX_ SV *ver)
 	    hv_store((HV *)hv, "width", 5, newSViv(width), 0);
 	}
 
+	if ( hv_exists((HV*)ver, "original", 8 ) )
+	{
+	    SV * pv = *hv_fetchs((HV*)ver, "original", FALSE);
+	    hv_store((HV *)hv, "original", 8, newSVsv(pv), 0);
+	}
+
 	sav = (AV *)SvRV(*hv_fetchs((HV*)ver, "version", FALSE));
 	/* This will get reblessed later if a derived class*/
 	for ( key = 0; key <= av_len(sav); key++ )
@@ -267,6 +273,9 @@ Perl_new_version(pTHX_ SV *ver)
 	    const STRLEN len = mg->mg_len;
 	    char * const version = savepvn( (const char*)mg->mg_ptr, len);
 	    sv_setpvn(rv,version,len);
+	    /* this is for consistency with the pure Perl class */
+	    if ( *version != 'v' ) 
+		sv_insert(rv, 0, 0, "v", 1);
 	    Safefree(version);
 	}
 	else {
@@ -334,10 +343,11 @@ Perl_upg_version(pTHX_ SV *ver, bool qv)
 	    const char *nver;
 	    const char *pos;
 	    int saw_period = 0;
-	    sv_setpvf(nsv,"%vd",ver);
+	    sv_setpvf(nsv,"v%vd",ver);
 	    pos = nver = savepv(SvPV_nolen(nsv));
 
 	    /* scan the resulting formatted string */
+	    pos++; /* skip the leading 'v' */
 	    while ( *pos == '.' || isDIGIT(*pos) ) {
 		if ( *pos == '.' )
 		    saw_period++ ;
