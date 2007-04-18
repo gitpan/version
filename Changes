@@ -1,5 +1,9 @@
 2007-04-17  John Peacock <jpeacock@cpan.org>
 
+	Neglected to delete or comment out a $DB::single (again).
+
+2007-04-17  John Peacock <jpeacock@cpan.org>
+
 	One last place that needed a leading 'v' (for non-magic v-strings).
 
 2007-04-17  John Peacock <jpeacock@cpan.org>
