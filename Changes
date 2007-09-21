@@ -1,3 +1,9 @@
+2007-09-20  John Peacock <jpeacock@cpan.org>
+
+	New code to handle versions too large to fit into an IV slot.
+	Both the pure Perl and XS code are now safe to use with ~0
+	Test new functionality.
+
 2007-04-17  John Peacock <jpeacock@cpan.org>
 
 	Neglected to delete or comment out a $DB::single (again).
