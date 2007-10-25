@@ -1,3 +1,13 @@
+2007-10-24  John Peacock <jpeacock@cpan.org>
+
+	Data::Dumper is sometimes too clever for its (and our) own good.
+	When copying an existing version object, directly set newSViv
+	instead of using &PL_sv_yes, since the latter has a PV slot which
+	looks shared to D::D's jaundiced eye.
+
+	Resolves:
+		http://rt.cpan.org/Public/Bug/Display.html?id=30004
+
 2007-09-20  John Peacock <jpeacock@cpan.org>
 
 	New code to handle versions too large to fit into an IV slot.
