@@ -1,3 +1,16 @@
+2008-06-07  John Peacock <jpeacock@cpan.org>
+
+	Forgot to bump the $VERSION.  Go figure.
+
+2008-06-07  John Peacock <jpeacock@cpan.org>
+
+	Improve POD to clarify usage and prevent confusion.
+
+2008-04-01  John Peacock <jpeacock@cpan.org>
+
+	Optionally use the more efficient XSLoader instead of DynaLoader.
+	Resolves http://rt.cpan.org//Ticket/Display.html?id=34590
+
 2007-10-24  John Peacock <jpeacock@cpan.org>
 
 	Data::Dumper is sometimes too clever for its (and our) own good.
