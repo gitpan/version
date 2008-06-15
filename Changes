@@ -1,3 +1,7 @@
+2008-06-14  John Peacock <jpeacock@cpan.org>
+
+	Interim release to correctly install under Perl v5.10.0.
+
 2008-06-07  John Peacock <jpeacock@cpan.org>
 
 	Forgot to bump the $VERSION.  Go figure.
