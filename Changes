@@ -1,3 +1,19 @@
+2008-07-18  John Peacock <jpeacock@cpan.org>
+
+	Fix segfault with core version stringification of serialized version
+	objects without an 'original' entry.  See
+
+	        http://rt.perl.org/rt3/Public/Bug/Display.html?id=56606
+
+2008-07-08  John Peacock <jpeacock@cpan.org>
+
+	Only need to rev the underlying vstringify2() function.
+
+2008-07-08  John Peacock <jpeacock@cpan.org>
+
+	Commit working implementation to handle badly formed version objects
+	thanks to Data::Dumper. :(
+
 2008-06-14  John Peacock <jpeacock@cpan.org>
 
 	Interim release to correctly install under Perl v5.10.0.

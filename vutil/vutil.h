@@ -1,5 +1,6 @@
 #include "ppport.h"
 
+#if PERL_VERSION < 10
 const char * Perl_scan_version(pTHX_ const char *s, SV *rv, bool qv);
 SV * Perl_new_version(pTHX_ SV *ver);
 SV * Perl_upg_version(pTHX_ SV *sv, bool qv);
@@ -18,3 +19,7 @@ int Perl_vcmp(pTHX_ SV *lsv, SV *rsv);
 #define voriginal(a)		Perl_voriginal(aTHX_ a)
 #define vstringify(a)		Perl_vstringify(aTHX_ a)
 #define vcmp(a,b)		Perl_vcmp(aTHX_ a,b)
+#endif
+
+SV * Perl_vstringify2(pTHX_ SV *vs);
+#define vstringify2(a)		Perl_vstringify2(aTHX_ a)
