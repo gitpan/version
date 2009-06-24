@@ -1,3 +1,61 @@
+2009-06-23  John Peacock <jpeacock@cpan.org>
+
+	Disable all tests for 5.10.0 for the moment, so we can release
+	as an alpha and not falsely claim success or failure.
+
+2009-06-13  John Peacock <jpeacock@cpan.org>
+
+	Fix RT#46921 - locale and eval action at a distance.  All tests pass
+	except on 5.10.0 (because the core code is broken).
+
+2009-06-13  John Peacock <jpeacock@cpan.org>
+
+	Fix mistaken regex to convert large exponential numbers to non-exponential
+	form before scanning.  Resolves:
+
+		https://rt.cpan.org/Ticket/Display.html?id=45241
+
+2009-05-27  John Peacock <jpeacock@cpan.org>
+
+	More fiddling with the revised POD.
+
+2009-05-20  John Peacock <jpeacock@cpan.org>
+
+	Resolve some more misleading warnings from vpp.pm in 5.005 and 5.6
+
+2009-05-20  John Peacock <jpeacock@cpan.org>
+
+	Misplaced #endif caused 5.005_04 and 5.6.x to fail tests.  Add
+	documentation for is_qv.
+
+2009-05-18  John Peacock <jpeacock@cpan.org>
+
+	Make all test pm files use File::Temp.  Change qv() to be both method and
+	function.  All tests pass using Build.PL from perl 5.6.x forward, but
+	a couple of test failures using Makefile.PL in 5.6.x and 5.005_04.
+
+2009-05-16  John Peacock <jpeacock@cpan.org>
+
+	Tests pass but POD is incomplete
+
+2009-05-10  John Peacock <jpeacock@cpan.org>
+
+	All tests pass in all Perl's and in XS and pure Perl.  Perl 5.005_04 still
+	throws lots of stupid warnings in pure Perl; can't help it apparently.
+
+2009-05-10  John Peacock <jpeacock@cpan.org>
+
+	Now tests all pass on 5.005 as well (two warnings I can't prevent)
+
+2009-05-10  John Peacock <jpeacock@cpan.org>
+
+	Now all three test files are 100% for 5.8.x and 5.10.x, but 01 and 02 fail
+	with 5.6.x and 5.005
+
+2009-05-09  John Peacock <jpeacock@cpan.org>
+
+	Begin massive reorg/redesign.  Tests 01 and 03 are 100%; 02 needs work.
+
 2008-07-18  John Peacock <jpeacock@cpan.org>
 
 	Fix segfault with core version stringification of serialized version

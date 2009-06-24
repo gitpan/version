@@ -32,7 +32,11 @@ it doesn't.
 */
 
 const char *
+#if PERL_VERSION < 10
 Perl_scan_version(pTHX_ const char *s, SV *rv, bool qv)
+#else
+Perl_scan_version2(pTHX_ const char *s, SV *rv, bool qv)
+#endif
 {
     const char *start;
     const char *pos;
@@ -62,7 +66,7 @@ Perl_scan_version(pTHX_ const char *s, SV *rv, bool qv)
     pos = s;
 
     /* pre-scan the input string to check for decimals/underbars */
-    while ( *pos == '.' || *pos == '_' || isDIGIT(*pos) )
+    while ( *pos == '.' || *pos == '_' || *pos == ',' || isDIGIT(*pos) )
     {
 	if ( *pos == '.' )
 	{
@@ -78,6 +82,12 @@ Perl_scan_version(pTHX_ const char *s, SV *rv, bool qv)
 	    alpha = 1;
 	    width = pos - last - 1; /* natural width of sub-version */
 	}
+	else if ( *pos == ',' && isDIGIT(pos[1]) )
+	{
+	    saw_period++ ;
+	    last = pos;
+	}
+
 	pos++;
     }
 
@@ -164,6 +174,8 @@ Perl_scan_version(pTHX_ const char *s, SV *rv, bool qv)
 	    else if ( *pos == '.' )
 		s = ++pos;
 	    else if ( *pos == '_' && isDIGIT(pos[1]) )
+		s = ++pos;
+	    else if ( *pos == ',' && isDIGIT(pos[1]) )
 		s = ++pos;
 	    else if ( isDIGIT(*pos) )
 		s = pos;
@@ -311,7 +323,7 @@ Perl_new_version(pTHX_ SV *ver)
 	}
     }
 #endif
-    return upg_version(rv, FALSE);
+    return UPG_VERSION(rv, FALSE);
 }
 
 /*
@@ -328,13 +340,16 @@ to force this SV to be interpreted as an "extended" version.
 */
 
 SV *
+#if PERL_VERSION < 10
 Perl_upg_version(pTHX_ SV *ver, bool qv)
+#else
+Perl_upg_version2(pTHX_ SV *ver, bool qv)
+#endif
 {
     const char *version, *s;
 #ifdef SvVOK
     const MAGIC *mg;
 #endif
-
     if ( SvNOK(ver) && !( SvPOK(ver) && sv_len(ver) == 3 ) )
     {
 	/* may get too much accuracy */ 
@@ -390,7 +405,7 @@ Perl_upg_version(pTHX_ SV *ver, bool qv)
 #endif
     }
 
-    s = scan_version(version, ver, qv);
+    s = SCAN_VERSION(version, ver, qv);
     if ( *s != '\0' ) 
 	if(ckWARN(WARN_MISC))
 	    Perl_warner(aTHX_ packWARN(WARN_MISC), 

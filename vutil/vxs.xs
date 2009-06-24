@@ -26,10 +26,11 @@ BOOT:
 	newXS("version::vxs::(<=>", XS_version__vxs_vcmp, file);
 	newXS("version::vxs::(bool", XS_version__vxs_boolean, file);
 	newXS("version::vxs::(nomethod", XS_version__vxs_noop, file);
-	newXS("UNIVERSAL::VERSION", XS_version__vxs_VERSION, file);
 
 void
 new(...)
+ALIAS:
+    parse  =  1
 PPCODE:
 {
     SV *vs = ST(1);
@@ -145,28 +146,57 @@ PPCODE:
 }
 
 void
-qv(ver)
-    SV *ver
+qv(...)
+ALIAS:
+    declare = 1
 PPCODE:
 {
+    SV *ver = ST(0);
+    SV * rv;
+    const char * classname = "";
+    if ( items == 2 && (ST(1)) != &PL_sv_undef ) {
+	/* getting called as object or class method */
+	ver = ST(1);
+	classname = 
+	    sv_isobject(ST(0)) /* get the class if called as an object method */
+		? HvNAME(SvSTASH(SvRV(ST(0))))
+		: (char *)SvPV_nolen(ST(0));
+    }
 #ifdef SvVOK
     if ( !SvVOK(ver) ) { /* not already a v-string */
 #endif
-	SV * const rv = sv_newmortal();
+	rv = sv_newmortal();
 	sv_setsv(rv,ver); /* make a duplicate */
-	upg_version(rv, TRUE);
-	PUSHs(rv);
+	UPG_VERSION(rv, TRUE);
 #ifdef SvVOK
     }
     else
     {
-	PUSHs(sv_2mortal(new_version(ver)));
+	rv = sv_2mortal(new_version(ver));
     }
 #endif
+    if ( strcmp(classname,"version::vxs") != 0 ) /* inherited new() */
+#if PERL_VERSION == 5
+	sv_bless(rv, gv_stashpv((char *)classname, GV_ADD));
+#else
+	sv_bless(rv, gv_stashpv(classname, GV_ADD));
+#endif
+    PUSHs(rv);
 }
 
 void
-VERSION(sv,...)
+is_qv(lobj)
+    version_vxs	lobj	
+PPCODE:
+{
+    if ( hv_exists((HV*)lobj, "qv", 2 ) )
+	XSRETURN_YES;
+    else
+	XSRETURN_NO;
+}
+
+void
+_VERSION(sv,...)
     SV *sv
 PPCODE:
 {
@@ -192,7 +222,7 @@ PPCODE:
         sv_setsv(nsv, sv);
         sv = nsv;
 	if ( !sv_derived_from(sv, "version::vxs"))
-	    upg_version(sv, FALSE);
+	    UPG_VERSION(sv, FALSE);
         undef = NULL;
     }
     else {
