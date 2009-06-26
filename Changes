@@ -1,3 +1,7 @@
+2009-06-26  John Peacock <jpeacock@cpan.org>
+
+	Finally have all tests passing in 5.10.0!
+
 2009-06-23  John Peacock <jpeacock@cpan.org>
 
 	Disable all tests for 5.10.0 for the moment, so we can release
