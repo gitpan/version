@@ -1,3 +1,20 @@
+2009-06-28  John Peacock <jpeacock@cpan.org>
+
+	Missed a couple more MAGIC NUMBERS in the tests.
+
+2009-06-28  John Peacock <jpeacock@cpan.org>
+
+	Tests all pass now in 5.005_04 in XS mode too!
+	Need to adapt the pure Perl release to work with 5.10.0 as well.
+
+2009-06-27  John Peacock <jpeacock@cpan.org>
+
+	Whitespace differences from blead
+
+2009-06-27  John Peacock <jpeacock@cpan.org>
+
+	Sync changes from bleadperl to vutil.c
+
 2009-06-26  John Peacock <jpeacock@cpan.org>
 
 	Finally have all tests passing in 5.10.0!
