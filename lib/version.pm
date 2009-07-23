@@ -6,7 +6,7 @@ use strict;
 
 use vars qw(@ISA $VERSION $CLASS *declare *qv);
 
-$VERSION = '0.76_03';
+$VERSION = '0.76_05';
 $VERSION = eval $VERSION;
 
 $CLASS = 'version';
@@ -24,6 +24,7 @@ if ( $@ ) { # don't have the XS version installed
 	no strict 'refs';
 	*{'version::stringify'} = \*version::vpp::stringify;
 	*{'version::(""'} = \*version::vpp::stringify;
+	*{'version::new'} = \*version::vpp::new;
     }
 }
 else { # use XS module

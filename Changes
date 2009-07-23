@@ -1,3 +1,69 @@
+2009-07-22  John Peacock <jpeacock@cpan.org>
+
+	Forgot to bump this.  Always run tests before committing!
+
+2009-07-22  John Peacock <jpeacock@cpan.org>
+
+	Revised version::Internals POD; bump $VERSION for potential last CPAN
+	release.
+
+2009-07-22  John Peacock <jpeacock@cpan.org>
+
+	WIP for version::Internals
+
+2009-07-21  John Peacock <jpeacock@cpan.org>
+
+	Don't need to load the class in order to check whether it contains package or  assignments.
+
+2009-07-18  John Peacock <jpeacock@cpan.org>
+
+	Rename Extended to Dotted-Decimal
+
+2009-07-18  John Peacock <jpeacock@cpan.org>
+
+	Rename "Numeric" to "Decimal"
+
+2009-07-18  John Peacock <jpeacock@cpan.org>
+
+	Fix for RT#47980.  Don't check $@ if you haven't actually done the eval().
+
+2009-07-16  John Peacock <jpeacock@cpan.org>
+
+	Apply David Golden's suggested changes with some minor massaging.
+
+2009-07-15  John Peacock <jpeacock@cpan.org>
+
+	Another CPAN alpha release.
+
+2009-07-15  John Peacock <jpeacock@cpan.org>
+
+	Start reworking the Internals documentation into something useful.
+
+2009-07-14  John Peacock <jpeacock@cpan.org>
+
+	Tweakage of POD
+
+2009-07-10  John Peacock <jpeacock@cpan.org>
+
+	Neglected to delete this directory from the repo
+
+2009-06-29  John Peacock <jpeacock@cpan.org>
+
+	Allow the pure Perl version module to be installed on Perl 5.10.0,
+	and trump the core code.
+
+2009-06-28  John Peacock <jpeacock@cpan.org>
+
+	Better heuristic for deciding when to rebless
+
+2009-06-28  John Peacock <jpeacock@cpan.org>
+
+	Remove old file from MANIFEST
+
+2009-06-28  John Peacock <jpeacock@cpan.org>
+
+	Convert this test to make its own Empty class
+
 2009-06-28  John Peacock <jpeacock@cpan.org>
 
 	Missed a couple more MAGIC NUMBERS in the tests.

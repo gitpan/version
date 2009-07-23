@@ -1,6 +1,6 @@
 ---
 name: version
-version: 0.76_03
+version: 0.76_05
 author:
   - 'John Peacock E<lt>jpeacock@cpan.orgE<gt>'
 abstract: Perl extension for Version Objects
@@ -9,18 +9,20 @@ resources:
   license: http://dev.perl.org/licenses/
 requires:
   perl: '> 5.005'
+configure_requires:
+  Module::Build: 0.3305
 dynamic_config: 1
 provides:
   UNIVERSAL:
     file: lib/version.pm
-    version: 0
+    version: 1.04
   version:
     file: lib/version.pm
-    version: 0.76_03
+    version: 0.76_05
   version::vxs:
     file: vutil/lib/version/vxs.pm
-    version: 0.76_03
-generated_by: Module::Build version 0.280801
+    version: 0.76_05
+generated_by: Module::Build version 0.3305
 meta-spec:
-  url: http://module-build.sourceforge.net/META-spec-v1.2.html
-  version: 1.2
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: 1.4
