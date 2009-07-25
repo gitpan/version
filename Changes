@@ -1,3 +1,14 @@
+2009-07-24  John Peacock <jpeacock@cpan.org>
+
+	Finally complete the POD rewrite.  Change the behavior to throw a
+	warning if you try and use a v-string without a leading 'v' in a
+	version object declaration (this may get pulled) and rewrite the POD
+	to follow the New World Order.
+
+2009-07-24  John Peacock <jpeacock@cpan.org>
+
+	Resolves https://rt.cpan.org/Public/Bug/Display.html?id=48135
+
 2009-07-22  John Peacock <jpeacock@cpan.org>
 
 	Forgot to bump this.  Always run tests before committing!
