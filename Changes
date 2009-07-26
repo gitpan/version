@@ -1,3 +1,11 @@
+2009-07-26  John Peacock <jpeacock@cpan.org>
+
+	Script to run through all of the Perl releases in one go
+
+2009-07-26  John Peacock <jpeacock@cpan.org>
+
+	Release 0.77 to CPAN without the warning change, for release with 5.10.1
+
 2009-07-24  John Peacock <jpeacock@cpan.org>
 
 	Finally complete the POD rewrite.  Change the behavior to throw a
