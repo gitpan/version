@@ -5,14 +5,12 @@
 #########################
 
 use Test::More qw/no_plan/;
+my $Verbose;
 
 BEGIN {
-    use_ok("version", 0.76_04);
-    # If we made it this far, we are ok.
+    require "t/coretests.pm";
+    use_ok('version', 0.7701);
 }
-
-my $Verbose;
-require "t/coretests.pm";
 
 diag "Tests with base class" if $Verbose;
 
