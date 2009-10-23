@@ -1,3 +1,20 @@
+2009-10-22  John Peacock <jpeacock@cpan.org>
+
+	Forgot to edit the README
+
+2009-10-15  John Peacock <jpeacock@cpan.org>
+
+	Make sure we override the system version.pm in the core for perl5.10.x
+
+2009-10-15  John Peacock <jpeacock@cpan.org>
+
+	Bump $VERSION in all files and add README text
+
+2009-10-15  John Peacock <jpeacock@cpan.org>
+
+	Smarter handling of non-magic v-strings.
+	Resolves https://rt.cpan.org/Ticket/Display.html?id=50347
+
 2009-09-07  John Peacock <jpeacock@cpan.org>
 
 	Tighten up un_vstring code to limit the number of false positives.

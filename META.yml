@@ -1,6 +1,6 @@
 ---
 name: version
-version: 0.7702
+version: 0.78
 author:
   - 'John Peacock E<lt>jpeacock@cpan.orgE<gt>'
 abstract: Perl extension for Version Objects
@@ -17,10 +17,10 @@ dynamic_config: 1
 provides:
   version:
     file: lib/version.pm
-    version: 0.7702
+    version: 0.78
   version::vxs:
     file: vutil/lib/version/vxs.pm
-    version: 0.7702
+    version: 0.78
 generated_by: Module::Build version 0.3305
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
