@@ -7083,7 +7083,49 @@ DPPP_(my_pv_display)(pTHX_ SV *dsv, const char *pv, STRLEN cur, STRLEN len, STRL
 #endif
 
 #ifndef SvPVx_nolen_const
-#  define SvPVx_nolen_const(sv) ({SV *_sv = (sv); SvPV_nolen_const(_sv); })
+#  if defined(__GNUC__) && !defined(PERL_GCC_BRACE_GROUPS_FORBIDDEN)
+#    define SvPVx_nolen_const(sv) ({SV *_sv = (sv); SvPV_nolen_const(_sv); })
+#  else
+#    define SvPVx_nolen_const(sv) (SvPV_nolen_const(sv))
+#  endif
+#endif
+
+#ifndef Perl_ck_warner
+static void Perl_ck_warner(pTHX_ U32 err, const char* pat, ...);
+
+#  ifdef vwarner
+static
+void
+Perl_ck_warner(pTHX_ U32 err, const char* pat, ...)
+{
+  va_list args;
+
+  PERL_UNUSED_ARG(err);
+  if (ckWARN(err)) {
+    va_list args;
+    va_start(args, pat);
+    vwarner(err, pat, &args);
+    va_end(args);
+  }
+}
+#  else
+/* yes this replicates my_warner */
+static
+void
+Perl_ck_warner(pTHX_ U32 err, const char* pat, ...)
+{
+  SV *sv;
+  va_list args;
+
+  PERL_UNUSED_ARG(err);
+
+  va_start(args, pat);
+  sv = vnewSVpvf(pat, &args);
+  va_end(args);
+  sv_2mortal(sv);
+  warn("%s", SvPV_nolen(sv));
+}
+#  endif
 #endif
 
 #endif /* _P_P_PORTABILITY_H_ */

@@ -9,7 +9,7 @@ my $class = Module::Build->subclass
     code => q{
 	sub ACTION_dist{
 	    my $self = shift;
-	    $self->do_system('svk log -x | gnuify-changelog.pl > Changes');
+	    $self->do_system('hg log --style changelog > Changes');
 	    $self->SUPER::ACTION_dist();
 	};
 	sub have_c_compiler{
@@ -38,6 +38,7 @@ my %build_arguments = (
 	'File::Temp' => '>= 0.13',
     },
     dynamic_config  => 1,
+    dist_version_from => 'lib/version.pm',
     installdirs     =>
 	($] > 5.009001) ? 'core' : 'site',
 );

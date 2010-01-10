@@ -1,6 +1,6 @@
 #include "ppport.h"
 
-# if PERL_VERSION == 10 && PERL_SUBVERSION == 0
+# if PERL_VERSION == 10 && (PERL_SUBVERSION == 0 || PERL_SUBVERSION == 1) 
 
 const char * Perl_scan_version2(pTHX_ const char *s, SV *rv, bool qv);
 SV * Perl_new_version2(pTHX_ SV *ver);
@@ -33,6 +33,16 @@ int Perl_vcmp(pTHX_ SV *lsv, SV *rsv);
 
 # endif
 
+const char *
+Perl_prescan_version(pTHX_ const char *s, bool strict,
+		     bool *sqv, int *ssaw_decimal, int *swidth, bool *salpha);
+#define prescan_version(a,b,c,d,e,f)	Perl_prescan_version(aTHX_ a,b,c,d,e,f)
+#define isVERSION(a,b) \
+	(a != Perl_prescan_version(aTHX_ a, b, NULL, NULL, NULL, NULL))
+
+#define PERL_ARGS_ASSERT_PRESCAN_VERSION	\
+	assert(s); assert(strict); assert(sqv); assert(ssaw_period);\
+	assert(swidth); assert(salpha);
 #define PERL_ARGS_ASSERT_SCAN_VERSION	\
 	assert(s); assert(rv)
 #define PERL_ARGS_ASSERT_NEW_VERSION	\
