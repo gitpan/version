@@ -1,8 +1,51 @@
+2010-01-21  John Peacock  <john.peacock@havurah-software.org>
+
+	* .hgtags:
+	Tagging version '0.80' using shipit.
+	[895ef02e8ccc] [tip]
+
+	* .hgignore:
+	No, really, ignore existing tarballs
+	[144c85b7c4ec] [0.80]
+
+	* .hgignore:
+	Ignore previous tarballs
+	[50e19235090e]
+
+	* README, vutil/vutil.h:
+	Release to CPAN with just the assertion fix for older compilers.
+	[e50ae7f5c829]
+
+	* lib/version.pm, t/01base.t, t/02derived.t, t/03require.t,
+	vperl/vpp.pm, vutil/lib/version/vxs.pm:
+	Bump $VERSION in all files in preparation for quick CPAN release
+	[c3e609936451]
+
+	* lib/version.pm, t/01base.t, t/02derived.t, t/03require.t,
+	t/coretests.pm, vperl/vpp.pm, vutil/lib/version/vxs.pm,
+	vutil/vutil.c:
+	Currently failed attempt to merge with bleadperl
+	[b973a2052a49]
+
+2010-01-12  John Peacock  <john.peacock@havurah-software.org>
+
+	* lib/version.pm:
+	Revise grouped regex again for better clarity.
+	[c9c0417e00a2]
+
+	* lib/version.pm:
+	Anchor all regexes and bump $VERSION
+	[ecd8c9c85418]
+
+	* lib/version.pm, vutil/vutil.c, vutil/vutil.h:
+	Merge back changes from bleadperl enhancements.
+	[353cd4fe59e1]
+
 2010-01-10  John Peacock  <john.peacock@havurah-software.org>
 
 	* .hgtags:
 	Tagging version '0.79' using shipit.
-	[ec386b00d27a] [tip]
+	[ec386b00d27a]
 
 	* .hgtags:
 	Removed tag 0.79
