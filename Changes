@@ -1,8 +1,89 @@
+2010-02-01  John Peacock  <john.peacock@havurah-software.org>
+
+	* .hgtags:
+	Tagging version '0.81' using shipit.
+	[3bd3e49d505b] [tip]
+
+	* lib/version.pm, lib/version.pod, lib/version/Internals.pod:
+	Merge in documentation and whitespace changes from bleadperl
+	[3e764e7fdd39] [0.81]
+
+	* lib/version.pm:
+	More consistent formatting and program flow. Now 5.10.1 passes with
+	pure Perl version too.
+	[d2869cfa8443]
+
+	* lib/version.pm:
+	Restore compatibility with Perl v5.10.1
+	[f5fb5ff1fe50]
+
+2010-01-31  John Peacock  <john.peacock@havurah-software.org>
+
+	* vperl/vpp.pm, vutil/vutil.c:
+	Check for empty before testing residual text. Tests fail with
+	5.10.1
+	[8f97e44fb308]
+
+	* vperl/vpp.pm, vutil/vutil.c:
+	Better heuristics for guessing v-strings.
+	[d504b73d828a]
+
+	* vperl/vpp.pm:
+	DTRT for boolean operation (which only freaks on 5.6.2).
+	[efeb8205d6de]
+
+2010-01-30  John Peacock  <john.peacock@havurah-software.org>
+
+	* vperl/vpp.pm:
+	Need to have two independent constant calls to make 5.005_04 happy.
+	[871d9d322f6a]
+
+	* vperl/vpp.pm:
+	All tests pass with pure Perl version!
+	[e8e8f781ffd7]
+
+2010-01-29  John Peacock  <john.peacock@havurah-software.org>
+
+	* vperl/vpp.pm:
+	Closer and closer to functionality.
+	[b54b50a597c8]
+
+2010-01-28  John Peacock  <john.peacock@havurah-software.org>
+
+	* vperl/vpp.pm:
+	Much cleanup so that it actually compiles and mostly works. Not
+	getting the correct original string (probably because of overloading
+	confusion).
+	[4d4e91a0c198]
+
+	* vperl/vpp.pm:
+	Remove duplicated code from new() and rename helper class
+	[f44107a742bd]
+
+2010-01-27  John Peacock  <john.peacock@havurah-software.org>
+
+	* lib/version.pm, vperl/vpp.pm:
+	This almost certainly doesn't work, but commit it now before
+	cleaning up
+	[7ea2e86e2eb9]
+
 2010-01-21  John Peacock  <john.peacock@havurah-software.org>
+
+	* released to CPAN so close
+	[d718924a70dd]
+
+	* lib/version.pm, t/01base.t, t/02derived.t, t/03require.t,
+	vperl/vpp.pm, vutil/lib/version/vxs.pm, vutil/vutil.h:
+	Merge in the changes from version-0.80 feature branch
+	[6c7bf1b4df86]
+
+	* vutil/vxs.xs:
+	Missed these changes when merging from bleadperl.
+	[25c41c1c4fff]
 
 	* .hgtags:
 	Tagging version '0.80' using shipit.
-	[895ef02e8ccc] [tip]
+	[895ef02e8ccc]
 
 	* .hgignore:
 	No, really, ignore existing tarballs
