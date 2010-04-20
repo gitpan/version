@@ -1,8 +1,23 @@
+2010-04-19  John Peacock  <john.peacock@havurah-software.org>
+
+	* .hgtags:
+	Tagging version '0.82' using shipit.
+	[76eac991d1ab] [tip]
+
+	* README, lib/version.pm, lib/version.pod, lib/version/Internals.pod,
+	t/01base.t, t/02derived.t, t/03require.t, vperl/vpp.pm,
+	vutil/lib/version/vxs.pm, vutil/ppport.h, vutil/vutil.c,
+	vutil/vutil.h:
+	Merge all changes from 5.12.0 into the CPAN release. Fix up
+	compilation so the CPAN release works with 5.12.0 too. Tests work
+	from 5.005_04 to 5.12.0
+	[8648e6e4d9d4] [0.82]
+
 2010-02-01  John Peacock  <john.peacock@havurah-software.org>
 
 	* .hgtags:
 	Tagging version '0.81' using shipit.
-	[3bd3e49d505b] [tip]
+	[3bd3e49d505b]
 
 	* lib/version.pm, lib/version.pod, lib/version/Internals.pod:
 	Merge in documentation and whitespace changes from bleadperl
