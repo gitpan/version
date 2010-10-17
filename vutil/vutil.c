@@ -4,6 +4,7 @@
 #define NEED_my_snprintf
 #define NEED_newRV_noinc
 #define NEED_vnewSVpvf
+#define NEED_newSVpvn_flags_GLOBAL
 #define NEED_warner
 #include "ppport.h"
 #include "vutil.h"
@@ -133,7 +134,7 @@ dotted_decimal_version:
 	    saw_decimal++;
 	    d++;
 	}
-	else if (!*d || *d == ';' || isSPACE(*d) || *d == '}') {
+	else if (!*d || *d == ';' || isSPACE(*d) || *d == '{' || *d == '}') {
 	    if ( d == s ) {
 		/* found nothing */
 		BADVERSION(s,errstr,"Invalid version format (version required)");
@@ -164,7 +165,7 @@ dotted_decimal_version:
 
 	/* scan the fractional part after the decimal point*/
 
-	if (!isDIGIT(*d) && (strict || ! (!*d || *d == ';' || isSPACE(*d) || *d == '}') )) {
+	if (!isDIGIT(*d) && (strict || ! (!*d || *d == ';' || isSPACE(*d) || *d == '{' || *d == '}') )) {
 		/* strict or lax-but-not-the-end */
 		BADVERSION(s,errstr,"Invalid version format (fractional part required)");
 	}
@@ -202,7 +203,7 @@ version_prescan_finish:
     while (isSPACE(*d))
 	d++;
 
-    if (*d && !isDIGIT(*d) && (! (*d == ';' || *d == '}') )) {
+    if (!isDIGIT(*d) && (! (!*d || *d == ';' || *d == '{' || *d == '}') )) {
 	/* trailing non-numeric data */
 	BADVERSION(s,errstr,"Invalid version format (non-numeric data)");
     }
@@ -241,7 +242,7 @@ it doesn't.
 */
 
 const char *
-#if PERL_VERSION == 10 && (PERL_SUBVERSION == 0 || PERL_SUBVERSION == 1) 
+#if VUTIL_USE_TWO_SUFFIX
 Perl_scan_version2(pTHX_ const char *s, SV *rv, bool qv)
 #else
 Perl_scan_version(pTHX_ const char *s, SV *rv, bool qv)
@@ -432,7 +433,7 @@ want to upgrade the SV.
 */
 
 SV *
-#if PERL_VERSION == 10 && (PERL_SUBVERSION == 0 || PERL_SUBVERSION == 1) 
+#if VUTIL_USE_TWO_SUFFIX
 Perl_new_version2(pTHX_ SV *ver)
 #else
 Perl_new_version(pTHX_ SV *ver)
@@ -522,7 +523,7 @@ to force this SV to be interpreted as an "extended" version.
 */
 
 SV *
-#if PERL_VERSION == 10 && (PERL_SUBVERSION == 0 || PERL_SUBVERSION == 1) 
+#if VUTIL_USE_TWO_SUFFIX
 Perl_upg_version2(pTHX_ SV *ver, bool qv)
 #else
 Perl_upg_version(pTHX_ SV *ver, bool qv)
@@ -610,28 +611,35 @@ Perl_upg_version(pTHX_ SV *ver, bool qv)
 /*
 =for apidoc vverify
 
-Validates that the SV contains a valid version object.
+Validates that the SV contains valid internal structure for a version object.
+It may be passed either the version object (RV) or the hash itself (HV).  If
+the structure is valid, it returns the HV.  If the structure is invalid,
+it returns NULL.
 
-    bool vverify(SV *vobj);
+    SV *hv = vverify(sv);
 
 Note that it only confirms the bare minimum structure (so as not to get
 confused by derived classes which may contain additional hash entries):
 
 =over 4
 
-=item * The SV contains a [reference to a] hash
+=item * The SV is an HV or a reference to an HV
 
 =item * The hash contains a "version" key
 
-=item * The "version" key has [a reference to] an AV as its value
+=item * The "version" key has a reference to an AV as its value
 
 =back
 
 =cut
 */
 
-bool
+SV *
+#if VUTIL_USE_TWO_SUFFIX
+Perl_vverify2(pTHX_ SV *vs)
+#else
 Perl_vverify(pTHX_ SV *vs)
+#endif
 {
     SV *sv;
 
@@ -645,9 +653,9 @@ Perl_vverify(pTHX_ SV *vs)
 	 && hv_exists(MUTABLE_HV(vs), "version", 7)
 	 && (sv = SvRV(*hv_fetchs(MUTABLE_HV(vs), "version", FALSE)))
 	 && SvTYPE(sv) == SVt_PVAV )
-	return TRUE;
+	return vs;
     else
-	return FALSE;
+	return NULL;
 }
 
 /*
@@ -675,10 +683,9 @@ Perl_vnumify(pTHX_ SV *vs)
 
     PERL_ARGS_ASSERT_VNUMIFY;
 
-    if ( SvROK(vs) )
-	vs = SvRV(vs);
-
-    if ( !vverify(vs) )
+    /* extract the HV from the object */
+    vs = VVERIFY(vs);
+    if ( ! vs )
 	Perl_croak(aTHX_ "Invalid version object");
 
     /* see if various flags exist */
@@ -754,10 +761,9 @@ Perl_vnormal(pTHX_ SV *vs)
 
     PERL_ARGS_ASSERT_VNORMAL;
 
-    if ( SvROK(vs) )
-	vs = SvRV(vs);
-
-    if ( !vverify(vs) )
+    /* extract the HV from the object */
+    vs = VVERIFY(vs);
+    if ( ! vs )
 	Perl_croak(aTHX_ "Invalid version object");
 
     if ( hv_exists(MUTABLE_HV(vs), "alpha", 5 ) )
@@ -805,7 +811,7 @@ the original version contained 1 or more dots, respectively
 */
 
 SV *
-#if PERL_VERSION == 10 && (PERL_SUBVERSION == 0 || PERL_SUBVERSION == 1) 
+#if VUTIL_USE_TWO_SUFFIX
 Perl_vstringify2(pTHX_ SV *vs)
 #else
 Perl_vstringify(pTHX_ SV *vs)
@@ -813,10 +819,9 @@ Perl_vstringify(pTHX_ SV *vs)
 {
     PERL_ARGS_ASSERT_VSTRINGIFY;
 
-    if ( SvROK(vs) )
-	vs = SvRV(vs);
-
-    if ( !vverify(vs) )
+    /* extract the HV from the object */
+    vs = VVERIFY(vs);
+    if ( ! vs )
 	Perl_croak(aTHX_ "Invalid version object");
 
     if (hv_exists(MUTABLE_HV(vs), "original",  sizeof("original") - 1)) {
@@ -856,15 +861,10 @@ Perl_vcmp(pTHX_ SV *lhv, SV *rhv)
 
     PERL_ARGS_ASSERT_VCMP;
 
-    if ( SvROK(lhv) )
-	lhv = SvRV(lhv);
-    if ( SvROK(rhv) )
-	rhv = SvRV(rhv);
-
-    if ( !vverify(lhv) )
-	Perl_croak(aTHX_ "Invalid version object");
-
-    if ( !vverify(rhv) )
+    /* extract the HVs from the objects */
+    lhv = VVERIFY(lhv);
+    rhv = VVERIFY(rhv);
+    if ( ! ( lhv && rhv ) )
 	Perl_croak(aTHX_ "Invalid version object");
 
     /* get the left hand term */

@@ -1,8 +1,44 @@
+2010-10-12  John Peacock  <john.peacock@havurah-software.org>
+
+	* vperl/vpp.pm:
+	Fixup support for non-magical v-strings in 5.6.2-5.8.0
+	[e5860248010f] [tip]
+
+	* vutil/ppport.h, vutil/vutil.c, vutil/vutil.h:
+	XS code finally passes on all support Perl releases!
+	[7f8a96283d17]
+
+2010-10-10  John Peacock  <john.peacock@havurah-software.org>
+
+	* t/coretests.pm, vperl/vpp.pm, vutil/vutil.c, vutil/vutil.h:
+	Change vverify API (David Golden) and simplify usage.
+	[ba0f930f83c4]
+
+2010-09-28  John Peacock  <john.peacock@havurah-software.org>
+
+	* lib/version.pm, t/01base.t, t/02derived.t, t/03require.t,
+	vutil/lib/version/vxs.pm, vutil/vxs.xs:
+	First pass at merging in changes from bleadperl.
+	[b2b70ee7b7c6]
+
+2010-05-02  John Peacock  <john.peacock@havurah-software.org>
+
+	* lib/version.pm, vutil/vutil.c, vutil/vutil.h:
+	Apply patch from Zefram to build correctly with Perl dev releases in
+	the 5.9.{3..5} and 5.11.{0..4} ranges.
+	[7384ae8a7947]
+
+	* Build.PL, Makefile.PL:
+	Apply patch from Todd Rinaldo (modified) to install dual-lifed
+	modules into the correct post-@INC reordering location (basically
+	site instead of core). Only applies to Perl >= 5.9.1 and < 5.11.0.
+	[7de0686270a3]
+
 2010-04-19  John Peacock  <john.peacock@havurah-software.org>
 
 	* .hgtags:
 	Tagging version '0.82' using shipit.
-	[76eac991d1ab] [tip]
+	[76eac991d1ab]
 
 	* README, lib/version.pm, lib/version.pod, lib/version/Internals.pod,
 	t/01base.t, t/02derived.t, t/03require.t, vperl/vpp.pm,
