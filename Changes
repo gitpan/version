@@ -1,8 +1,31 @@
+2010-10-24  John Peacock  <john.peacock@havurah-software.org>
+
+	* .hgtags:
+	Tagging version '0.84' using shipit.
+	[b8782eba0763] [tip]
+
+	* lib/version.pm, t/01base.t, t/02derived.t, t/03require.t,
+	vperl/vpp.pm, vutil/lib/version/vxs.pm:
+	Restore public API broken by 0.83
+	[a475d9c09d66] [0.84]
+
+2010-10-17  John Peacock  <john.peacock@havurah-software.org>
+
+	* .hgtags:
+	Tagging version '0.83' using shipit.
+	[e25cf06d69ff]
+
+	* MANIFEST:
+	Checking in changes prior to tagging of version 0.83.
+
+	Changelog diff is:
+	[383db44a8de3] [0.83]
+
 2010-10-12  John Peacock  <john.peacock@havurah-software.org>
 
 	* vperl/vpp.pm:
 	Fixup support for non-magical v-strings in 5.6.2-5.8.0
-	[e5860248010f] [tip]
+	[e5860248010f]
 
 	* vutil/ppport.h, vutil/vutil.c, vutil/vutil.h:
 	XS code finally passes on all support Perl releases!
@@ -121,7 +144,7 @@
 2010-01-21  John Peacock  <john.peacock@havurah-software.org>
 
 	* released to CPAN so close
-	[d718924a70dd]
+	[d718924a70dd] <version-0.80>
 
 	* lib/version.pm, t/01base.t, t/02derived.t, t/03require.t,
 	vperl/vpp.pm, vutil/lib/version/vxs.pm, vutil/vutil.h:
@@ -134,24 +157,24 @@
 
 	* .hgtags:
 	Tagging version '0.80' using shipit.
-	[895ef02e8ccc]
+	[895ef02e8ccc] <version-0.80>
 
 	* .hgignore:
 	No, really, ignore existing tarballs
-	[144c85b7c4ec] [0.80]
+	[144c85b7c4ec] [0.80] <version-0.80>
 
 	* .hgignore:
 	Ignore previous tarballs
-	[50e19235090e]
+	[50e19235090e] <version-0.80>
 
 	* README, vutil/vutil.h:
 	Release to CPAN with just the assertion fix for older compilers.
-	[e50ae7f5c829]
+	[e50ae7f5c829] <version-0.80>
 
 	* lib/version.pm, t/01base.t, t/02derived.t, t/03require.t,
 	vperl/vpp.pm, vutil/lib/version/vxs.pm:
 	Bump $VERSION in all files in preparation for quick CPAN release
-	[c3e609936451]
+	[c3e609936451] <version-0.80>
 
 	* lib/version.pm, t/01base.t, t/02derived.t, t/03require.t,
 	t/coretests.pm, vperl/vpp.pm, vutil/lib/version/vxs.pm,
@@ -1198,7 +1221,7 @@
 
 	* Build.PL Make Scalar::Util requirement optional based both on
 	Perl version and on whether vpp.pm is being installed.
-	[dc5177e9c787] [0.53_03]
+	[dc5177e9c787] [0.53_03] <version-combined>
 
 	* t/coretests.pm, vperl/vpp.pm, vutil/vxs.xs:
 	Working pure Perl version objects (but relies on Scalar::Util).
@@ -1211,7 +1234,7 @@
 	* vperl/vpp.pm Implement CVS-style (evil) initialization.
 	Add _verify() sub to make sure derived classes don't break things.
 	Add test for vstring (uses Scalar::Util) and DTRT.
-	[e52565977ef4]
+	[e52565977ef4] <version-combined>
 
 	* lib/version.pm, vperl/vpp.pm, vutil/vxs.pm:
 	Nearly working pure Perl version objects. A couple of tests still
@@ -1225,18 +1248,18 @@
 	versions.
 
 	* vutil/vxs.pm Bump version.
-	[b17e3fd4647e]
+	[b17e3fd4647e] <version-combined>
 
 2006-02-09  John Peacock  <john.peacock@havurah-software.org>
 
 	* Build.PL, MANIFEST, t/01base.t, t/01base.t.PL:
 	Complete merge with version/trunk (all tests pass).
-	[3d0b79179484]
+	[3d0b79179484] <version-combined>
 
 	* Build.PL, README, lib/version.pm, lib/version.pod, t/02derived.t,
 	t/coretests.pm, vutil/vutil.c, vutil/vxs.pm:
 	Merge from version/trunk
-	[b361d26556a3]
+	[b361d26556a3] <version-combined>
 
 	* Build.PL, lib/version.pod, vutil/vutil.c:
 	Commit changes prior to push to implement pure Perl alternative.
@@ -1301,27 +1324,27 @@
 
 	* lib/version.pm:
 	this still does not work
-	[f2bf12c6b92b]
+	[f2bf12c6b92b] <tied-version>
 
 2005-12-13  John Peacock  <john.peacock@havurah-software.org>
 
 	* lib/version.pm:
 	this doesn't work either
-	[86c7d3977d59]
+	[86c7d3977d59] <tied-version>
 
 2005-12-09  John Peacock  <john.peacock@havurah-software.org>
 
 	* lib/version.pm:
 	Thist doesn't actually work, but let's save it for later, just in
 	case.
-	[317bd847d6bb]
+	[317bd847d6bb] <tied-version>
 
 	* t/coretests.pm:
 	use the correct path to perl, not that it matters
-	[fd702b4928f5]
+	[fd702b4928f5] <tied-version>
 
 	* a new start
-	[e854d5f1583e]
+	[e854d5f1583e] <tied-version>
 
 2005-12-03  John Peacock  <john.peacock@havurah-software.org>
 
@@ -1401,10 +1424,10 @@
 	lib/version/vxs.xs, t/01base.t, t/01base.t.PL, t/02derived.t,
 	vperl/vpp.pm, vutil/vxs.pm, vutil/vxs.xs:
 	Check in work so far on combined XS and PP version
-	[3edcf7671ee6]
+	[3edcf7671ee6] <version-combined>
 
 	* Branch to develop the combined XS and PP version
-	[2153e5a1c98c]
+	[2153e5a1c98c] <version-combined>
 
 2005-09-26  John Peacock  <john.peacock@havurah-software.org>
 
@@ -1434,48 +1457,48 @@
 
 	* README:
 	Final changes to README before merging back
-	[f0e5937b6b0f]
+	[f0e5937b6b0f] <version-xs>
 
 	* MANIFEST, lib/version.pm, lib/version.pod:
 	Extract POD into seperate file and re-add version.pm
-	[178da6ad8799]
+	[178da6ad8799] <version-xs>
 
 	* Build.PL, MANIFEST, lib/typemap, lib/version/typemap,
 	lib/version/vxs.pm, lib/version/vxs.xs, lib/vxs.pm, lib/vxs.xs,
 	t/01base.t, t/02derived.t, t/coretests.pm:
 	Fully working xs base class and derived class
-	[6a5eb5274261]
+	[6a5eb5274261] <version-xs>
 
 	* MANIFEST, lib/typemap, lib/vxs.pm, lib/vxs.xs, t/01base.t,
 	t/02derived.t, vutil/vutil.c:
 	Intermediate commit before rename
-	[3802a826abea]
+	[3802a826abea] <version-xs>
 
 	* MANIFEST, lib/vxs.pm, t/01base.t:
 	First working wrapper class
-	[0da6c1445e0f]
+	[0da6c1445e0f] <version-xs>
 
 	* lib/version.pm, lib/version_xs.xs, lib/vxs.pm, lib/vxs.xs:
 	Working again as new classname
-	[e332d1afbe87]
+	[e332d1afbe87] <version-xs>
 
 	* Build.PL, MANIFEST, lib/typemap, lib/version.pm, lib/version_xs.xs,
 	t/01base.t, vutil/vutil.c:
 	Interim commit prior to renames
-	[269637fd55a2]
+	[269637fd55a2] <version-xs>
 
 	* lib/version.xs, lib/version_xs.xs:
 	Another commit but it still doesn't work
-	[234bc2a6cc79]
+	[234bc2a6cc79] <version-xs>
 
 	* MANIFEST, lib/version.pm, lib/version.xs:
 	Intermediate commit before renaming file
-	[ef5daf9123d1]
+	[ef5daf9123d1] <version-xs>
 
 2005-09-10  John Peacock  <john.peacock@havurah-software.org>
 
 	* Branch to begin to split the module to load either XS or pure Perl
-	[4dd58d14600b]
+	[4dd58d14600b] <version-xs>
 
 2005-09-07  John Peacock  <john.peacock@havurah-software.org>
 
@@ -1864,15 +1887,15 @@
 	Change the overloaded class to version::overload Add the code (but
 	don't implement yet) for version::tied Change the test to use
 	version::overloaded (though it will be changed back)
-	[35bb2adf4ba9]
+	[35bb2adf4ba9] <version-new>
 
 2003-07-09  John Peacock  <john.peacock@havurah-software.org>
 
 	* Copy off a branch to work on Damian-inspired lunacy
-	[7053382ad592]
+	[7053382ad592] <version-new>
 
 	* Start working on version objects with math ops
-	[7b6882da276f]
+	[7b6882da276f] <version-math>
 
 	* Changes, MANIFEST, lib/version/AlphaBeta.pm, t/01base.t,
 	t/02AlphaBeta.t, t/1.t, t/2.t:

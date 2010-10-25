@@ -1,0 +1,29 @@
+---
+abstract: 'Perl extension for Version Objects'
+author:
+  - 'John Peacock E<lt>jpeacock@cpan.orgE<gt>'
+build_requires:
+  ExtUtils::CBuilder: 0
+configure_requires:
+  Module::Build: 0.36
+dynamic_config: 0
+generated_by: 'Module::Build version 0.36'
+license: perl
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.2.html
+  version: 1.2
+name: version
+provides:
+  version:
+    file: lib/version.pm
+    version: 0.82
+  version::vxs:
+    file: vutil/lib/version/vxs.pm
+    version: 0.82
+requires:
+  File::Temp: '>= 0.13'
+  Test::More: '>= 0.45'
+  perl: '> 5.005'
+resources:
+  license: http://dev.perl.org/licenses/
+version: 0.82
