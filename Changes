@@ -1,8 +1,29 @@
+2010-12-09  John Peacock  <john.peacock@havurah-software.org>
+
+	* .hgtags:
+	Tagging version '0.87' using shipit.
+	[f8caa8f3a657] [tip]
+
+	* Build.PL, MANIFEST, Makefile.PL, README, lib/version.pm, t/01base.t,
+	t/02derived.t, t/03require.t, vperl/vpp.pm,
+	vutil/lib/version/vxs.pm:
+	Remove support for Build.PL to keep from introducing circular
+	dependencies.
+	[1d290fc3106c] [0.87]
+
+2010-11-27  John Peacock  <john.peacock@havurah-software.org>
+
+	* lib/version.pod:
+	Apply misc POD cleanup. Resolves:
+	https://rt.cpan.org/Ticket/Display.html?id=57950
+	https://rt.cpan.org/Ticket/Display.html?id=56737
+	[afc2d76243df]
+
 2010-11-26  John Peacock  <john.peacock@havurah-software.org>
 
 	* .hgtags:
 	Tagging version '0.86' using shipit.
-	[7c17b9c1c275] [tip]
+	[7c17b9c1c275]
 
 	* MANIFEST, README, lib/version.pm, t/01base.t, t/02derived.t,
 	t/03require.t, t/04strict_lax.t, vperl/vpp.pm,

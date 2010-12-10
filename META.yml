@@ -1,27 +1,23 @@
----
-name: version
-version: 0.86
+--- #YAML:1.0
+name:               version
+version:            0.87
+abstract:           Structured version objects
 author:
-  - 'John Peacock E<lt>jpeacock@cpan.orgE<gt>'
-abstract: Perl extension for Version Objects
-license: perl
-requires:
-  File::Temp: '>= 0.13'
-  Test::More: '>= 0.45'
-  perl: '> 5.005'
+    - John Peacock <jpeacock@cpan.org>
+license:            unknown
+distribution_type:  module
 configure_requires:
-  Module::Build: 0.340201
-dynamic_config: 1
-generated_by: Module::Build version 0.340201
+    ExtUtils::MakeMaker:  0
+build_requires:
+    ExtUtils::MakeMaker:  0
+requires:
+    File::Temp:  0.13
+    Test::More:  0.45
+no_index:
+    directory:
+        - t
+        - inc
+generated_by:       ExtUtils::MakeMaker version 6.55_02
 meta-spec:
-  url: http://module-build.sourceforge.net/META-spec-v1.4.html
-  version: 1.4
-provides:
-  version:
-    file: lib/version.pm
-    version: 0.86
-  version::vxs:
-    file: vutil/lib/version/vxs.pm
-    version: 0.86
-resources:
-  license: http://dev.perl.org/licenses/
+    url:      http://module-build.sourceforge.net/META-spec-v1.4.html
+    version:  1.4
