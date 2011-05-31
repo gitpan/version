@@ -1,8 +1,49 @@
+2011-05-31  John Peacock  <john.peacock@havurah-software.org>
+
+	* .hgtags:
+	Tagging version '0.89' using shipit.
+	[5cf121b754b6] [tip]
+
+	* vperl/vpp.pm:
+	Act like vxs version and always use version->new method for
+	qv/declare, then rebless into inherited class
+	[1eb73dd9059b] [0.89]
+
+	* t/02derived.t, t/coretests.pm:
+	Failing test case with version::vpp only
+	[7dedb7cb50d0]
+
+	* t/03require.t:
+	More bumping
+	[131ed8486036]
+
+	* lib/version.pm, vperl/vpp.pm, vutil/lib/version/vxs.pm:
+	Bump $VERSION prior to testing new changes.
+	[d38b0fc42650]
+
+	* README:
+	Remove discussion of Build.PL (no longer supported) Resolves
+	https://rt.cpan.org/Ticket/Display.html?id=66206
+	[4a16bc27cffa]
+
+2010-12-20  John Peacock  <john.peacock@havurah-software.org>
+
+	* .hgtags:
+	Tagging version '0.88' using shipit.
+	[a1d7151ace67]
+
+2010-12-19  John Peacock  <john.peacock@havurah-software.org>
+
+	* Makefile.PL, README, lib/version.pm, t/01base.t, t/02derived.t,
+	t/03require.t, vperl/vpp.pm, vutil/lib/version/vxs.pm:
+	Tweak Makefile.PL to make Strawberry Perl happy.
+	[36b62c0768b4] [0.88]
+
 2010-12-09  John Peacock  <john.peacock@havurah-software.org>
 
 	* .hgtags:
 	Tagging version '0.87' using shipit.
-	[f8caa8f3a657] [tip]
+	[f8caa8f3a657]
 
 	* Build.PL, MANIFEST, Makefile.PL, README, lib/version.pm, t/01base.t,
 	t/02derived.t, t/03require.t, vperl/vpp.pm,

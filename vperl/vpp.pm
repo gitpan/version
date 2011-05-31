@@ -121,7 +121,7 @@ use strict;
 use POSIX qw/locale_h/;
 use locale;
 use vars qw ($VERSION @ISA @REGEXS);
-$VERSION = 0.88;
+$VERSION = 0.89;
 
 use overload (
     '""'       => \&stringify,
@@ -794,8 +794,8 @@ sub qv {
 
     $value = _un_vstring($value);
     $value = 'v'.$value unless $value =~ /(^v|\d+\.\d+\.\d)/;
-    my $version = $class->new($value);
-    return $version;
+    my $obj = version->new($value);
+    return bless $obj, $class;
 }
 
 *declare = \&qv;
