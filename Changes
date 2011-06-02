@@ -1,8 +1,26 @@
+2011-06-01  John Peacock  <john.peacock@havurah-software.org>
+
+	* .hgtags:
+	Tagging version '0.90' using shipit.
+	[30cea8f2eac2] [tip]
+
+	* README:
+	Remember to edit README this time
+	[137df6eaa22c] [0.90]
+
+	* lib/version.pm, t/01base.t, t/02derived.t, t/03require.t,
+	vperl/vpp.pm, vutil/lib/version/vxs.pm:
+	Sloppy release for 0.89; I forgot to bump all of the release tests.
+	Do this now and resolve:
+
+	 https://rt.cpan.org/Ticket/Display.html?id=68588
+	[e7b1d5a01256]
+
 2011-05-31  John Peacock  <john.peacock@havurah-software.org>
 
 	* .hgtags:
 	Tagging version '0.89' using shipit.
-	[5cf121b754b6] [tip]
+	[5cf121b754b6]
 
 	* vperl/vpp.pm:
 	Act like vxs version and always use version->new method for
