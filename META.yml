@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name:               version
-version:            0.90
+version:            0.91
 abstract:           Structured version objects
 author:
     - John Peacock <jpeacock@cpan.org>

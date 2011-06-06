@@ -1,8 +1,31 @@
+2011-06-06  John Peacock  <john.peacock@havurah-software.org>
+
+	* .hgtags:
+	Tagging version '0.91' using shipit.
+	[d9305ef3630f] [tip]
+
+	* .hgtags:
+	Removed tag 0.91
+	[089ab8b080ba] [0.91]
+
+	* .hgtags:
+	Tagging version '0.91' using shipit.
+	[749088e4a014]
+
+2011-06-05  John Peacock  <john.peacock@havurah-software.org>
+
+	* README, lib/version.pm, t/01base.t, t/02derived.t, t/03require.t,
+	vperl/vpp.pm, vutil/lib/version/vxs.pm, vutil/vutil.c:
+	Protect the Perl core functions introduced in 5.11.4, which only
+	apparently causes problems with Strawberry Perl. Bump $VERSION
+	everwhere and even remember to update README.
+	[b65d7a359ae6]
+
 2011-06-01  John Peacock  <john.peacock@havurah-software.org>
 
 	* .hgtags:
 	Tagging version '0.90' using shipit.
-	[30cea8f2eac2] [tip]
+	[30cea8f2eac2]
 
 	* README:
 	Remember to edit README this time
