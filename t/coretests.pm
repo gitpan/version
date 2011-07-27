@@ -68,6 +68,10 @@ sub BaseTests {
     like($@, qr/non-numeric data/,
 	"Invalid version format (non-numeric data)");
 
+    eval { $version = $CLASS->$method("-1.23")};
+    like($@, qr/negative version number/,
+	"Invalid version format (negative version number)");
+
     # from here on out capture the warning and test independently
     {
     eval{$version = $CLASS->$method("99 and 44/100 pure")};
@@ -324,6 +328,20 @@ SKIP: {
 	unlike ($@, qr/$error_regex/,
 	    'Replacement handles modules without VERSION'); 
 	unlink $filename;
+    }
+SKIP:    { # https://rt.perl.org/rt3/Ticket/Display.html?id=95544
+	skip "version require'd instead of use'd, cannot test UNIVERSAL::VERSION", 2
+	    unless defined $qv_declare;
+	my ($fh, $filename) = tempfile('tXXXXXXX', SUFFIX => '.pm', UNLINK => 1);
+	(my $package = basename($filename)) =~ s/\.pm$//;
+	print $fh "package $package;\n\$VERSION = '3alpha';\n1;\n";
+	close $fh;
+	eval "use lib '.'; use $package;";
+	unlike ($@, qr/Invalid version format (non-numeric data)/,
+	    'Do not warn about bad $VERSION unless asked');
+	eval "use lib '.'; use $package; warn $package->VERSION";
+	ok ($warning =~ /3alpha/, 'Even a bad $VERSION is returned:
+	    '.$warning);
     }
 
 SKIP: 	{

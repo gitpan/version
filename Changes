@@ -1,8 +1,50 @@
+2011-07-26  John Peacock  <john.peacock@havurah-software.org>
+
+	* .hgtags:
+	Tagging version '0.92' using shipit.
+	[8dc71db60aaa] [tip]
+
+	* README:
+	Remember to update README for a change
+	[23c8ac5df1db] [0.92]
+
+	* lib/version.pm:
+	Forgot to update the logic for the pure Perl version
+	[6b616b3cf67d]
+
+	* t/coretests.pm:
+	Plus Tests for UNIVERSAL::VERSION!
+	[bdcc02a495da]
+
+	* vperl/vpp.pm:
+	Forbid negative version in pure Perl and update UNIVERSAL::VERSION
+	replacement. Plus Tests!
+	[3e6273e898c4]
+
+	* vutil/vxs.xs:
+	In UNIVERSAL::VERSION, don't convert the package $VERSION into a
+	version object unless you need to actually compare it; return the
+	original $VERSION scalar in any case.
+	[573e3dacc865]
+
+	* vutil/vxs.xs:
+	Eliminate tab characters
+	[b81f8f7ddc53]
+
+	* lib/version.pm, t/01base.t, t/02derived.t, t/03require.t,
+	t/coretests.pm, vutil/lib/version/vxs.pm, vutil/vutil.c,
+	vutil/vutil.h, vutil/vxs.xs:
+	Rewrite overriding logic to just bulk replace the core code after
+	the point where version.pm was assimilated. Also correct handling
+	of negative versions (and add tests), to mirror what was done in
+	core.
+	[b1774b895712]
+
 2011-06-06  John Peacock  <john.peacock@havurah-software.org>
 
 	* .hgtags:
 	Tagging version '0.91' using shipit.
-	[d9305ef3630f] [tip]
+	[d9305ef3630f]
 
 	* .hgtags:
 	Removed tag 0.91
