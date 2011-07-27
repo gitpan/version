@@ -1,8 +1,25 @@
+2011-07-27  John Peacock  <john.peacock@havurah-software.org>
+
+	* .hgtags:
+	Tagging version '0.93' using shipit.
+	[1fb9bb0676db] [tip]
+
+	* t/coretests.pm:
+	Reorder tests and include both positive and negative test for
+	exception.
+	[758140b17786] [0.93]
+
+	* README, lib/version.pm, t/01base.t, t/02derived.t, t/03require.t,
+	t/coretests.pm, vperl/vpp.pm, vutil/lib/version/vxs.pm,
+	vutil/vxs.xs:
+	Fix problem with UNIVERSAL::VERSION spotted by Father Chrysostomos.
+	[2a7768a85f8b]
+
 2011-07-26  John Peacock  <john.peacock@havurah-software.org>
 
 	* .hgtags:
 	Tagging version '0.92' using shipit.
-	[8dc71db60aaa] [tip]
+	[8dc71db60aaa]
 
 	* README:
 	Remember to update README for a change
