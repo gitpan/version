@@ -1,8 +1,32 @@
+2011-08-21  John Peacock  <john.peacock@havurah-software.org>
+
+	* .hgtags:
+	Tagging version '0.94' using shipit.
+	[743538f58cb7] [tip]
+
+	* Makefile.PL, lib/version.pod, lib/version/Internals.pod:
+	Tweak POD and add LICENSE to Makefile.PL. Resolves:
+
+	 https://rt.cpan.org/Public/Bug/Display.html?id=70120
+	[3a4fae29c763] [0.94]
+
+	* MANIFEST, t/05sigdie.t:
+	Add test to confirm that the $SIG{__DIE__} handling is correct.
+	[4a421bba05c9]
+
+	* lib/version.pm, t/01base.t, t/02derived.t, t/03require.t,
+	vperl/vpp.pm, vutil/lib/version/vxs.pm:
+	Prevent DIE handlers in user code from tripping up loading version.
+	Don't know how this hasn't shown up until now. Resolves:
+
+	 https://rt.cpan.org/Ticket/Display.html?id=70260
+	[754fd86858af]
+
 2011-07-27  John Peacock  <john.peacock@havurah-software.org>
 
 	* .hgtags:
 	Tagging version '0.93' using shipit.
-	[1fb9bb0676db] [tip]
+	[1fb9bb0676db]
 
 	* t/coretests.pm:
 	Reorder tests and include both positive and negative test for
