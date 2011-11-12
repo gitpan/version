@@ -1,8 +1,50 @@
+2011-11-12  John Peacock  <john.peacock@havurah-software.org>
+
+	* .hgtags:
+	Tagging version '0.95' using shipit.
+	[f76612f96814] [tip]
+
+	* README, t/coretests.pm, vutil/vxs.xs:
+	Turns out the XS code didn't prevent the math ops from working after
+	all. Add a test to make sure we catch that and update README for
+	release.
+	[9f4e1ff7704c] [0.95]
+
+	* t/06noop.t:
+	Forgot to add test file for math noop methods
+	[ca0bc8526ea5]
+
+	* MANIFEST, vperl/vpp.pm:
+	Restore 5.14.x behavior of UNIVERSAL::VERSION to pure Perl code
+	[1dd0281f09b8]
+
+	* t/coretests.pm, vutil/vutil.c, vutil/vutil.h, vutil/vxs.xs:
+	Fix segfault with versions that start with 'v', especially
+	'version'.
+	[868edaf0223b]
+
+2011-10-30  John Peacock  <john.peacock@havurah-software.org>
+
+	* lib/version.pm, t/01base.t, t/02derived.t, t/03require.t,
+	t/05sigdie.t, t/coretests.pm, vutil/lib/version/vxs.pm:
+	Bump $VERSION in preparation for eventual release.
+	[3bcfd3008cbc]
+
+	* vutil/vxs.xs:
+	Revert change to UNIVERSAL::VERSION replacement, pending ruling from
+	the bench.
+	[d5c1282dfe13]
+
+	* vperl/vpp.pm:
+	For some reason, nomethod doesn't work in pure Perl code, so be
+	explicit about ops that are not allowed.
+	[5cad9cde035e]
+
 2011-08-21  John Peacock  <john.peacock@havurah-software.org>
 
 	* .hgtags:
 	Tagging version '0.94' using shipit.
-	[743538f58cb7] [tip]
+	[743538f58cb7]
 
 	* Makefile.PL, lib/version.pod, lib/version/Internals.pod:
 	Tweak POD and add LICENSE to Makefile.PL. Resolves:
