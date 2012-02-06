@@ -1,8 +1,70 @@
+2012-02-06  John Peacock  <john.peacock@havurah-software.org>
+
+	* .hgtags:
+	Tagging version '0.96' using shipit.
+	[869515de8517] [tip]
+
+	* lib/version.pod, vutil/vutil.c:
+	Final merge from bleadperl plus whitespace cleanup
+	[6cfe8a913105] [0.96]
+
+2012-02-05  John Peacock  <john.peacock@havurah-software.org>
+
+	* t/07locale.t:
+	Wrong skip count and extra whitespace
+	[eec6bacab6ae]
+
+	* MANIFEST, lib/version.pm, t/07locale.t, t/comma_locale.pl,
+	vperl/vpp.pm:
+	Eliminate comma_locale helper script after all, since we don't
+	really need it with only one locale test file.
+	[b8f4bc01a4cb]
+
+2012-02-04  John Peacock  <john.peacock@havurah-software.org>
+
+	* lib/version/typemap, vutil/vutil.c, vutil/vxs.xs:
+	Sync with Perl core, especially not leaking scalars during boolean.
+	[5849413db03c]
+
+2012-02-02  John Peacock  <john.peacock@havurah-software.org>
+
+	* lib/version.pm, t/comma_locale.pl, t/coretests.pm:
+	Figured out what I was missing on Perl > 5.9 tests.
+	[02cc6870927d]
+
+2011-12-26  John Peacock  <john.peacock@havurah-software.org>
+
+	* MANIFEST, t/coretests.pm:
+	For some reason, the pure Perl test fails otherwise.
+	[957517cbd08f]
+
+	* t/08locale-105784.t:
+	Turns out this isn't a bug in version but in Perl, so we cannot test
+	it here.
+	[4e1e1ce197b9]
+
+2011-12-20  John Peacock  <john.peacock@havurah-software.org>
+
+	* MANIFEST, lib/version.pm, t/01base.t, t/02derived.t, t/03require.t,
+	t/05sigdie.t, t/06noop.t, t/07locale.t, t/08locale-105784.t,
+	t/comma_locale.pl, t/coretests.pm, vperl/vpp.pm,
+	vutil/lib/version/vxs.pm, vutil/vutil.c, vutil/vutil.h,
+	vutil/vxs.xs:
+	Merge changes from bleadperl. Split out locale testing to two
+	files. Prep for releasing 0.96 to CPAN.
+	[c1267228d702]
+
+2011-12-01  John Peacock  <john.peacock@havurah-software.org>
+
+	* lib/version.pod:
+	No longer recommend 0.77 in the use line.
+	[cbc5615a685d]
+
 2011-11-12  John Peacock  <john.peacock@havurah-software.org>
 
 	* .hgtags:
 	Tagging version '0.95' using shipit.
-	[f76612f96814] [tip]
+	[f76612f96814]
 
 	* README, t/coretests.pm, vutil/vxs.xs:
 	Turns out the XS code didn't prevent the math ops from working after

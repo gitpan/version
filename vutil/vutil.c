@@ -298,7 +298,7 @@ Perl_scan_version(pTHX_ const char *s, SV *rv, bool qv)
 	(void)hv_stores(MUTABLE_HV(hv), "alpha", newSViv(alpha));
     if ( !qv && width < 3 )
 	(void)hv_stores(MUTABLE_HV(hv), "width", newSViv(width));
-    
+
     while (isDIGIT(*pos))
 	pos++;
     if (!isALPHA(*pos)) {
@@ -451,7 +451,7 @@ Perl_new_version(pTHX_ SV *ver)
     dVAR;
     SV * const rv = newSV(0);
     PERL_ARGS_ASSERT_NEW_VERSION;
-    if ( ISA_VERSION_OBJ(ver,"version") ) /* can just copy directly */
+    if ( ISA_CLASS_OBJ(ver,"version") ) /* can just copy directly */
     {
 	I32 key;
 	AV * const av = newAV();
@@ -472,7 +472,7 @@ Perl_new_version(pTHX_ SV *ver)
 
 	if ( hv_exists(MUTABLE_HV(ver), "alpha", 5) )
 	    (void)hv_stores(MUTABLE_HV(hv), "alpha", newSViv(1));
-	
+
 	if ( hv_exists(MUTABLE_HV(ver), "width", 5 ) )
 	{
 	    const I32 width = SvIV(*hv_fetchs(MUTABLE_HV(ver), "width", FALSE));
@@ -547,14 +547,17 @@ Perl_upg_version(pTHX_ SV *ver, bool qv)
 
     if ( SvNOK(ver) && !( SvPOK(ver) && sv_len(ver) == 3 ) )
     {
+	STRLEN len;
 	/* may get too much accuracy */ 
 	char tbuf[64];
 #ifdef USE_LOCALE_NUMERIC
-	char *loc = setlocale(LC_NUMERIC, "C");
+	char *loc = savepv(setlocale(LC_NUMERIC, NULL));
+	setlocale(LC_NUMERIC, "C");
 #endif
-	STRLEN len = my_snprintf(tbuf, sizeof(tbuf), "%.9"NVff, SvNVX(ver));
+	len = my_snprintf(tbuf, sizeof(tbuf), "%.9"NVff, SvNVX(ver));
 #ifdef USE_LOCALE_NUMERIC
 	setlocale(LC_NUMERIC, loc);
+	Safefree(loc);
 #endif
 	while (tbuf[len-1] == '0' && len > 0) len--;
 	if ( tbuf[len-1] == '.' ) len--; /* eat the trailing decimal */
@@ -596,7 +599,7 @@ Perl_upg_version(pTHX_ SV *ver, bool qv)
 		    }
 
 		    /* is definitely a v-string */
-		    if ( saw_decimal >= 2 ) {	
+		    if ( saw_decimal >= 2 ) {
 			Safefree(version);
 			version = nver;
 		    }
@@ -677,6 +680,8 @@ point representation.  Call like:
 
 NOTE: you can pass either the object directly or the SV
 contained within the RV.
+
+The SV returned has a refcount of 1.
 
 =cut
 */
@@ -761,6 +766,8 @@ representation.  Call like:
 NOTE: you can pass either the object directly or the SV
 contained within the RV.
 
+The SV returned has a refcount of 1.
+
 =cut
 */
 
@@ -822,7 +829,9 @@ Perl_vnormal(pTHX_ SV *vs)
 In order to maintain maximum compatibility with earlier versions
 of Perl, this function will return either the floating point
 notation or the multiple dotted notation, depending on whether
-the original version contained 1 or more dots, respectively
+the original version contained 1 or more dots, respectively.
+
+The SV returned has a refcount of 1.
 
 =cut
 */
