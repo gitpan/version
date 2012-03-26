@@ -1,8 +1,28 @@
+2012-03-26  John Peacock  <john.peacock@havurah-software.org>
+
+	* .hgtags:
+	Tagging version '0.97' using shipit.
+	[b92630594a52] [tip]
+
+2012-02-28  John Peacock  <john.peacock@havurah-software.org>
+
+	* README, lib/version.pm, t/01base.t, t/02derived.t, t/03require.t,
+	t/05sigdie.t, t/06noop.t, t/07locale.t, vperl/vpp.pm,
+	vutil/lib/version/vxs.pm:
+	Prep for 0.97 release to CPAN
+	[40481a8c9961] [0.97]
+
+2012-02-27  John Peacock  <john.peacock@havurah-software.org>
+
+	* t/07locale.t:
+	Need to actually check to make sure we have a comma locale.
+	[01831906b0fc]
+
 2012-02-06  John Peacock  <john.peacock@havurah-software.org>
 
 	* .hgtags:
 	Tagging version '0.96' using shipit.
-	[869515de8517] [tip]
+	[869515de8517]
 
 	* lib/version.pod, vutil/vutil.c:
 	Final merge from bleadperl plus whitespace cleanup

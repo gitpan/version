@@ -10,7 +10,7 @@ use POSIX qw/locale_h/;
 use Test::More tests => 7;
 
 BEGIN {
-    use_ok('version', 0.96);
+    use_ok('version', 0.97);
 }
 
 SKIP: {
@@ -29,7 +29,7 @@ SKIP: {
 	    last if localeconv()->{decimal_point} eq ',';
 	}
 	skip 'Cannot test locale handling without a comma locale', 5
-	    unless $loc;
+	    unless $loc and localeconv()->{decimal_point} eq ',';
 
 	diag ("Testing locale handling with $loc") unless $ENV{PERL_CORE};
 
