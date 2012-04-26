@@ -1,8 +1,29 @@
+2012-04-25  John Peacock  <john.peacock@havurah-software.org>
+
+	* .hgtags:
+	Tagging version '0.98' using shipit.
+	[f2b560650d71] [tip]
+
+	* README, lib/version.pm, t/01base.t, t/02derived.t, t/03require.t,
+	t/05sigdie.t, t/06noop.t, t/07locale.t, vperl/vpp.pm,
+	vutil/lib/version/vxs.pm:
+	Final prep for release to CPAN
+	[9b2b10192e6d] [0.98]
+
+	* t/coretests.pm:
+	And apply test for overflowing versions...
+	[428561b08acb]
+
+	* vutil/vutil.c:
+	Apply changes from Perl core to prevent buffer overflow with
+	ludicrous version objects.
+	[dda581b33ebb]
+
 2012-03-26  John Peacock  <john.peacock@havurah-software.org>
 
 	* .hgtags:
 	Tagging version '0.97' using shipit.
-	[b92630594a52] [tip]
+	[b92630594a52]
 
 2012-02-28  John Peacock  <john.peacock@havurah-software.org>
 
