@@ -1,8 +1,20 @@
+2012-04-26  John Peacock  <john.peacock@havurah-software.org>
+
+	* .hgtags:
+	Tagging version '0.99' using shipit.
+	[5b92453596f4] [tip]
+
+	* README, lib/version.pm, t/01base.t, t/02derived.t, t/03require.t,
+	t/05sigdie.t, t/06noop.t, t/07locale.t, t/coretests.pm,
+	vperl/vpp.pm, vutil/lib/version/vxs.pm:
+	Missed a patch from bleadperl.
+	[47af644a41f0] [0.99]
+
 2012-04-25  John Peacock  <john.peacock@havurah-software.org>
 
 	* .hgtags:
 	Tagging version '0.98' using shipit.
-	[f2b560650d71] [tip]
+	[f2b560650d71]
 
 	* README, lib/version.pm, t/01base.t, t/02derived.t, t/03require.t,
 	t/05sigdie.t, t/06noop.t, t/07locale.t, vperl/vpp.pm,
