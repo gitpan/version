@@ -1,8 +1,25 @@
+2012-09-10  John Peacock  <john.peacock@havurah-software.org>
+
+	* .hgtags:
+	Tagging version '0.9901' using shipit.
+	[4ede6195fa54] [tip]
+
+2012-09-09  John Peacock  <john.peacock@havurah-software.org>
+
+	* lib/version.pm, t/01base.t, t/02derived.t, t/03require.t,
+	t/05sigdie.t, t/06noop.t, t/07locale.t, t/coretests.pm,
+	vperl/vpp.pm, vutil/lib/version/vxs.pm, vutil/vutil.c:
+	Fix problem with short floating point alpha versions (e.g. 0.52_0).
+	Resolves:
+
+	 https://rt.cpan.org/Ticket/Display.html?id=79259
+	[d0e1d933089b] [0.9901]
+
 2012-04-26  John Peacock  <john.peacock@havurah-software.org>
 
 	* .hgtags:
 	Tagging version '0.99' using shipit.
-	[5b92453596f4] [tip]
+	[5b92453596f4]
 
 	* README, lib/version.pm, t/01base.t, t/02derived.t, t/03require.t,
 	t/05sigdie.t, t/06noop.t, t/07locale.t, t/coretests.pm,
