@@ -9,7 +9,7 @@ my $Verbose;
 
 BEGIN {
     require "t/coretests.pm";
-    use_ok('version', 0.9901);
+    use_ok('version', 0.9902);
 }
 
 diag "Tests with base class" if $Verbose;
@@ -32,4 +32,16 @@ my $v = eval {
     return IO::Handle->VERSION;
 };
 ok defined($v), 'Fix for RT #47980';
+
+{ # https://rt.cpan.org/Ticket/Display.html?id=81085
+    eval { version::new() };
+    like $@, qr'Usage: version::new\(class, version\)',
+	'No bus err when called as function';
+    eval { $x = 1; print version::new };
+    like $@, qr'Usage: version::new\(class, version\)',
+	'No implicit object creation when called as function';
+    eval { $x = "version"; print version::new };
+    like $@, qr'Usage: version::new\(class, version\)',
+	'No implicit object creation when called as function';
+}
 

@@ -1,8 +1,57 @@
+2013-03-06  John Peacock  <john.peacock@havurah-software.org>
+
+	* .hgtags:
+	Tagging version '0.9902' using shipit.
+	[5c6574976e24] [tip]
+
+	* lib/version.pm:
+	Make sure to create &version::new alias with all Perls
+	[9fc95f57161a] [0.9902]
+
+2013-03-05  John Peacock  <john.peacock@havurah-software.org>
+
+	* README:
+	Ready for release to CPAN
+	[e8829f2f8800]
+
+2013-03-03  John Peacock  <john.peacock@havurah-software.org>
+
+	* vperl/vpp.pm:
+	Pure Perl version::new() should also croak if called as function.
+	Resolves: https://rt.cpan.org/Ticket/Display.html?id=81085
+	[823994482617]
+
+	* lib/version.pm, t/01base.t, t/02derived.t, t/03require.t,
+	t/05sigdie.t, t/06noop.t, t/07locale.t, t/coretests.pm,
+	vperl/vpp.pm, vutil/lib/version/vxs.pm:
+	Cope with hashkey ordering changes. Resolves:
+
+	 https://rt.cpan.org/Public/Bug/Display.html?id=81708
+	[3c49b0c9c7d6]
+
+	* Makefile.PL:
+	Implement PERL_ONLY environment variable. Resolves:
+
+	 https://rt.cpan.org/Public/Bug/Display.html?id=83509
+	[be18a6913e9d]
+
+	* .hgignore, vutil/vutil.c, vutil/vxs.xs:
+	Don't create object structure until after prescanning, resolves:
+
+	 https://rt.cpan.org/Public/Bug/Display.html?id=81086
+	[50e4af5e81ce]
+
+2012-11-15  John Peacock  <john.peacock@havurah-software.org>
+
+	* t/01base.t, vutil/vxs.xs:
+	Resolve https://rt.cpan.org/Ticket/Display.html?id=81085
+	[38f2fe7b96fd]
+
 2012-09-10  John Peacock  <john.peacock@havurah-software.org>
 
 	* .hgtags:
 	Tagging version '0.9901' using shipit.
-	[4ede6195fa54] [tip]
+	[4ede6195fa54]
 
 2012-09-09  John Peacock  <john.peacock@havurah-software.org>
 
