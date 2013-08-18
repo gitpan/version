@@ -1,8 +1,55 @@
+2013-08-18  John Peacock  <john.peacock@havurah-software.org>
+
+	* .hgtags:
+	Tagging version '0.9903' using shipit.
+	[02af417226b0] [tip]
+
+	* vutil/lib/version/vxs.pm:
+	Missed one VERSION++
+	[8c04e6e6f195] [0.9903]
+
+	* README:
+	Final tweaks before release to CPAN
+	[a63c5368dbae]
+
+2013-08-16  John Peacock  <john.peacock@havurah-software.org>
+
+	* lib/version.pod:
+	More whitespace normalization
+	[bebbe00cbd68]
+
+2013-08-15  John Peacock  <john.peacock@havurah-software.org>
+
+	* lib/version.pm, lib/version/Internals.pod, t/01base.t,
+	t/02derived.t, t/03require.t, t/04strict_lax.t, t/05sigdie.t,
+	t/06noop.t, t/07locale.t, t/coretests.pm, vperl/vpp.pm:
+	Merge with core perl changes and bump $VERSION for release.
+	[cf81a9587bf2]
+
+2013-07-06  John Peacock  <john.peacock@havurah-software.org>
+
+	* lib/version/Internals.pod:
+	Resolve https://rt.cpan.org/Ticket/Display.html?id=86582
+	[f831a867b6be]
+
+	* Makefile.PL:
+	Always install version::vpp even when installing XS code Resolves
+	https://rt.cpan.org/Ticket/Display.html?id=84616
+	[e983c52f6935]
+
+	* Makefile.PL:
+	Require the correct minimum version of "parent"
+	[1aa33af2f954]
+
+	* Makefile.PL, t/coretests.pm:
+	Eliminate "use base" usage
+	[ffee69e907be]
+
 2013-03-06  John Peacock  <john.peacock@havurah-software.org>
 
 	* .hgtags:
 	Tagging version '0.9902' using shipit.
-	[5c6574976e24] [tip]
+	[5c6574976e24]
 
 	* lib/version.pm:
 	Make sure to create &version::new alias with all Perls

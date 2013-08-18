@@ -39,7 +39,14 @@ write_makefile();
 
 sub write_makefile
 {
-    my %prereq = ( 'Test::More' => 0.45, 'File::Temp' => 0.13 );
+    my %prereq = (
+	'Test::More' => 0.45,
+	'File::Temp' => 0.13,
+    	($] < 5.010001
+	    ? (parent => 0.221)
+	    : ()
+	),
+    );
 
     WriteMakefile( VERSION_FROM    => 'lib/version.pm',
                    NAME            => 'version',
@@ -78,10 +85,9 @@ sub init
 {
     my $hash = $_[1];
 
-    if ($no_xs) {
-        $hash->{'PM'}->{'vperl/vpp.pm'} = '$(INST_LIBDIR)/version/vpp.pm';
-    }
-    else {
+    # include this always
+    $hash->{'PM'}->{'vperl/vpp.pm'} = '$(INST_LIBDIR)/version/vpp.pm';
+    unless ($no_xs) {
         open MAKEFILE, '>vutil/Makefile.PL';
         while (<DATA>) {
             print MAKEFILE $_;
