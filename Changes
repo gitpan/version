@@ -1,8 +1,36 @@
 2014-01-04  John Peacock  <john.peacock@havurah-software.org>
 
 	* .hgtags:
+	Tagging version '0.9906' using shipit.
+	[f3985248813a] [tip]
+
+	* README:
+	Update README for new CPAN release.
+	[9f49d95d787c] [0.9906]
+
+	* lib/version.pm, lib/version/Internals.pod, lib/version/regex.pm, t
+	/00impl-pp.t, t/01base.t, t/02derived.t, t/03require.t,
+	t/04strict_lax.t, t/05sigdie.t, t/06noop.t, t/07locale.t,
+	t/08_corelist.t, t/09_list_util.t, vperl/vpp.pm,
+	vutil/lib/version/vxs.pm:
+	Restore $version::LAX functionality, resolves:
+
+	 https://rt.cpan.org/Ticket/Display.html?id=91858
+	[3129d0a133d9]
+
+2014-01-04  Karl Williamson  <public@khwilliamson.com>
+
+	* vutil/vxs.inc:
+	vxs.inc: Move code to after declarations This macro, added in
+	e1c774b6, is actual code, and needs to be after the declarations, so
+	that C89 compilers compile it.
+	[d2ac7d3ab38f]
+
+2014-01-04  John Peacock  <john.peacock@havurah-software.org>
+
+	* .hgtags:
 	Tagging version '0.9905' using shipit.
-	[5b7173e3cf28] [tip]
+	[5b7173e3cf28]
 
 	* README:
 	Ready to release to CPAN
