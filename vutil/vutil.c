@@ -1,12 +1,17 @@
-#include "EXTERN.h"
-#include "perl.h"
-#include "XSUB.h"
-#define NEED_my_snprintf
-#define NEED_newRV_noinc
-#define NEED_vnewSVpvf
-#define NEED_newSVpvn_flags_GLOBAL
-#define NEED_warner
-#include "ppport.h"
+/* This file is part of the "version" CPAN distribution.  Please avoid
+   editing it in the perl core. */
+
+#ifndef PERL_CORE
+#  include "EXTERN.h"
+#  include "perl.h"
+#  include "XSUB.h"
+#  define NEED_my_snprintf
+#  define NEED_newRV_noinc
+#  define NEED_vnewSVpvf
+#  define NEED_newSVpvn_flags_GLOBAL
+#  define NEED_warner
+#  include "ppport.h"
+#endif
 #include "vutil.h"
 
 #define VERSION_MAX 0x7FFFFFFF
@@ -516,7 +521,7 @@ Perl_new_version(pTHX_ SV *ver)
 	}
 	else {
 #endif
-	sv_setsv(rv,ver); /* make a duplicate */
+	SvSetSV_nosteal(rv, ver); /* make a duplicate */
 #ifdef SvVOK
 	}
     }
@@ -567,8 +572,9 @@ Perl_upg_version(pTHX_ SV *ver, bool qv)
 	}
 #endif
 	if (sv) {
-	    Perl_sv_setpvf(aTHX_ sv, "%.9"NVff, SvNVX(ver));
-	    buf = SvPV(sv, len);
+	    Perl_sv_catpvf(aTHX_ sv, "%.9"NVff, SvNVX(ver));
+	    len = SvCUR(sv);
+	    buf = SvPVX(sv);
 	}
 	else {
 	    len = my_snprintf(tbuf, sizeof(tbuf), "%.9"NVff, SvNVX(ver));
@@ -591,10 +597,23 @@ Perl_upg_version(pTHX_ SV *ver, bool qv)
 	qv = TRUE;
     }
 #endif
-    else /* must be a string or something like a string */
+    else if ( (SvUOK(ver) && SvUVX(ver) > VERSION_MAX)
+	   || (SvIOK(ver) && SvIVX(ver) > VERSION_MAX) ) {
+	/* out of bounds [unsigned] integer */
+	STRLEN len;
+	char tbuf[64];
+	len = my_snprintf(tbuf, sizeof(tbuf), "%d", VERSION_MAX);
+	version = savepvn(tbuf, len);
+	Perl_ck_warner(aTHX_ packWARN(WARN_OVERFLOW),
+		       "Integer overflow in version %d",VERSION_MAX);
+    }
+    else if ( SvUOK(ver) || SvIOK(ver) ) {
+	version = savesvpv(ver);
+    }
+    else if ( SvPOK(ver) )/* must be a string or something like a string */
     {
 	STRLEN len;
-	version = savepv(SvPV(ver,len));
+	version = savepvn(SvPV(ver,len), SvCUR(ver));
 #ifndef SvVOK
 #  if PERL_VERSION > 5
 	/* This will only be executed for 5.6.0 - 5.8.0 inclusive */
@@ -631,6 +650,11 @@ Perl_upg_version(pTHX_ SV *ver, bool qv)
 	}
 #  endif
 #endif
+    }
+    else
+    {
+	/* no idea what this is */
+	Perl_croak(aTHX_ "Invalid version format (non-numeric data)");
     }
 
     s = SCAN_VERSION(version, ver, qv);
