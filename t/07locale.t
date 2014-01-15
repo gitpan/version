@@ -11,7 +11,7 @@ use Test::More tests => 7;
 use Config;
 
 BEGIN {
-    use_ok('version', 0.9906);
+    use_ok('version', 0.9907);
 }
 
 SKIP: {
@@ -31,7 +31,7 @@ SKIP: {
 						      # because have to
 						      # evaluate in current
 						      # scope
-	use locale;
+	use if $^O !~ /android/, 'locale';
 
 	while (<DATA>) {
 	    chomp;

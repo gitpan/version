@@ -1,8 +1,155 @@
+2014-01-15  John Peacock  <john.peacock@havurah-software.org>
+
+	* .hgtags:
+	Tagging version '0.9907' using shipit.
+	[59f891910a94] [tip]
+
+2014-01-14  John Peacock  <john.peacock@havurah-software.org>
+
+	* Makefile.PL, README, lib/version.pm, vperl/vpp.pm:
+	Stop supporting Perl releases prior to v5.6.2. Tweak the code to
+	prevent locale from causing troubles where it cannot be used, e.g.
+	Android.
+	[0eb90073ce68] [0.9907]
+
+	* vutil/vutil.c:
+	That is lval not the length of the key
+	[00fff6f82ffd]
+
+2014-01-13  John Peacock  <john.peacock@havurah-software.org>
+
+	* README:
+	Final tweaks before releasing
+	[7b1b98341550]
+
+	* Makefile.PL, README, t/07locale.t, vperl/vpp.pm:
+	Better way to handle locale under Android
+	[5ba9c78a80f2]
+
+2014-01-13  Piotr Roszatycki  <piotr.roszatycki@gmail.com>
+
+	* vutil/vutil.h:
+	Check USE_LOCALE
+	[9a4981da2550]
+
+2014-01-13  John Peacock  <john.peacock@havurah-software.org>
+
+	* README:
+	Correct spelling
+	[bb0b009054a5]
+
+2014-01-12  John Peacock  <john.peacock@havurah-software.org>
+
+	* Makefile.PL, vperl/vpp.pm:
+	Isolate the locale testing to make it easier to deal with on
+	Android. On Android, strip out 'use locale' so that it doesn't fall
+	over.
+	[bf28d1047cf5]
+
+	* README, lib/version.pm, lib/version/regex.pm, t/00impl-pp.t,
+	t/01base.t, t/02derived.t, t/03require.t, t/05sigdie.t, t/06noop.t,
+	t/07locale.t, t/08_corelist.t, t/09_list_util.t, vperl/vpp.pm,
+	vutil/lib/version/vxs.pm:
+	$VERSION++ for CPAN release.
+	[bf8d867fdd67]
+
+2014-01-11  John Peacock  <john.peacock@havurah-software.org>
+
+	* vutil/vutil.h:
+	The new macros, and indeed the previous macros, do not work on Perl
+	prior to 5.19.0 because the bug is actually how in Perl itself
+	handles the locale bits. So we just go back to effectively always
+	saving the locale. Resolves:
+
+	 https://rt.cpan.org/Ticket/Display.html?id=91987
+	[9dc839b97fbb]
+
+2014-01-06  bulk88  <bulk88@hotmail.com>
+
+	* vutil/vutil.c, vutil/vutil.h, vutil/vxs.inc, vutil/vxs.xs:
+	various XS optimizations and a leak fix vutil.h
+	-restore 5.10 and 5.12 compatiblity, S_croak_xs_usage came from
+	Win32::API
+
+	vutil.c
+	-add PERL_NO_GET_CONTEXT to both translation units
+	-remove all hv_exists/hv_fetchs patterns and replace with 1 hv key
+	getter
+	-remove all SvIV(*av_fetch patterns, av_fetch is called multiple
+	times in the SvIV macro
+	-in new_version, directly use version * directly, savepvn isn't
+	needed and doesn't convert character encoding either
+	-in upg_version, recently this function was converted to use
+	SAVEFREEPV this savesvpv was missed
+
+	vxs.inc
+	-make xsub details table smaller in the binary by getting rid of the
+	NULL entries, version doesn't use prototypes, but in CORE other
+	xsubs use them in this table
+	-in VXS(version_new) don't read PL_stack_base more than necessary
+	-in VTYPECHECK, make this macro eval the SV* only once. ST(123) was
+	multi evaling/multiple recalcs of it, also this now makes POPs safe
+	to pass.
+	-in VXS(version_vcmp) take advantage of sv_2mortal's return val for
+	smaller machine code
+	-because of XSUB details table, ALIAS:/XSANY can't be used, factor
+	out VXS(version_is_alpha) and VXS(version_is_qv), and make the XS
+	stubs tailcall friendly on regcall ABIs
+	-in S_version_check_key use SP semantics instead of ax, less machine
+	code
+	-in VXS(version_qv) don't read PL_stack_base more than necessary,
+	this fnc could be further cleaned up, since it has obvious signs of
+	xsubpp and hand written portions
+	[f9d01679492f]
+
+2014-01-05  John Peacock  <john.peacock@havurah-software.org>
+
+	* vutil/vutil.c, vutil/vutil.h, vutil/vxs.inc:
+	This was more subtle than I had initially understood
+	[649e700fadae]
+
+	* vutil/vutil.h:
+	Somewhat faster because we avoid a strlen() call
+	[11fb73b0be3f]
+
+	* MANIFEST, Makefile.PL, vutil/vxs.xs:
+	Apparently we do still need this, at least for Windows. grrr
+	[b4d4e0057b40]
+
 2014-01-04  John Peacock  <john.peacock@havurah-software.org>
+
+	* vutil/vutil.c:
+	Only need to compare the remaining string
+	[8f1352c79510]
+
+	* vutil/vutil.c:
+	Use AvFILLp since we know av is not magical
+	[a5367b183ff0]
+
+	* vutil/vutil.c:
+	Arrange for all saved strings to be cleaned up on scope exit
+	[7a76ab3bbf84]
+
+	* vutil/vutil.c:
+	Use macro instead of function call for efficiency
+	[d03bfc7f7f0f]
+
+	* MANIFEST, Makefile.PL, vutil/vxs.xs:
+	Do not need vxs.xs any longer
+	[c2cc74f7ebf4]
+
+	* vutil/vxs.inc:
+	Remove unnecessary variable. Resolves:
+	https://rt.cpan.org/Ticket/Display.html?id=91867
+	[190410bc3966]
+
+	* vutil/vutil.c:
+	Use equivalent macro from Perl
+	[ffc872209ccb]
 
 	* .hgtags:
 	Tagging version '0.9906' using shipit.
-	[f3985248813a] [tip]
+	[f3985248813a]
 
 	* README:
 	Update README for new CPAN release.
@@ -564,8 +711,8 @@
 	t/comma_locale.pl, t/coretests.pm, vperl/vpp.pm,
 	vutil/lib/version/vxs.pm, vutil/vutil.c, vutil/vutil.h,
 	vutil/vxs.xs:
-	Merge changes from bleadperl. Split out locale testing to two
-	files. Prep for releasing 0.96 to CPAN.
+	Merge changes from bleadperl. Split out locale testing to two files.
+	Prep for releasing 0.96 to CPAN.
 	[c1267228d702]
 
 2011-12-01  John Peacock  <john.peacock@havurah-software.org>
@@ -694,9 +841,8 @@
 	t/coretests.pm, vutil/lib/version/vxs.pm, vutil/vutil.c,
 	vutil/vutil.h, vutil/vxs.xs:
 	Rewrite overriding logic to just bulk replace the core code after
-	the point where version.pm was assimilated. Also correct handling
-	of negative versions (and add tests), to mirror what was done in
-	core.
+	the point where version.pm was assimilated. Also correct handling of
+	negative versions (and add tests), to mirror what was done in core.
 	[b1774b895712]
 
 2011-06-06  John Peacock  <john.peacock@havurah-software.org>
@@ -922,8 +1068,7 @@
 2010-01-31  John Peacock  <john.peacock@havurah-software.org>
 
 	* vperl/vpp.pm, vutil/vutil.c:
-	Check for empty before testing residual text. Tests fail with
-	5.10.1
+	Check for empty before testing residual text. Tests fail with 5.10.1
 	[8f97e44fb308]
 
 	* vperl/vpp.pm, vutil/vutil.c:
@@ -1361,10 +1506,10 @@
 
 	* Build.PL, MANIFEST, Makefile.PL, lib/version.pm, t/02derived.t,
 	t/coretests.pm, vperl/vpp.pm, vutil/vxs.xs:
-	Make all test pm files use File::Temp. Change qv() to be both
-	method and function. All tests pass using Build.PL from perl 5.6.x
-	forward, but a couple of test failures using Makefile.PL in 5.6.x
-	and 5.005_04.
+	Make all test pm files use File::Temp. Change qv() to be both method
+	and function. All tests pass using Build.PL from perl 5.6.x forward,
+	but a couple of test failures using Makefile.PL in 5.6.x and
+	5.005_04.
 	[ed43ca29ece0]
 
 2009-05-16  John Peacock  <john.peacock@havurah-software.org>
@@ -1458,8 +1603,7 @@
 	instead of using &PL_sv_yes, since the latter has a PV slot which
 	looks shared to D::D's jaundiced eye.
 
-	Resolves:
-	http://rt.cpan.org/Public/Bug/Display.html?id=30004
+	Resolves: http://rt.cpan.org/Public/Bug/Display.html?id=30004
 	[5aca82860f43] [0.74]
 
 2007-09-21  John Peacock  <john.peacock@havurah-software.org>
@@ -1783,9 +1927,9 @@
 
 	* Makefile.PL, README, lib/version.pm, vperl/vpp.pm,
 	vutil/Makefile.PLz, vutil/lib/version/vxs.pm:
-	More Makefile tweakage. Can't use warnings in Perl < v5.6.0 and
-	need to protect Build.PL from being run by Makefile.PL being a
-	little too helpful.
+	More Makefile tweakage. Can't use warnings in Perl < v5.6.0 and need
+	to protect Build.PL from being run by Makefile.PL being a little too
+	helpful.
 	[35592dc8515b] [0.652]
 
 2006-07-17  John Peacock  <john.peacock@havurah-software.org>
@@ -1962,8 +2106,8 @@
 	* lib/version.pod, t/01base.t, t/02derived.t, t/coretests.pm:
 	* lib/version.pod Minor POD fixup (revealed by pod2html).
 
-	* t/coretests.pm t/01base.t t/02derived.t Suppress status
-	messages except when --verbose is used.
+	* t/coretests.pm t/01base.t t/02derived.t Suppress status messages
+	except when --verbose is used.
 	[d56f87b98787]
 
 2006-02-26  John Peacock  <john.peacock@havurah-software.org>
@@ -1981,8 +2125,7 @@
 	* Build.PL Subclass Module::Build and override have_c_compiler()
 	with one that fails without die'ing.
 
-	* README lib/version.pm vperl/vpp.pm vutil/vxs.pm
-	$VERSION++.
+	* README lib/version.pm vperl/vpp.pm vutil/vxs.pm $VERSION++.
 	[c3f3788e4619] [0.56_03]
 
 	* README, lib/version.pm, t/coretests.pm, vperl/vpp.pm, vutil/vxs.pm:
@@ -1990,15 +2133,14 @@
 
 	* README lib/version.pm Bump $VERSION for new release.
 
-	* vperl/vpp.pm Fully implemented UNIVERSAL::VERSION in the pure
-	Perl module. Set explicit $VERSION so that correct module gets
-	loaded during testing.
+	* vperl/vpp.pm Fully implemented UNIVERSAL::VERSION in the pure Perl
+	module. Set explicit $VERSION so that correct module gets loaded
+	during testing.
 
 	* vutil/vxs.pm Set explicit $VERSION so that correct module gets
 	loaded during testing.
 
-	* t/coretests.pm Additional tests (based on bleadperl
-	t/op/use.t).
+	* t/coretests.pm Additional tests (based on bleadperl t/op/use.t).
 	[d6427d31c3fc] [0.56_02]
 
 2006-02-19  John Peacock  <john.peacock@havurah-software.org>
@@ -2047,8 +2189,8 @@
 	* README lib/version.pod Document changes in interface of
 	$obj->new().
 
-	* Build.PL Make Scalar::Util requirement optional based both on
-	Perl version and on whether vpp.pm is being installed.
+	* Build.PL Make Scalar::Util requirement optional based both on Perl
+	version and on whether vpp.pm is being installed.
 	[dc5177e9c787] [0.53_03] <version-combined>
 
 	* t/coretests.pm, vperl/vpp.pm, vutil/vxs.xs:
@@ -2059,9 +2201,9 @@
 
 	* t/coretests.pm Make sure obj->new() doesn't clone value.
 
-	* vperl/vpp.pm Implement CVS-style (evil) initialization.
-	Add _verify() sub to make sure derived classes don't break things.
-	Add test for vstring (uses Scalar::Util) and DTRT.
+	* vperl/vpp.pm Implement CVS-style (evil) initialization. Add
+	_verify() sub to make sure derived classes don't break things. Add
+	test for vstring (uses Scalar::Util) and DTRT.
 	[e52565977ef4] <version-combined>
 
 	* lib/version.pm, vperl/vpp.pm, vutil/vxs.pm:
@@ -2070,10 +2212,9 @@
 
 	* lib/version.pm Bump version. Re-enable vpp.pm support
 
-	* vperl/vpp.pm Bump version. Completely rewrite new() to
-	exactly mirror what the XS code does. Support swapped
-	comparisons. Correct $v->normal() code for short decimal
-	versions.
+	* vperl/vpp.pm Bump version. Completely rewrite new() to exactly
+	mirror what the XS code does. Support swapped comparisons. Correct
+	$v->normal() code for short decimal versions.
 
 	* vutil/vxs.pm Bump version.
 	[b17e3fd4647e] <version-combined>
@@ -2092,14 +2233,13 @@
 	* Build.PL, lib/version.pod, vutil/vutil.c:
 	Commit changes prior to push to implement pure Perl alternative.
 
-	* Build.PL Need to exclude building on all 5.9.x bleadperl
-	releases.
+	* Build.PL Need to exclude building on all 5.9.x bleadperl releases.
 
 	* lib/version.pod Forgot a quote in one of the example code
 	fragments.
 
-	* vutil/vutil.c Sync with bleadperl. Only warn if 'use
-	warnings' is set.
+	* vutil/vutil.c Sync with bleadperl. Only warn if 'use warnings' is
+	set.
 	[3edcd94d655e]
 
 2006-01-10  John Peacock  <john.peacock@havurah-software.org>
@@ -2108,9 +2248,9 @@
 	vutil/vutil.c:
 	Release 0.53 to CPAN.
 
-	* vutil/vutil.c warn() when initialization string contains
-	trailing characters (rather than silently ignoring them).
-	Suggested by David Wheeler.
+	* vutil/vutil.c warn() when initialization string contains trailing
+	characters (rather than silently ignoring them). Suggested by David
+	Wheeler.
 
 	* t/coretests.pm Test the above change.
 
@@ -2131,11 +2271,10 @@
 
 	* README lib/version/vxs.pm lib/version.pm Bump version.
 
-	* vutil/vutil.c Die if input value has underscore but no
-	decimal.
+	* vutil/vutil.c Die if input value has underscore but no decimal.
 
-	* t/01base.t t/02derived.t Use no_plan so I don't need to
-	increment tests any more.
+	* t/01base.t t/02derived.t Use no_plan so I don't need to increment
+	tests any more.
 
 	* t/coretests.pm Check for malformed input.
 	[befad918782c] [0.52]
@@ -2177,8 +2316,8 @@
 2005-12-03  John Peacock  <john.peacock@havurah-software.org>
 
 	* lib/version.pod:
-	* lib/version.pod PAUSE does so support version objects.
-	Elaborate on support for Module::Build and lack thereof for
+	* lib/version.pod PAUSE does so support version objects. Elaborate
+	on support for Module::Build and lack thereof for
 	ExtUtils::MakeMaker.
 	[a1ef1dd2300d]
 
@@ -2195,8 +2334,8 @@
 
 	* README Whoo-hoo! Remember to update this the first time.
 
-	* lib/version.pm Make sure that there is no possible way that
-	Perl will try to include the non-existant pure Perl vpp.pm
+	* lib/version.pm Make sure that there is no possible way that Perl
+	will try to include the non-existant pure Perl vpp.pm
 
 	* lib/version.pod Complete rewrite that is hopefully easier to
 	understand.
@@ -2205,14 +2344,13 @@
 2005-11-01  John Peacock  <john.peacock@havurah-software.org>
 
 	* t/02derived.t, vutil/vutil.c:
-	* vutil/vutil.c Use trinary operator to choose power of 10,
-	rather than pow(), which caused some problem with AIX 5.1.
-	Resolves:
+	* vutil/vutil.c Use trinary operator to choose power of 10, rather
+	than pow(), which caused some problem with AIX 5.1. Resolves:
 
 	 <https://rt.cpan.org/NoAuth/Bug.html?id=15254>
 
-	* t/02derived.t Suppress unnecessary warning when overriding
-	qv() sub.
+	* t/02derived.t Suppress unnecessary warning when overriding qv()
+	sub.
 	[aa151d606d89]
 
 2005-10-10  John Peacock  <john.peacock@havurah-software.org>
@@ -2231,17 +2369,17 @@
 
 	* Build.PL, lib/version.pm, lib/version.pod, lib/version/vxs.pm,
 	t/01base.t, t/02derived.t, t/coretests.pm, vutil/vutil.c:
-	* version/Build.PL Explicit call to dist_name to help Windows
-	DTRT. Resolves ticket:
+	* version/Build.PL Explicit call to dist_name to help Windows DTRT.
+	Resolves ticket:
 
 	 <https://rt.cpan.org/Ticket/Display.html?id=14743>
 
 	* lib/version/vxs.pm lib/version.pm lib/version.pod t/01base.t
-	t/02derived.t t/coretests.pm vutil/vutil.c Change
-	implementation to return version objects instead of version::vxs
-	object. Document that qv() isn't inherited and give work
-	around. Update tests to no longer test version::vxs class
-	directly (since it doesn't work). Resolves ticket:
+	t/02derived.t t/coretests.pm vutil/vutil.c Change implementation to
+	return version objects instead of version::vxs object. Document that
+	qv() isn't inherited and give work around. Update tests to no longer
+	test version::vxs class directly (since it doesn't work). Resolves
+	ticket:
 
 	 <https://rt.cpan.org/Ticket/Display.html?id=14958>
 	[d1d72857d535]
@@ -2391,12 +2529,11 @@
 
 	* README, lib/version.pm Bump $VERSION number
 
-	* t/01base.t Test that single term version expands to triplet
-	for $v->normal. Eliminate "Exporter" from derived class.
+	* t/01base.t Test that single term version expands to triplet for
+	$v->normal. Eliminate "Exporter" from derived class.
 
-	* util/util.c Various const'ifying to match Perl's own
-	changes. Handle short and really short array outputs in
-	vnormal().
+	* util/util.c Various const'ifying to match Perl's own changes.
+	Handle short and really short array outputs in vnormal().
 
 	* util/util.h const'ify Perl_scan_version().
 	[e024e3970f74]
@@ -2407,25 +2544,24 @@
 	Complete rewrite of parser to handle CPAN-style (two significant
 	decimal) versions, as well as finish documenting the changes.
 
-	* util/util.c Simplify parser to just count digits when
-	parsing numeric versions.
+	* util/util.c Simplify parser to just count digits when parsing
+	numeric versions.
 
-	* lib/version.pm Rewrite documentation on Numeric Alpha
-	Versions and make all examples consistent.
+	* lib/version.pm Rewrite documentation on Numeric Alpha Versions and
+	make all examples consistent.
 
-	* t/01base.t Add additional tests for CPAN-style alphas as
-	well as object->new().
+	* t/01base.t Add additional tests for CPAN-style alphas as well as
+	object->new().
 	[c26b2ad4d80f]
 
 2005-05-20  John Peacock  <john.peacock@havurah-software.org>
 
 	* lib/version.pm, lib/version.xs:
-	* lib/version.pm Revised POD to correspond to new behavior
-	with regards to both Quoted Versions and Alpha Versions.
+	* lib/version.pm Revised POD to correspond to new behavior with
+	regards to both Quoted Versions and Alpha Versions.
 
-	* lib/version.xs Extend new() to be callable as an object
-	method. Copy existing object if called as object method with no
-	parameter.
+	* lib/version.xs Extend new() to be callable as an object method.
+	Copy existing object if called as object method with no parameter.
 	[37ccec7cf023]
 
 2005-05-17  John Peacock  <john.peacock@havurah-software.org>
@@ -2433,11 +2569,11 @@
 	* Build.PL, README, lib/version.pm, t/01base.t, util/util.c:
 	Working towards a release to CPAN.
 
-	* README lib/version.pm First pass at documenting the
-	external changes.
+	* README lib/version.pm First pass at documenting the external
+	changes.
 
-	* t/01base.t Since vcmp() is working again, can restore the
-	minimum to the use line.
+	* t/01base.t Since vcmp() is working again, can restore the minimum
+	to the use line.
 
 	* util/util.c Finish up handling for vcmp to deal with alpha
 	versions.
@@ -2447,12 +2583,12 @@
 	Almost completely working; only the comparison tests with non-
 	objects is still failing.
 
-	* lib/version.xs Simplify is_alpha() now that it is just as
-	hash flag.
+	* lib/version.xs Simplify is_alpha() now that it is just as hash
+	flag.
 
 	* util/util.c Manually create and copy the hash elements when
-	creating new object from old object. Forgot to make sure to
-	display all subversion from short numeric versions.
+	creating new object from old object. Forgot to make sure to display
+	all subversion from short numeric versions.
 	[5b742513620e]
 
 2005-05-15  John Peacock  <john.peacock@havurah-software.org>
@@ -2461,31 +2597,28 @@
 	util.h, util/ppport.h, util/util.c, util/util.h, version.xs:
 	Completed (?) to move to Module::Build
 
-	* lib/typemap lib/version.xs Move XS and support files to
-	lib/
+	* lib/typemap lib/version.xs Move XS and support files to lib/
 
-	* util/ppport.h util/util.c util/util.h Move utility
-	functions in their own directory (c_source)
+	* util/ppport.h util/util.c util/util.h Move utility functions in
+	their own directory (c_source)
 
-	* MANIFEST Updated to reflect new file locations Add
-	additional files that were originally left out of file
-	Alphabetize this listing (for compulsiveness)
+	* MANIFEST Updated to reflect new file locations Add additional
+	files that were originally left out of file Alphabetize this listing
+	(for compulsiveness)
 	[d3f75de8d860]
 
 	* Build.PL, Makefile.PL, t/01base.t, util.c, version.xs:
 	Intermediate commit to facilitate move to Module::Build as well as
 	work on new hash-based object (all tests do not suceed)
 
-	* Makefile.PL Replace ExtUtils::MakeMaker with Module::Build
-	wrapper
+	* Makefile.PL Replace ExtUtils::MakeMaker with Module::Build wrapper
 
 	* Build.PL New M::B file
 
-	* version.xs Try and deal with case where no parameter was
-	passed to new()
+	* version.xs Try and deal with case where no parameter was passed to
+	new()
 
-	* util.c Changes to access hash-based object (vcmp still
-	busted)
+	* util.c Changes to access hash-based object (vcmp still busted)
 
 	* t/01base.t Changed to prevent core dump (temporarily)
 	[47aeafff343b]
@@ -2498,17 +2631,17 @@
 	alphas (1.002_03) so that versions which only use two significant
 	places normally will still sort correctly with their alpha versions.
 
-	* util.c (Perl_scan_version): Somehow manage to both simplify
-	and complicate the code at the same time. (Perl_vnumify): use
-	the new zero'th array element to distinguish between 2 and 3
-	significant decimal places for printing.
+	* util.c (Perl_scan_version): Somehow manage to both simplify and
+	complicate the code at the same time. (Perl_vnumify): use the new
+	zero'th array element to distinguish between 2 and 3 significant
+	decimal places for printing.
 	[ef0f99d37a37]
 
 2005-04-22  John Peacock  <john.peacock@havurah-software.org>
 
 	* t/01base.t, util.c:
-	* util.c Handle two digit alpha versions Once a v-style or
-	FP, always a v-style or FP
+	* util.c Handle two digit alpha versions Once a v-style or FP,
+	always a v-style or FP
 
 	* t/01base.t Altered tests to match new expectations
 	[c6b16a7f9cfe]
@@ -2524,39 +2657,37 @@
 	* t/01base.t Correctly compare to numified version (instead of
 	stringified)
 
-	* util.c Use same code as bleadperl AvReal_on required to
-	fix problems under threaded Perl Slight rewrite of loop code to
-	fix compiler bug on OS X Display alpha versions properly
+	* util.c Use same code as bleadperl AvReal_on required to fix
+	problems under threaded Perl Slight rewrite of loop code to fix
+	compiler bug on OS X Display alpha versions properly
 
-	* version.xs new() returns void since it actual returns on the
-	stack
+	* version.xs new() returns void since it actual returns on the stack
 	[ae634dc379af] [0.42]
 
 2004-07-13  John Peacock  <john.peacock@havurah-software.org>
 
 	* README, lib/version.pm, t/01base.t, util.c:
-	* util.c Fix infinite loop for CVS-style versions of more
-	than 3 decimal places. Thanks to Richard Evans
+	* util.c Fix infinite loop for CVS-style versions of more than 3
+	decimal places. Thanks to Richard Evans
 	<richard_david_evans@yahoo.co.uk>
 
 	* t/01base.t Test to make sure above doesn't happen again.
 
 	* lib/version.pm Increment the $VERSION again.
 
-	* README Remember to update this before releasing (for a
-	change).
+	* README Remember to update this before releasing (for a change).
 	[1b7ab2af9364] [0.41]
 
 2004-07-11  John Peacock  <john.peacock@havurah-software.org>
 
 	* lib/version.pm, version.xs:
-	* lib/version.pm Increment $VERSION number; have to quote to
-	get the tgz file named correctly (isn't that what this module
-	is supposed to fix?)
+	* lib/version.pm Increment $VERSION number; have to quote to get the
+	tgz file named correctly (isn't that what this module is supposed to
+	fix?)
 
-	* version.xs:UNIVERSAL_VERSION() Check for null sv before
-	attempting sv_derived_from() Thanks to Marcus Holland-Moritz
-	<mhx-perl@gmx.net> for finding this.
+	* version.xs:UNIVERSAL_VERSION() Check for null sv before attempting
+	sv_derived_from() Thanks to Marcus Holland-Moritz <mhx-perl@gmx.net>
+	for finding this.
 	[beaac28edd99] [0.40]
 
 2004-04-14  John Peacock  <john.peacock@havurah-software.org>
@@ -2571,21 +2702,20 @@
 	* MANIFEST, Makefile.PL, lib/version.pm, t/01base.t, t/02AlphaBeta.t,
 	util.c:
 	* t/02AlphaBeta.t
-	*    t/01base.t Update tests to require newer version. Change
-	test for CPAN-Style version behavior.
+	*    t/01base.t Update tests to require newer version. Change test for
+	CPAN-Style version behavior.
 
-	* MANIFEST Delete 'Changes' from repository since it will
-	now be autogenerated.
+	* MANIFEST Delete 'Changes' from repository since it will now be
+	autogenerated.
 
-	* lib/version.pm Clean up POD to reflect actual behavior of
-	code.
+	* lib/version.pm Clean up POD to reflect actual behavior of code.
 
-	* Makefile.PL Add new target to automatically generate the
-	'Changes' file.
+	* Makefile.PL Add new target to automatically generate the 'Changes'
+	file.
 
-	* util.c (Perl_scan_version): rewrite code to use AV *
-	instead of SV * for internal representation; trigger CPAN-style
-	only for second term.
+	* util.c (Perl_scan_version): rewrite code to use AV * instead of SV
+	* for internal representation; trigger CPAN-style only for second
+	term.
 	[1c588fb86973]
 
 2004-01-04  John Peacock  <john.peacock@havurah-software.org>
@@ -2605,9 +2735,9 @@
 	* lib/version.pm (POD): Initial documentation of CPAN-Style
 	versions.
 
-	* util.c (Perl_scan_version): Try and handle CPAN versions
-	(two decimal places) differently from Perl-style (three or more
-	decimal places).
+	* util.c (Perl_scan_version): Try and handle CPAN versions (two
+	decimal places) differently from Perl-style (three or more decimal
+	places).
 	[f8f05480690b]
 
 2003-12-29  John Peacock  <john.peacock@havurah-software.org>
@@ -2616,45 +2746,43 @@
 	* typemap Stop automatically dereferencing input variable
 	*    lib/version.pm Update $VERSION for a change
 	*    README Include warning on memory leaks
-	*    util.c (new_version): use upg_version exclusively
-	(upg_version): move code from new_version here
-	*    version.xs Stop dereferencing input variables Stop
-	assuming that the PV has a value
+	*    util.c (new_version): use upg_version exclusively (upg_version):
+	move code from new_version here
+	*    version.xs Stop dereferencing input variables Stop assuming that the
+	PV has a value
 	[df739f393e0a] [0.34]
 
 	* t/01base.t, util.c, version.xs:
-	* t/01base.t Replace postfix increment with prefix increment
-	to prevent erroneous "Attempt to free..." errors Add test
-	of CVS $Revision: $ style versions
+	* t/01base.t Replace postfix increment with prefix increment to
+	prevent erroneous "Attempt to free..." errors Add test of CVS
+	$Revision: $ style versions
 
-	* util.c Rewrite new_version to free temporary string
-	variable
+	* util.c Rewrite new_version to free temporary string variable
 
-	* version.xs Rewrite version->new() to eliminate temp string
-	for CVS $Revision: $ Rewrite version->qv() to use scan_version
-	instead of new_version
+	* version.xs Rewrite version->new() to eliminate temp string for CVS
+	$Revision: $ Rewrite version->qv() to use scan_version instead of
+	new_version
 	[5cc05e7606a8]
 
 2003-12-21  John Peacock  <john.peacock@havurah-software.org>
 
 	* lib/version.pm, version.xs:
-	M version.xs Go through code to ensure that there are no
-	leaking scalars Sadly, there are still leaks from
-	version::VERSION of unknown origins
+	M version.xs Go through code to ensure that there are no leaking
+	scalars Sadly, there are still leaks from version::VERSION of
+	unknown origins
 	[24b98fd1a0a8] [0.33]
 
 	* lib/version/AlphaBeta.pm, t/02AlphaBeta.t:
-	M t/02AlphaBeta.t M lib/version/AlphaBeta.pm Implement an
-	alternate object representation Overload stringify() with
-	custom function
+	M t/02AlphaBeta.t M lib/version/AlphaBeta.pm Implement an alternate
+	object representation Overload stringify() with custom function
 	[19b66371282f]
 
 2003-10-26  John Peacock  <john.peacock@havurah-software.org>
 
 	* t/01base.t, t/02AlphaBeta.t:
-	M t/02AlphaBeta.t Add empty derived class and modify tests
-	to run M t/01base.t Work around bug with postfix increment
-	under all Perl < bleadperl
+	M t/02AlphaBeta.t Add empty derived class and modify tests to run M
+	t/01base.t Work around bug with postfix increment under all Perl <
+	bleadperl
 	[473e143b1e01]
 
 2003-09-10  John Peacock  <john.peacock@havurah-software.org>

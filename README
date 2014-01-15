@@ -1,4 +1,4 @@
-version 0.9904
+version 0.9907
 ==================================
 
 Full version object support, with patch for bug in Perl 5.10.0 core
@@ -9,13 +9,29 @@ There was a bug caused by objects serialized by YAML that will cause Perl
 5.10.0 to segfault.  As long as some module calls 'use version', then the
 replacement code will take effect and Perl will not crash.
 
+Major Changes in 0.9907 - 2014-01-12
+=====================================
+Lots of optimizations of XS and C code courtesy of Daniel Dragan
+(bulk88@hotmail.com).  Lots of minor tweaks as well.
+
+Resolves:
+    https://rt.cpan.org/Ticket/Display.html?id=91892
+    https://rt.cpan.org/Ticket/Display.html?id=91867
+    https://rt.cpan.org/Ticket/Display.html?id=91987
+    https://rt.cpan.org/Ticket/Display.html?id=92051
+
+IMPORTANT CHANGE - 0.9906 is the last release that fully supports Perl
+releases prior to 5.6.2.  It is just too much trouble to continue to
+fight to maintain full backward compatibility.
 
 Major Changes in 0.9906 - 2014-01-04
 =====================================
 Applied C89 compatibility fix from Karl Williamson to vxs.inc.  Added back
 support for $version::LAX and $version::STRICT to resolve:
 
+    https://rt.cpan.org/Ticket/Display.html?id=88458
     https://rt.cpan.org/Ticket/Display.html?id=91858
+    https://rt.cpan.org/Ticket/Display.html?id=91868
 
 Major Changes in 0.9905 - 2014-01-04
 =====================================
