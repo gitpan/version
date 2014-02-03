@@ -32,6 +32,7 @@
       },
       "runtime" : {
          "requires" : {
+            "ExtUtils::MakeMaker" : "6.17",
             "File::Temp" : "0.13",
             "Test::More" : "0.45",
             "parent" : "0.221",
@@ -40,5 +41,5 @@
       }
    },
    "release_status" : "stable",
-   "version" : "0.9907"
+   "version" : "0.9908"
 }

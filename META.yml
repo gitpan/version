@@ -18,8 +18,9 @@ no_index:
     - t
     - inc
 requires:
+  ExtUtils::MakeMaker: 6.17
   File::Temp: 0.13
   Test::More: 0.45
   parent: 0.221
   perl: 5.006002
-version: 0.9907
+version: 0.9908

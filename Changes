@@ -1,8 +1,94 @@
+2014-02-03  John Peacock  <john.peacock@havurah-software.org>
+
+	* .hgtags:
+	Tagging version '0.9908' using shipit.
+	[2bb065d82876] [tip]
+
+2014-02-01  John Peacock  <john.peacock@havurah-software.org>
+
+	* README, lib/version.pm, lib/version/regex.pm, t/00impl-pp.t,
+	t/01base.t, t/02derived.t, t/03require.t, t/05sigdie.t, t/06noop.t,
+	t/07locale.t, t/08_corelist.t, t/09_list_util.t, vperl/vpp.pm,
+	vutil/lib/version/vxs.pm:
+	Ready for release to CPAN
+	[8143deb9480e] [0.9908]
+
+2014-02-02  John Peacock  <john.peacock@havurah-software.org>
+
+	* MANIFEST, Makefile.PL, vutil/Makefile.PL:
+	Slight tweaks to Makefile.PL to make it smarter and add standalone
+	Makefile.PL for vxs code
+	[3cd691eea31e]
+
+2014-02-01  John Peacock  <john.peacock@havurah-software.org>
+
+	* vutil/vutil.c:
+	We should mortalize in the caller, not the callee
+	[ba2e8bb9de43]
+
+	* vutil/vutil.c:
+	Prevent leaking if upg_version dies before returning
+	[b56054bcaf22]
+
+	* vutil/vutil.c:
+	Put all of the private check flags at the end
+	[de677ab32388]
+
+	* vutil/vutil.c:
+	Reorder tests to be IV, NV, PV in that order
+	[5b56c32404b2]
+
+	* vutil/vutil.c:
+	And do not forget about the integer case
+	[645c700be118]
+
+	* vutil/vutil.c:
+	Extra paranoia; prefer SvPOK before taking SvNOKp.
+	[501517a03119]
+
+	* vutil/vutil.c:
+	Deal with certain tiedscalars (e.g. created by Readonly::XS).
+	Resolves https://rt.cpan.org/Ticket/Display.html?id=92540
+	[efb44fbc6bd8]
+
+	* vperl/vpp.pm:
+	Whitespace consistency and cuddled braces on subs
+	[5e76102adf1a]
+
+	* vperl/vpp.pm:
+	Simplify parsing of parameters in new() like the XS code does
+	[3f260ed4603c]
+
+2014-01-28  bulk88  <bulk88@hotmail.com>
+
+	* vutil/vxs.inc:
+	VXS_RETURN_M_SV optimization
+	[24df4a74aa08]
+
+	* vutil/vxs.inc:
+	fix theoretical uninit Perl stack reads in XS version::new see Perl
+	#115660 and CPAN #92438
+	[3c329a938ad5]
+
+2014-01-19  John Peacock  <john.peacock@havurah-software.org>
+
+	* vutil/vutil.c:
+	Prevent bug in threads::shared from causing problems Effective only
+	for Perl < 5.19.8.
+	[aae0051131e7]
+
+2014-01-17  John Peacock  <john.peacock@havurah-software.org>
+
+	* vperl/vpp.pm:
+	Move the locale stuff after the _un_vstring, so we don't
+	accidentally strip the V-magic
+	[bdb0f5310262]
+
 2014-01-15  John Peacock  <john.peacock@havurah-software.org>
 
 	* .hgtags:
 	Tagging version '0.9907' using shipit.
-	[59f891910a94] [tip]
+	[59f891910a94]
 
 2014-01-14  John Peacock  <john.peacock@havurah-software.org>
 
