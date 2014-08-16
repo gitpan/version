@@ -1,8 +1,191 @@
+2014-08-16  John Peacock  <john.peacock@havurah-software.org>
+
+	* .hgtags:
+	Tagging version '0.9909' using shipit.
+	[28f76b8d2918] [tip] <0.9909>
+
+2014-08-15  John Peacock  <john.peacock@havurah-software.org>
+
+	* README:
+	Update README
+	[d31021b57b62] [0.9909] <0.9909>
+
+	* lib/version.pm, lib/version/regex.pm, t/00impl-pp.t, t/01base.t,
+	t/02derived.t, t/03require.t, t/05sigdie.t, t/06noop.t,
+	t/07locale.t, t/08_corelist.t, t/09_list_util.t, vperl/vpp.pm,
+	vutil/lib/version/vxs.pm:
+	Bump $VERSION in preparation for CPAN release
+	[ff9b7da70a4b] <0.9909>
+
+	* vutil/vutil.c:
+	commit f57000bc399f9b433bfb06a4302f4e773f7f50bb Author: Karl
+	Williamson <khw@cpan.org> Date: Mon Aug 4 16:29:12 2014 -0600
+
+	 PATCH: [perl #121930] Bleadperl breaks MDOOTSON/Wx
+
+	 The root cause of this issue is that XS code or the libraries it
+	calls is changing the locale behind Perl's back so that the decimal
+	point character is not a dot. Version number parsing relies on it
+	being a dot.
+
+	 This patch fixes the problem by retrieving the current locale just
+	before version number parsing, and updating Perl's records if the
+	locale has changed away from what is expected. Given accurate
+	records, the pre-existing call to the
+	STORE_NUMERIC_LOCAL_SET_STANDARD macro will do what it's supposed to
+	do, and change the locale so that the dot is the radix character for
+	the version number parsing.
+
+	 After the parsing is done, the pre-existing call to the
+	RESTORE_NUMERIC_LOCAL macro will restore properly, but see below
+
+	 This patch should be suitable for both 5.20.1 and 5.21 (though the
+	SHA-1 value in the porting/customize.dat will have to be adjusted
+	because the files aren't otherwise identical). But there is a
+	fundamental difference between the releases. In 5.20.X, Perl does
+	not attempt to keep the radix character a dot at almost all times
+	(though it initializes things so it is a dot, overriding any
+	environmental settings to the contrary). This leads to known non-
+	regression bugs in 5.20 because very little XS code can cope with a
+	non-dot. To fix this, Perl has changed the macros in 5.21 so that
+	the result after the RESTORE_NUMERIC_LOCAL is that the current
+	locale will have a dot. This will fix those long-standing bugs where
+	XS code expecting a dot fails should it be mashed up with modules
+	that change it to something else. But this will break the relatively
+	few modules that want it the other way. So it has been done early in
+	5.21 to give things a chance to settle down.
+
+	 The extra {} braces around the code that calls the macros is
+	because STORE_NUMERIC_LOCAL_SET_STANDARD declares a variable, and so
+	must be within the declarations area of a block for C89 compilers.
+	(I myself would not write a macro that does this without indicating
+	so in its name.)
+	[2a4fc121c6c4] <0.9909>
+
+	* vutil/vutil.c, vutil/vxs.inc:
+	Apply patch from Perl 5.20.0 as released
+
+	commit 24120986965f248417d199c5818d145ea2a34607 Author: Brian Fraser
+	<fraserbn@gmail.com> Date: Tue Feb 4 06:38:55 2014 -0300
+
+	vutil.c, vxs.inc: Avoid warnings from -Wmissing-prototypes -Wundef
+	-Wunused-label
+	[08e9b0d7cca2] <0.9909>
+
+	* Preparatory branch for releasing custom 0.9909 for Perl 5.20.1
+	[79f970339680] <0.9909>
+
+	* t/coretests.pm:
+	Add a couple of overflow tests
+	[b150b244c13e]
+
+2014-06-21  John Peacock  <john.peacock@havurah-software.org>
+
+	* lib/version.pod:
+	POD correction. Thanks "Matthew Horsfall (alh)" <wolfsage@gmail.com>
+	Resolves https://rt.cpan.org/Ticket/Display.html?id=96620
+	[36eeed6fea2c]
+
+	* vutil/vutil.c:
+	Ignore unused context. Thanks to fraserbn@gmail.com Resolves
+	https://rt.cpan.org/Ticket/Display.html?id=96100
+	[3ac9f9bcc78e]
+
+	* vutil/vxs.inc:
+	Unreachable code. Thanks to Jarkko Hietaniemi <jhi@iki.fi> Resolves
+	https://rt.cpan.org/Ticket/Display.html?id=95896
+	[5aab343122fb]
+
+2014-05-26  John Peacock  <john.peacock@havurah-software.org>
+
+	* t/07locale.t:
+	Unintentionally skipping these tests since vpp.pm was included by
+	default.
+	[ad3699914825]
+
+2014-05-10  John Peacock  <john.peacock@havurah-software.org>
+
+	* vutil/vutil.c:
+	Use unsigned integer where appropriate
+	[2ff16e565b1d]
+
+	* t/07locale.t:
+	Remove debugging
+	[621c728ff110]
+
+2014-04-17  John Peacock  <john.peacock@havurah-software.org>
+
+	* README, t/07locale.t, t/coretests.pm, vperl/vpp.pm:
+	Revised heuristic in vpp to better handle v-strings
+	[14c5405a8ccd]
+
+	* README, t/coretests.pm, vperl/vpp.pm, vutil/vutil.c:
+	Forbid trailing bare decimal in dotted decimal versions. Resolves
+
+	 https://rt.cpan.org/Ticket/Display.html?id=93603
+	[690dfba7c43b]
+
+	* README, lib/version.pm, lib/version/regex.pm, t/00impl-pp.t,
+	t/01base.t, t/02derived.t, t/03require.t, t/05sigdie.t, t/06noop.t,
+	t/07locale.t, t/08_corelist.t, t/09_list_util.t, vperl/vpp.pm:
+	Start working on 0.9909 release
+	[7a5441bfe2b0]
+
+	* lib/version.pm, vperl/vpp.pm:
+	Protect usage of warn categories to supported Perl releases
+	[d5e4aa541780]
+
+2014-04-16  John Peacock  <john.peacock@havurah-software.org>
+
+	* vutil/vutil.c:
+	Add warnings to vutil code too
+	[8f94ebcb7bdc]
+
+2014-03-01  John Peacock  <john.peacock@havurah-software.org>
+
+	* lib/version.pm, t/coretests.pm, vperl/vpp.pm:
+	Add lossy warning for both numify() and normal() alpha versions
+	[591b0e507293]
+
+	* t/coretests.pm, vperl/vpp.pm, vutil/vutil.c:
+	Make alpha->normal() a lossy operation
+	[ababbdd1380f]
+
+2014-02-25  John Peacock  <john.peacock@havurah-software.org>
+
+	* lib/version.pm, t/coretests.pm, vperl/vpp.pm, vutil/vutil.c:
+	Forbid calling ->normal() on non-qv alpha versions
+	[ed0f3215c1ee]
+
+2014-02-04  John Peacock  <john.peacock@havurah-software.org>
+
+	* Makefile.PL:
+	Add META stanzas for bugtracker and repository
+	[47bb0ceaa783]
+
+	* README:
+	Revise README to document source repositories
+	[ca260e8255f1]
+
+2014-02-04  Brian Fraser  <fraserbn@gmail.com>
+
+	* vutil/vutil.c, vutil/vxs.inc:
+	Avoid warnings from -Wmissing-prototypes -Wundef -Wunused-label
+
+	-Wmissing-prototypes was complaining about declaring XS() functions
+	without previously declaring a prototype.
+
+	-Wundef didn't like using #if foo instead of #ifdef foo
+
+	-Wunused-label warned because VER_{IV,NM,PV} were defined on all
+	versions of perl, but only used on < 5.17.2
+	[a4171dd98d50]
+
 2014-02-03  John Peacock  <john.peacock@havurah-software.org>
 
 	* .hgtags:
 	Tagging version '0.9908' using shipit.
-	[2bb065d82876] [tip]
+	[2bb065d82876]
 
 2014-02-01  John Peacock  <john.peacock@havurah-software.org>
 
